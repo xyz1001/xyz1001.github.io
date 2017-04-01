@@ -6,4 +6,5 @@ node_modules/
 public/
 .deploy*/
 package.json
-themes/
+themes/*
+!themes/landscape
