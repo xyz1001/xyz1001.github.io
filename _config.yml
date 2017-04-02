@@ -4,8 +4,8 @@
 
 # Site
 title: 心驿站
-subtitle:   成长长路上的心灵驿站
-description: 记录成长路途上的点点滴滴
+subtitle:   成长路上的心灵驿站
+description: 记录成长路上的点点滴滴
 author: 张帆(Zix)
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -40,7 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace: false
 
 # Category & Tag
