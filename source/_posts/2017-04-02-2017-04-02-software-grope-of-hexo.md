@@ -1,12 +1,11 @@
 ---
 title: 软件摸索之hexo
 author: 张帆
-date: 2017-04-02 17:05:47
 tags:
- - 软件摸索
- - hexo
- - 博客
+  - null
+date: 2017-04-02 17:05:47
 ---
+
 
 hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系统。在看了一位同事的博客之后，我坚定地转向了hexo。但在安装配置和使用的过程中摸索了较长时间，也遇到了较多的坑点。 如果是初次接触hexo，推荐去阅读一下hexo的[官方文档](https://hexo.io/zh-cn/docs/)，会让我们对hexo的使用有一个基本的了解。 在搭建自己的hexo博客的过程中，我较多的参考了这位同事对hexo介绍的一篇[文章](http://blog.guorongfei.com/2016/01/01/update-blog-with-hexo/)及他托管在Github上的[hexo博客](https://github.com/zhaohuaxishi/zhaohuaxishi.github.io)。
 
@@ -19,8 +18,10 @@ hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系�
 
 所需要的相关软件安装命令如下：
 ``` bash
-sudo apt install nodejs git #安装NodeJS和git
-sudo npm install -g hexo-cli    #安装hexo命令行接口，可通过命令使用hexo
+sudo apt install git    #安装git
+wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh #安装nvm
+nvm install stable   #安装nodejs
+npm install -g hexo-cli    #安装hexo命令行接口，可通过命令使用hexo
 ```
 其他情况请自行作出修改。
 ## hexo搭建
@@ -74,3 +75,14 @@ git push --set-upstream origin source   #推送新创建的分支source至Github
 - **为什么要将`source`分支设为默认？**
 > 博客搭建完成后一般都是在`source`分支下写作，极少会切换至`master`分支
 
+## 主题管理
+主题位于`hexo`目录`theme`目录下，由于往往需要对主题进行自定义，主题也需要进行同步。默认情况下，主题是一个单独的仓库，因此需要将主题文件夹中的`.git`信息删除。
+
+## hexo恢复
+当更换电脑或本地文件丢失时，我们需要在新电脑上恢复hexo，具体步骤如下：
+1. 安装`git`和`npm`,`hexo-cli`
+2. 克隆博客仓库至本地
+3. 安装npm模块
+```
+npm install
+```
