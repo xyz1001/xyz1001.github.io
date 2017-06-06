@@ -72,3 +72,12 @@ deploy:
   repo: git@github.com:xyz1001/xyz1001.github.io.git
   branch: master
   message: 
+
+# sitemap
+sitemap:
+  path: sitemap.xml
+
+# search
+search:
+  path: search.xml
+  field: post
