@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "张帆, zix, 博客, c++, linux, blog"
+keywords: "张帆, zinux, 博客, c++, linux, blog"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -39,7 +39,7 @@ seo: false
 menu:
   home: /
   #categories: /categories
-  #about: /about
+  about: /about
   archives: /archives
   tags: /tags
   #sitemap: /sitemap.xml
@@ -204,7 +204,7 @@ links_title: 友链
 #links_layout: inline
 links:
   #Title: http://example.com/
-  Zix的博客: http://www.xyz520.cn
+  zinux的博客: http://www.xyz520.cn
 
 
 # ---------------------------------------------------------------
