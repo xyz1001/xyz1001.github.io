@@ -18,10 +18,9 @@ hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系�
 
 所需要的相关软件安装命令如下：
 ``` bash
-sudo apt install git    #安装git
-wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh #安装nvm
-nvm install stable   #安装nodejs
-npm install -g hexo-cli    #安装hexo命令行接口，可通过命令使用hexo
+sudo apt install git npm nodejs-legacy #安装git
+sudo npm install npm@lts -g
+sudo npm install -g hexo-cli    #安装hexo命令行接口，可通过命令使用hexo
 ```
 其他情况请自行作出修改。
 ## hexo搭建
@@ -81,6 +80,9 @@ git push --set-upstream origin source   #推送新创建的分支source至Github
 ## hexo恢复
 当更换电脑或本地文件丢失时，我们需要在新电脑上恢复hexo，具体步骤如下：
 1. 安装`git`和`npm`,`hexo-cli`
+```
+sudo npm install hexo-cli -g
+```
 2. 克隆博客仓库至本地
 3. 安装npm模块
 ```
