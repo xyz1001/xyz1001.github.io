@@ -36,7 +36,7 @@ date: 2017-08-28 23:30:33
      style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
  }
  ```
- 以下简称*特定`paintEvent`实现*
+    以下简称*特定`paintEvent`实现*
  - 不提供如上的`paintEvent`实现
 - 背景颜色属性
  - 在边框属性设置前设置背景颜色属性，如
@@ -46,7 +46,7 @@ date: 2017-08-28 23:30:33
                "border:2px solid gray;"
                "}");
  ```
- 以下简称*正确设置背景颜色属性*
+    以下简称*正确设置背景颜色属性*
  - 不设置背景颜色属性或未在边框属性设置前设置
 下面将以控件类型和控件角色为分类标准一一介绍**在正确提供边框设置的QSS语句条件下**如何设置不同边框效果
 
@@ -55,6 +55,7 @@ date: 2017-08-28 23:30:33
 > Supports only the background, background-clip and background-origin properties.
 
 也就是说，`QWidget`实际上是不支持盒子模型的，具体使用时，需要按一定规则重写`void paintEvent(QPaintEvent *e)`函数来实现对盒子模型的支持。因此理论上来说在未重写该函数时，我们是无法通过设置`border`相关属性来对一个`QWidget`来添加边框。在对于`QWidget`及继承于`QWidget`的自定义控件作为主窗口时均需要提供特定的`paintEvent`函数相关实现。
+
 ### 单侧边框
 需要满足的条件为：
 - 提供了特定`paintEvent`实现
