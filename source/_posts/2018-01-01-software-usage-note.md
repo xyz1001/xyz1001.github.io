@@ -26,11 +26,11 @@ date: 2018-01-01 16:17:57
 
 # 目录
 
-- [WordPress](http://xyz1001.xyz/2016/04/11/software-note-of-wordpress/) - 博客系统 ![linux](http://onyvldqhl.bkt.clouddn.com/software-note/linux.png) ![windows](http://onyvldqhl.bkt.clouddn.com/software-note/windows.png) ![free](http://onyvldqhl.bkt.clouddn.com/software-note/free.png) ![opensoure](http://onyvldqhl.bkt.clouddn.com/software-note/oss.png)
+- [WordPress](http://xyz1001.xyz/2016/04/11/software-usage-of-wordpress/) - 博客系统 ![linux](http://onyvldqhl.bkt.clouddn.com/software-note/linux.png) ![windows](http://onyvldqhl.bkt.clouddn.com/software-note/windows.png) ![free](http://onyvldqhl.bkt.clouddn.com/software-note/free.png) ![opensoure](http://onyvldqhl.bkt.clouddn.com/software-note/oss.png)
 
-- [hexo](http://xyz1001.xyz/2017/04/02/software-note-of-hexo/) - 静态博客系统 ![linux](http://onyvldqhl.bkt.clouddn.com/software-note/linux.png) ![windows](http://onyvldqhl.bkt.clouddn.com/software-note/windows.png) ![free](http://onyvldqhl.bkt.clouddn.com/software-note/free.png) ![opensoure](http://onyvldqhl.bkt.clouddn.com/software-note/oss.png) ![cmd](http://onyvldqhl.bkt.clouddn.com/software-note/cmd.png)
+- [hexo](http://xyz1001.xyz/2017/04/02/software-usage-of-hexo/) - 静态博客系统 ![linux](http://onyvldqhl.bkt.clouddn.com/software-note/linux.png) ![windows](http://onyvldqhl.bkt.clouddn.com/software-note/windows.png) ![free](http://onyvldqhl.bkt.clouddn.com/software-note/free.png) ![opensoure](http://onyvldqhl.bkt.clouddn.com/software-note/oss.png) ![cmd](http://onyvldqhl.bkt.clouddn.com/software-note/cmd.png)
 
-- [shadowsocks](http://xyz1001.xyz/2017/04/02/software-note-of-shadowsocks/) ![linux](http://onyvldqhl.bkt.clouddn.com/software-note/linux.png) ![windows](http://onyvldqhl.bkt.clouddn.com/software-note/windows.png) ![android](http://onyvldqhl.bkt.clouddn.com/software-note/android.png) ![free](http://onyvldqhl.bkt.clouddn.com/software-note/free.png) ![opensoure](http://onyvldqhl.bkt.clouddn.com/software-note/oss.png)
+- [shadowsocks](http://xyz1001.xyz/2017/08/20/software-usage-of-shadowsocks/) ![linux](http://onyvldqhl.bkt.clouddn.com/software-note/linux.png) ![windows](http://onyvldqhl.bkt.clouddn.com/software-note/windows.png) ![android](http://onyvldqhl.bkt.clouddn.com/software-note/android.png) ![free](http://onyvldqhl.bkt.clouddn.com/software-note/free.png) ![opensoure](http://onyvldqhl.bkt.clouddn.com/software-note/oss.png)
 
 
 
