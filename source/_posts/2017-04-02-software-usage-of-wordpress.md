@@ -1,9 +1,9 @@
 ---
-title: 软件摸索---WordPress
+title: 软件折腾笔记之WordPress
 author: 张帆
 date: 2016-04-11 18:57:00
 tags:
- - 软件摸索
+ - 软件折腾笔记
  - WordPress
 ---
 

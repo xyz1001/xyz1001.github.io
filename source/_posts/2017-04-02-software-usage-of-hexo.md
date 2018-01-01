@@ -1,8 +1,9 @@
 ---
-title: 软件摸索之hexo
+title: 软件折腾笔记之hexo
 author: 张帆
 tags:
-  - null
+  - 软件折腾笔记
+  - hexo
 date: 2017-04-02 17:05:47
 ---
 
