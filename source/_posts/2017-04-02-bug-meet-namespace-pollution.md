@@ -29,6 +29,7 @@ int main()
 }
 ```
 在mingw492_32下编译提示如下错误:
+
 > no matching function for call to 'remove_copy_if(std::basic_string<char>::iterator, std::basic_string<char>::iterator, std::back_insert_iterator<std::basic_string<char> >, < unresolved overloaded function type>)' std::back_inserter(word), ispunct);
 
 <!--more-->
@@ -63,6 +64,7 @@ int main()
 ## 填坑
 
 实际上，在谷歌的[C++代码规范](https://google.github.io/styleguide/cppguide.html#Namespaces)里面有这样一条
+
 > You may not use a using-directive to make all names from a namespace available.
 
 由于命名空间往往是一个黑盒，我们无法直观得查看到命名空间里面定义了哪些名称，因此直接导入一个命名空间是相当危险的事，尤其是在一个多人协作的大型项目中，每个人都有可能往命名空间中添加命名。贸然使用using指示，很有可能导致各种bug，甚至是运行时bug，同时也为后期维护埋下了地雷。

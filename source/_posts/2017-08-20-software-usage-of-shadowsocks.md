@@ -10,11 +10,16 @@ date: 2017-08-20 23:44:14
 ## 服务器配置
 
 ### 安装环境
-`sudo apt install python3-pip`
-`sudo pip3 install shadowsocks`
+
+``` bash
+sudo apt install python3-pip
+sudo pip3 install shadowsocks
+```
 
 ### 优化系统配置
- #### 开启TCP BBR拥塞控制算法
+
+#### 开启TCP BBR拥塞控制算法
+
   1. 且服务器虚拟化方式为xen或kvm，TCP BBR不支持OpenVZ，检测方式：
   `sudo apt install virt-what && sudo virt-what`
   2. 检查内核是否为4.9以上，否则自行升级内核至4.9以上或更换较新的系统
@@ -29,7 +34,8 @@ date: 2017-08-20 23:44:14
 
  <!--more-->
 
- #### 优化网络配置
+#### 优化网络配置
+
  在`/etc/sysctl.d/local.conf`中添加以下内容
  ```
  # max open files
@@ -72,6 +78,7 @@ date: 2017-08-20 23:44:14
  net.ipv4.tcp_mtu_probing = 1
  ```
 ### 编写配置文件
+
  新建配置文件`/etc/shadowsocks.json`，添加以下内容
  ```
  {
@@ -87,18 +94,22 @@ date: 2017-08-20 23:44:14
  ```
 
 ### 运行/停止程序
+
  - `ssserver -c /etc/shadowsocks.json -d start`
  - `ssserver -c /etc/shadowsocks.json -d stop`
 
 ### NOTE
+
 - 服务器系统推荐选择具有较新内核(`>=4.9`)的系统，避免升级内核步骤，推荐使用`Ubuntu`，直接支持`tcp fast_open`
 - 选购服务器时注意根据自身的地理位置、网络状况来选择合适的服务器提供商，测试指标一般有网速和ping延迟，推荐工具有`traceroute`，`奇云测`，`服务器提供商官方测速地址`
 
 ## 客户端配置
+
 1. 下载GUI客户端
 2. 添加服务器信息
 
 ### NOTE
+
 - 搭配各类软件可实现shadowsocks的多协议、多场景支持，部分如下
 
 |软件|协议或场景|
