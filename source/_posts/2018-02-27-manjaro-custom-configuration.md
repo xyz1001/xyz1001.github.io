@@ -45,7 +45,7 @@ sudo pacman -S gnupg archlinx-keyring manjaro-keyring
 ``` bash
 sudo pacman -Syyu
 ```
-4. 安装备份的官方软件仓库中的软件，即可通过`pacman`进行安装的软件
+4. 安装备份的官方软件仓库中的软件，即可通过`pacman`进行安装的软件，生成已安装软件列表的方法可参考[Manjaro下备份已安装软件包](/2018/03/02/manjaro-backup-installed-packages/)
 ``` bash
 sudo pacman -S $(< pacman.lst) --needed
 ```
