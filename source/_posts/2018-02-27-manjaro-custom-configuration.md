@@ -17,29 +17,25 @@ date: 2018-02-27 21:32:16
 
 ### 调整软件源
 
-1. 修改`/etc/pacman-mirrors.conf`，将`OnlyCountry`一行修改为`OnlyCountry = China`
-``` bash
-sudo sed -i "s/OnlyCountry*/OnlyCountry = China/g" /etc/pacman-mirrors.conf
-```
-2. 调整软件源
+1. 根据速度切换软件源
 ``` bash
 sudo pacman-mirrors -i -c China -b stable
 ```
-3. 向`/etc/pacman.conf`添加archlinux源
+2. 向`/etc/pacman.conf`添加archlinux源
 ```
 [archlinuxcn]
 SigLevel = Optional TrustAll
 Server = http://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ```
 
-### 安装
+### 恢复官方软件
 1. 卸载不需要的软件
 ``` bash
 sudo pacman -R evince evolution evolution-data-server firefox gedit sushi libreoffice-fresh
 ```
 2. 安装密钥环
 ``` bash
-sudo pacman -S gnupg archlinx-keyring manjaro-keyring
+sudo pacman -S gnupg archlinuxcn-keyring manjaro-keyring
 ```
 3. 更新软件数据库和软件
 ``` bash
@@ -108,42 +104,37 @@ ln -s /tmp ~/Temp
 ```
 
 
-## 其他软件安装
+## 恢复其他软件
 
 ### 配置安装环境
 
-2. 配置终端代理
+1. 配置终端代理
 ``` bash
 export https_proxy=127.0.0.1:8118
 export http_proxy=127.0.0.1:8118
 ```
-3. 配置Git代理，若Git配置文件`~/.gitconfig`中已配置，可跳过此步
+2. 配置Git代理，若Git配置文件`~/.gitconfig`中已配置，可跳过此步
 ``` bash
 git config --global http.proxy 'socks5://127.0.0.1:1080'
 git config --global https.proxy 'socks5://127.0.0.1:1080'
 ```
 
-### 安装软件
+### Python软件
 
-1. 安装Archlinux社区软件仓库中的软件
-注1：`Albert`需要单独安装，指定内核模块
-注2：需要先通过`pip`卸载`psutil`，否则安装会冲突导致安装停止
 ``` bash
-yaourt -S $(< yaourt.lst) --needed --noconfirm
+sudo pip2 --proxy 127.0.0.1:8118 install youdao
+sudo pip --proxy 127.0.0.1:8118 install you-get thefuck tldr 
 ```
-2. 安装Python软件
-``` bash
-sudo pip2 install youdao
-sudo pip install you-get thefuck tldr
-```
-3. 安装npm软件
+
+### npm软件
+
 ``` bash
 sudo npm install hexo-cli -g
 ```
 
-## 安装额外软件
+### 自行编译软件
 
-### dde-system-monitor
+#### dde-system-monitor
 
 dock上的系统资源监视器,方便查看内存及网速
 ``` bash
@@ -153,7 +144,7 @@ qmake .. && make
 sudo cp libdock-system-monitor.so /usr/lib/dde-dock/plugins && pkill dde-dock
 ```
 
-### XMemo
+#### XMemo
 
 便签软件
 ``` bash
@@ -164,11 +155,29 @@ sudo cp -r ../package/fakeroot/usr/* /usr/
 sudo cp xmemo /usr/local/bin
 ```
 
-### cppiniter
+#### cppiniter
 c++工程初始化脚本
 ``` bash
 cd /tmp && git clone git@github.com:xyz1001/cppiniter.git
 cd cppiniter && sudo ./install.py
+```
+
+### AUR软件
+
+#### albert
+`Albert`需要单独安装，指定内核模块
+yaourt -S albert
+
+### deepinwine系列软件
+该系列软件经常会安装出错，故单独安装，避免yaourt批量安装多次失败
+yaourt -S deepin.com.qq.office
+yaourt -S deepin.com.thunderspeed
+yaourt -S deepin.com.wechat
+
+#### 其他软件
+安装Archlinux社区软件仓库中的软件
+``` bash
+yaourt -S $(< yaourt.lst) --needed --noconfirm
 ```
 
 ## 软件配置
@@ -254,8 +263,8 @@ sudo sed -i "/var pk, decrypted/a\        return \{\n            name: \"0xcb\",
 
 - 更换头像
 - 亮度中开启`自动调节色温`
-- 标准字体修改为`文泉驿微米黑`，等宽字体修改为`Fira Code`
 - 默认程序
+- 标准字体修改为`文泉驿微米黑`，等宽字体修改为`Fira Code`
 - 更换图标主题
 - 更换字体
 - 关闭音效
