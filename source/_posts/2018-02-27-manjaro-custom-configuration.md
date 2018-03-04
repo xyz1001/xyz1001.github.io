@@ -9,7 +9,7 @@ date: 2018-02-27 21:32:16
 
 使用了Manjaro Deepin有一段时间了，从最初的Ubuntu kylin，到Ubuntu，CentOS，Deepin，直到去年发现了Manjaro这个发行版，被其相对简单的安装和强大的软件源所深深吸引。刚从Debian系切换过来还不是很习惯，相对于Deepin的开箱即用，Manjaro还是有一些需要手动去配置的地方。本文将以刚安装完成的Manjaro为前提，一步一步记录下自己的个性化配置步骤，方便以后查阅，同时也为他人提供借鉴。
 
-注：本文所示系统为Manjaro Deepin 17.1.2，不保证在其他Linux发行版/桌面环境/版本下完全可用。请根据自身的需求谨慎参考。
+注：本文所示系统为Manjaro Deepin 17.1.2，不保证在其他Linux发行版/桌面环境/版本下完全可用。请根据自身的需求谨慎参考。具体相关命令可参考[Manjaro个性化配置脚本](https://raw.githubusercontent.com/xyz1001/software-notes/master/backup_and_restore/manjaro/setup.sh)
 
 <!--more-->
 
@@ -31,11 +31,11 @@ Server = http://mirrors.ustc.edu.cn/archlinuxcn/$arch
 ### 恢复官方软件
 1. 卸载不需要的软件
 ``` bash
-sudo pacman -R evince evolution evolution-data-server firefox gedit sushi libreoffice-fresh
+sudo pacman -R `comm -12 <(cat uninstall.lst | sort) <(pacman -Qnq | sort)`
 ```
 2. 安装密钥环
 ``` bash
-sudo pacman -S gnupg archlinuxcn-keyring manjaro-keyring
+sudo pacman -S gnupg archlinuxcn-keyring manjaro-keyring --needed
 ```
 3. 更新软件数据库和软件
 ``` bash
@@ -76,7 +76,7 @@ git clone git@github.com:xyz1001/dotfiles.git && cd dotfiles && ./install.py
 
 用于将socks5代理转换为http代理
 ``` bash
-sudo sh -c 'echo "forward-socks5 / 127.0.0.1:1080 ." >> /etc/privoxy/config' # 修改配置文件
+sudo bash -c 'echo "forward-socks5 / 127.0.0.1:1080 ." >> /etc/privoxy/config' # 修改配置文件
 sudo systemctl start privoxy.service # 运行服务
 ```
 ### 调整HOME目录下文件夹
@@ -95,7 +95,7 @@ XDG_VIDEOS_DIR="$HOME/Videos"
 ```
 2. 删除中文目录
 ``` bash
-cd ~ && rmdir 文档 公共 图片 模板 下载 音乐 桌面 视频
+cd ~ && rmdir 文档 公共 模板 下载 音乐 桌面 视频 && rm -r 图片
 ```
 3. 创建其他所需文件夹
 ``` bash
@@ -129,7 +129,7 @@ sudo pip --proxy 127.0.0.1:8118 install you-get thefuck tldr
 ### npm软件
 
 ``` bash
-sudo npm install hexo-cli -g
+sudo -E npm install hexo-cli -g
 ```
 
 ### 自行编译软件
@@ -193,7 +193,7 @@ chsh -s /usr/bin/zsh
 ### tmux
 
 1. 在控制中心中添加开启终端时启动tmux快捷键`Ctrl+Alt+T`，覆盖默认设置
-启动命令为`deepin-terminal -e tmux`
+启动命令为`deepin-terminal -e tmux -2`
 2. 安装tmux插件管理器tpm
 ``` bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -229,14 +229,12 @@ google-chrome-stable --proxy-server=socks5://127.0.0.1:1080
 - 启动时最大化
 - 关闭退出提示
 ``` bash
-sudo sed -i "s/print_notify_after_script_finish*/print_notify_after_script_finish=false/g" ~/.config/deepin/deepin-terminal/config.conf
+sudo sed -i "s/print_notify_after_script_finish.*/print_notify_after_script_finish=false/g" ~/.config/deepin/deepin-terminal/config.conf
 ```
 - 关闭雷神终端的标题栏
-show_quakewindow_tab=false
 ``` bash
-sudo sed -i "s/show_quakewindow_tab*/show_quakewindow_tab=false/g" ~/.config/deepin/deepin-terminal/config.conf
+sudo sed -i "s/show_quakewindow_tab.*/show_quakewindow_tab=false/g" ~/.config/deepin/deepin-terminal/config.conf
 ```
-- 添加快捷键Ctrl+Alt+T, 命令：deepin-terminal -e tmux
 
 ### 坚果云
 
@@ -254,7 +252,7 @@ sed -i "s/enterprise=false/enterprise=true/g" "${HOME}/.nutstore/dist/conf/nutst
 
 ``` bash
 # 破解
-sudo sed -i "/var pk, decrypted/a\        return \{\n            name: \"0xcb\",\n            product: \"StarUML\",\n            licenseType: \"vip\",\n            quantity: \"www.qq.com\",\n            licenseKey: \"later equals never\!\"\n        \};" /opt/staruml/www/license/node/LicenseManagerDomain.js
+sudo sed -i '/var pk, decrypted/a\        return {\n            name: "0xcc",\n            product: "StarUML",\n            licenseType: "vip",\n            quantity: "www.qq.com",\n            licenseKey: "later equals never!"\n        };' /opt/staruml/www/license/node/LicenseManagerDomain.js
 ```
 
 ## 其他配置
@@ -264,9 +262,8 @@ sudo sed -i "/var pk, decrypted/a\        return \{\n            name: \"0xcb\",
 - 更换头像
 - 亮度中开启`自动调节色温`
 - 默认程序
-- 标准字体修改为`文泉驿微米黑`，等宽字体修改为`Fira Code`
+- 标准字体修改为`Noto Sans CJK SC`，等宽字体修改为`Fira Code`
 - 更换图标主题
-- 更换字体
 - 关闭音效
 - 开启时间`自动同步`
 - 开启`插入鼠标禁用触摸板`
@@ -275,8 +272,7 @@ sudo sed -i "/var pk, decrypted/a\        return \{\n            name: \"0xcb\",
 
 - albert
 - notepadqq
+- fcitx
 - Android Studio
 - Zeal
 - StarUML
-
-
