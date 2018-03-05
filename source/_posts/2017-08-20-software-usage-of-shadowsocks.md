@@ -13,7 +13,7 @@ date: 2017-08-20 23:44:14
 
 ``` bash
 sudo apt install python3-pip
-sudo pip3 install shadowsocks
+sudo -H pip3 install setuptools shadowsocks
 ```
 
 ### 优化系统配置
@@ -83,20 +83,20 @@ sudo pip3 install shadowsocks
  ```
  {
      "server":"my_server_ip",
-     "server_port": 433
+     "server_port": 433,
      "local_address": "127.0.0.1",
      "local_port":1080,
      "password":"mypassword",
      "timeout":300,
-     "method":"aes-256-cfb",
+     "method":"aes-256-ctr",
      "fast_open": true
  }
  ```
 
 ### 运行/停止程序
 
- - `ssserver -c /etc/shadowsocks.json -d start`
- - `ssserver -c /etc/shadowsocks.json -d stop`
+ - `sudo ssserver -c /etc/shadowsocks.json -d start`
+ - `sudo ssserver -c /etc/shadowsocks.json -d stop`
 
 ### NOTE
 
