@@ -189,3 +189,7 @@ autocmd BufNewFile,BufFilePre,BufRead *.qss set filetype=css
 " vim 类型文件设置折叠方式为 marker
 autocmd FileType vim set foldmethod=marker
 ```
+
+## 小结
+
+Vim的选项很多，我们需要根据自己的习惯和使用场景做出调整。快捷键和自动命令有着极高的自由度，我们在日常使用过程中需要随时留意哪些操作是可以通过配置快捷键和自动命令进行改善的，这样我们使用Vim才会越来越顺手，玩出自己的精彩
