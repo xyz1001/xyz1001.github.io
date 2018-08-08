@@ -23,16 +23,16 @@ date: 2018-08-08 10:59:16
 
 ## 语法
 
-qmake的语法相对来说比较简单，和cmake相比，关键词要少很多，Qt官方手册里面有一章详细的介绍了所有关键词的使用。这里也推荐一篇博客，里面对qmake的关键词讲解的比较好。
-[官方手册-Qt变量](http://doc.qt.io/qt-5/qmake-variable-reference.html)
-[Qt之pro配置详解](https://blog.csdn.net/liang19890820/article/details/51774724)
+qmake的语法相对来说比较简单，和cmake相比，关键词要少很多，Qt官方手册里面有一章详细的介绍了所有关键词的使用。这里也推荐一篇博客，里面对qmake的关键词有比较详细的讲解。
+- [Qt Variables](http://doc.qt.io/qt-5/qmake-variable-reference.html)
+- [Qt之pro配置详解](https://blog.csdn.net/liang19890820/article/details/51774724)
 
 这里列举一些qmake使用过程中需要注意的地方或小技巧。
 - 将环境变量转换为宏定义。在软件的自动构建中，我们可能会需要根据环境变量来确定编译期的一些行为或数据，如我们可能在环境变量中设置了当前软件的版本号，我们需要将这个版本号设置到我们的代码中。这个时候我们可以通过读取环境变量来设置一个宏，这样我们就可以在代码中使用。对于qmake，我们可以通过下面这行语句来设置。
 ```
 DEFINES += [micro]=\\\"$$([environment variable])\\\"
 ```
-其中`[environment variable]`是我们要读取的环境变量，`[micro]`是我们要设置的宏
+ 其中`[environment variable]`是我们要读取的环境变量，`[micro]`是我们要设置的宏
 - qmake目前不支持相同文件名的源文件。即在当前项目中不能存在两个一样名称的`.cpp`文件，即使是在不同目录下。因为qmake默认编译输出的目标文件（`.o`或`.obj`文件）放在同一目录下，两个同名的`.cpp`文件生成的目标文件是也是同名的，后一个生成的会覆盖前一个生成的。这是qmake的一个缺陷，cmake不存在这样的问题。
 - 我们可以添加`QMAKE_PROJECT_DEPTH = 0`使qmake在生成`makefile`时使用绝对路径。这一点在某些情况下会非常有用。例如如果使用Vim开发，qmake编译生成的输出在quickfix窗口中的路径是相对路径，回车无法跳转到正确文件，设置使用绝对路径就可以解决这个问题。
 
