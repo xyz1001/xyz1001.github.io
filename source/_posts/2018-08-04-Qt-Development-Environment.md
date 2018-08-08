@@ -3,6 +3,7 @@ title: Qt从0到1之工具篇（1）：开发环境
 author: 张帆
 tags:
   - Qt
+  - Qt Creator
 date: 2018-08-04 14:42:40
 ---
 
