@@ -35,7 +35,11 @@ DEFINES += [micro]=\\\"$$([environment variable])\\\"
  其中`[environment variable]`是我们要读取的环境变量，`[micro]`是我们要设置的宏
 - qmake目前不支持相同文件名的源文件。即在当前项目中不能存在两个一样名称的`.cpp`文件，即使是在不同目录下。因为qmake默认编译输出的目标文件（`.o`或`.obj`文件）放在同一目录下，两个同名的`.cpp`文件生成的目标文件是也是同名的，后一个生成的会覆盖前一个生成的。这是qmake的一个缺陷，cmake不存在这样的问题。
 - 我们可以添加`QMAKE_PROJECT_DEPTH = 0`使qmake在生成`makefile`时使用绝对路径。这一点在某些情况下会非常有用。例如如果使用Vim开发，qmake编译生成的输出在quickfix窗口中的路径是相对路径，回车无法跳转到正确文件，设置使用绝对路径就可以解决这个问题。
+- `INCLUDEPATH`和`DEPENDPATH`的区别
+ - `INCLUDEPATH`：用于指定要包含的头文件目录，`#include`指令会去这些目录中寻找头文件。
+ - `DEPENDPATH`：指定编译要依赖的文件目录，该目录下的文件发生改动后，编译期将会对依赖这些文件的代码重新进行编译。
 
+ 在Qt4时代，两个变量的作用是不一样的，设置了`INCLUDEPATH`后，该目录下的文件即使改变了，也不会触发重新编译，所以还需要设置`DEPENDPATH`。但是在Qt5之后，`INCLUDEPATH`下的文件改动之后也触发重新编译，已经附带了`DEPENDPATH`的效果，`DEPENDPATH`已经不需要设置了。具体可参考stackoverflow上的[这个回答](https://stackoverflow.com/questions/16769541/does-a-qt-5-programmer-have-to-know-about-dependpath-qmake-variable)。
 
 ## 使用
 
