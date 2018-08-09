@@ -102,3 +102,7 @@ sudo npm install hexo-cli -g
 ```
 npm install
 ```
+
+## SEO
+
+参考[让Google搜索到搭建在Github Pages上的博客](https://jactor-sue.github.io/how-githubio-blog-can-be-searched-by-google/)
