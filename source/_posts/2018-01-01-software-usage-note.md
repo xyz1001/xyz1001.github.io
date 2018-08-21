@@ -3,6 +3,7 @@ title: 软件折腾笔记
 author: 张帆
 tags:
   - 软件折腾笔记
+abbrlink: 24426
 date: 2018-01-01 16:17:57
 ---
 
