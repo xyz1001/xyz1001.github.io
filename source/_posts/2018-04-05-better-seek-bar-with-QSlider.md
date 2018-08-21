@@ -4,6 +4,7 @@ author: 张帆
 tags:
   - Qt
   - QSlider
+abbrlink: 52996
 date: 2018-04-05 14:27:08
 ---
 

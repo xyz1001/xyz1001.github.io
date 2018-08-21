@@ -1,10 +1,11 @@
 ---
 title: 软件折腾笔记之WordPress
 author: 张帆
-date: 2016-04-11 18:57:00
 tags:
- - 软件折腾笔记
- - WordPress
+  - 软件折腾笔记
+  - WordPress
+abbrlink: 10685
+date: 2016-04-11 18:57:00
 ---
 
 WordPress是一个优秀的个人博客框架，用起来相当简单，功能强大。但世上没有完美无缺的东西，任何事物总存在或多或少的瑕疵。在折腾WordPress的过程中，我遇到了一些问题，有WordPress自身的BUG，也有其功能上的不足。但由于WordPress本身开源，而且提供了数量丰富的插件供我们使用，因此所有的问题也都不是问题了。以下是本人对WordPress的配置及优化过程。
