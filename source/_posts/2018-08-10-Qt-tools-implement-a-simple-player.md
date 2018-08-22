@@ -3,7 +3,8 @@ title: Qt从0到1之工具篇（3）：实现一个简陋的播放器
 author: 张帆
 tags:
   - Qt
-  - vlc
+  - Qt工具
+  - Qt从0到1
 abbrlink: 16527
 date: 2018-08-10 21:52:35
 ---
