@@ -96,7 +96,7 @@ connect(sender, signal, receiver, method, type)
 连接时需要注意的点有
  - 信号槽的连接是多对多的，一个信号可以关联多个槽，一个槽也可以由多个信号触发，而且同一个信号和槽可以重复关联。
  - 连接信号和槽时要求信号的参数不能大于槽的参数。
- - 避免死循环，如槽函数中又触发了连接的信号。相关案例可以参考我之前的一篇文章[Qt自定义控件之SeekBar](http://xyz1001.xyz/2018/04/05/better-seek-bar-with-QSlider/#%E5%B1%8F%E8%94%BDsetValue-%E6%97%B6%E7%9A%84%E4%BF%A1%E5%8F%B7)
+ - 避免死循环，如槽函数中又触发了连接的信号。相关案例可以参考我之前的一篇文章[Qt自定义控件之SeekBar](http://xyz1001.xyz/52996.html)
 
 #### 连接类型
 
@@ -117,7 +117,7 @@ bool disconnect(const QMetaObject::Connection &connection)
 bool disconnect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method)
 ```
 
-其中，除了静态成员函数的第三种，我们需要传入一个连接时的返回值来断开一个特定的连接，其他方式都可以通过将调用特定参数为0或者`nullptr`来实现一个类似于通配符的作用。下面这段摘录自Qt的[官方文档](file:///home/xyz1001/.local/share/Zeal/Zeal/docsets/Qt_5.docset/Contents/Resources/Documents/doc.qt.io/qt-5/qobject.html#disconnect)
+其中，除了静态成员函数的第三种，我们需要传入一个连接时的返回值来断开一个特定的连接，其他方式都可以通过将调用特定参数为0或者`nullptr`来实现一个类似于通配符的作用。下面这段摘录自Qt的[官方文档](http://doc.qt.io/qt-5/qobject.html#disconnect)
 1. 断开所有与对象myObject发出的信号相连接的所有信号槽:
  ``` cpp
  disconnect(myObject, 0, 0, 0);
