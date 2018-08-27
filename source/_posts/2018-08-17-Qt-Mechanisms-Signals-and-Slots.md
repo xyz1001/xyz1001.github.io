@@ -63,27 +63,121 @@ Qt的信号槽主要是为了解决对象间的通信问题。在不使用信号
 
 有了信号和槽，我们还需要将其进行一个关联。我们需要通过`QObject`的静态成员函数`connect`来实现。Qt5中，`connect`的函数原型如下：
 ``` cpp
+// 静态成员函数
 QMetaObject::Connection	connect(const QObject *sender, const char *signal, const QObject *receiver, const char *method, Qt::ConnectionType type = Qt::AutoConnection)
 QMetaObject::Connection	connect(const QObject *sender, const QMetaMethod &signal, const QObject *receiver, const QMetaMethod &method, Qt::ConnectionType type = Qt::AutoConnection)
 QMetaObject::Connection	connect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method, Qt::ConnectionType type = Qt::AutoConnection)
 QMetaObject::Connection	connect(const QObject *sender, PointerToMemberFunction signal, Functor functor)
 QMetaObject::Connection	connect(const QObject *sender, PointerToMemberFunction signal, const QObject *context, Functor functor, Qt::ConnectionType type = Qt::AutoConnection)
+
+// 普通成员函数
+QMetaObject::Connection	connect(const QObject *sender, const char *signal, const char *method, Qt::ConnectionType type = Qt::AutoConnection) const
 ```
-其中第一种和第二种是Qt4中中，而后三种是Qt5中引入的。其中返回值主要用于判断连接是否成功，一般会忽略，再忽略参数类型和默认参数等，可以看出基本形式为
+我们可以看到，`connect`方法包括普通成员函数和静态成员函数在内，一共有六种形式，而且参数也是相当的多。我们一步步来分析这些方法。
+首先我们我可看到所有形式的函数的返回值都是`QMetaObject::Connection`，我们查阅[文档](http://doc.qt.io/qt-5/qmetaobject-connection.html#details)可以看到，`QMetaObject::Connection`的作用有两个
+- 用于断开一个信号槽的连接
+- 检查信号槽连接是否成功
+一般情况下我们会直接忽略这个返回值。
+
+然后我们先忽略作为普通成员函数的`connect`函数，先看下作为静态成员函数的5个`connect`重载。其中前3个如果我们忽略掉参数的类型和默认参数，可以简化为同一种形式
 ``` cpp
-connect(sender, signal, receiver, method, type)
+QMetaObject::Connection connect(sender, signal, receiver, method, type)
 ```
-其中，`sender`是信号的发出者，`signal`就是信号，`receiver`是信号的接受者，`method`就是在信号发出后要执行的函数，`type`是连接类型，下面会具体讲解。接下来我们针对每个原型具体说明。
-1. `QMetaObject::Connection	connect(const QObject *sender, const char *signal, const QObject *receiver, const char *method, Qt::ConnectionType type = Qt::AutoConnection)`
- 该形式的信号发出者和接收着均是`QObject`类型的对象指针，而信号和槽则是字符串常量，这是因为在Qt4中是直接通过字符串来进行函数的匹配的，其使用方式类似于
+我们先看最后一个参数`type`，表示连接类型，带有一个默认参数`Qt::AutoConnection`，一般情况下使用默认值即可。由于连接类型相关的内容涉及到其他知识点，本文将暂不做深入说明。
 
- > QObject::connect(scrollBar, SIGNAL(valueChanged(int)), label,  SLOT(setNum(int)));
+接下来我们看下剩下的四个参数。其中`sender`是信号的发出者，`signal`就是信号，`receiver`是信号的接受者，`method`就是槽，也就是在信号发出后要执行的函数。静态成员函数中的前三个最大的区别就是`signal`和`method`的参数类型不同。其中前两种是Qt4中使用的，而第三种是在Qt5中引入。我们先看前两种。
+对于第一种，该形式的信号发出者和接收着均是`QObject`类型的对象指针，而信号和槽则是`const char *`类型，也就是一个字符串常量，这是因为在Qt4中是直接通过字符串来进行函数的匹配的，我们来看一个例子。
+``` cpp
+// foo.h
+#ifndef FOO_H
+#define FOO_H
 
- 其中`SIGNAL`和`SLOT`为两个宏，用于将括号中的函数转换为字符串，这种处理方式有一个严重的问题是由于使用字符串对函数进行标识，然后在运行期再进行匹配，使得编译器无法在编译期获取到信号和槽函数的类型，也就无法去判断信号和槽是否存在，参数是否匹配，而只能在运行期去判断，这往往会导致连接了错误的信号和槽，进而产生很多意想不到的bug。
-2. `QMetaObject::Connection	connect(const QObject *sender, const QMetaMethod &signal, const QObject *receiver, const QMetaMethod &method, Qt::ConnectionType type = Qt::AutoConnection)`
-这种形式本质上和第一种是一样的，只是通过`QMetaMethod`对函数进行了包装。该方式很少用到。
-3. `QMetaObject::Connection	connect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method, Qt::ConnectionType type = Qt::AutoConnection)`
-这是`Qt5`引入的新的信号槽连接方式，信号和槽的类型是`PointerToMemberFunction`，也就是成员函数指针，这样如果信号或槽函数不存在，或者是信号和槽的参数无法匹配，编译期间就会报错。
+#include <QObject>
+
+class Foo : public QObject
+{
+    Q_OBJECT
+public:
+    explicit Foo(QObject *parent = nullptr);
+
+signals:
+    void Hello(int i);
+
+public slots:
+    void World(int i);
+};
+
+#endif // FOO_H
+```
+
+``` cpp
+// foo.cpp
+#include "foo.h"
+
+#include <QDebug>
+
+Foo::Foo(QObject *parent) : QObject(parent) {
+    connect(this, SIGNAL(Hello(int i)), this, SLOT(World(int i)));
+}
+
+void Foo::World(int i) {
+    qDebug() << "Hello world!"<< i;
+}
+```
+我们可以看到我们关联信号(`Hello`)槽(`World`)时使用了`SIGNAL`和`SLOT`为两个宏，这两个宏在`Release`编译时(`Debug`时还会添加语句所在行数等信息用于调试)的定义如下
+``` cpp
+# define SLOT(a)     "1"#a
+# define SIGNAL(a)   "2"#a
+```
+这里面使用了一个较少出现的宏的用法，即`#`，其功能是将其后面的宏参数进行字符串化操作，简单说就是在对它所引用的宏变量通过替换后在其左右各加上一个双引号，也就是说我们的`connect`函数经过预处理后的效果是这样的
+``` cpp
+connect(this, "2""Hello(int i)", this, "1""World(int i)");
+```
+我们忽略多出的`"1"`和`"2"`，可以看到，实际上在Qt4的信号槽连接语法中，预处理阶段我们传入的信号和槽函数会被转换成相应的字符串，我们也可以猜测到Qt会保存一个对应的字符串和函数的映射表用于运行时查找。再联想到信号和槽定义时需要放在特定的区块中，我们大致可以确定`MOC`工具在对头文件进行处理时，就是根据这些特定的区块标记(`signals`和`... slots:`)来确定哪些函数需要添加到实现信号槽所需的函数字符串与函数的映射表的。
+Qt4提供的第二种信号槽连接语法实际上与第一种无异，[文档中](http://doc.qt.io/qt-5/qobject.html#connect-1)有这样一句话
+
+> This function works in the same way as connect(const QObject *sender, const char *signal, const QObject *receiver, const char *method, Qt::ConnectionType type) but it uses QMetaMethod to specify signal and method.
+
+因此这里不再赘述。
+
+再回到上面这个例子，我们使用了Qt4的信号槽连接语法，但这种处理方式有一个严重的问题，如果我在编写代码时不小心将信号或槽函数打错，例如如果我们不小心将信号槽连接语句写成了如下形式
+``` cpp
+connect(this, SIGNAL(Helo(int i)), this, SLOT(World(int i)));
+```
+编译时是没有任何问题的，只有当我们运行程序时，我们才能在输出窗口中看到如下输出
+
+> Object::connect: No such signal Foo::Helo(int i) in ../SignalsAndSlots/foo.cpp:15
+
+如果编译的是`Release`，甚至连错误位置信息都没有。这是由于Qt4的信号槽连接语法使用字符串对函数进行标识，然后在运行期再进行匹配，使得编译器无法在编译期获取到信号和槽函数的类型，也就无法去判断信号和槽是否存在，参数是否匹配，这个缺陷导致信号槽的关联特别容易出现bug，我们只能依靠运行期间的现象和输出来排查此类bug。因此在Qt5中，Qt引入了第三种信号槽连接语法。
+第三个`connect`函数的信号和槽的类型是`PointerToMemberFunction`，字面意思也就是成员函数指针，如果换成新的Qt5的信号槽连接语法，上面的代码可以修改为
+``` cpp
+connect(this, &Foo::Hello, this, &Foo::World);
+```
+这里的信号和槽函数使用了成员函数指针，这样编译器就可以知道信号和槽函数的具体类型，如果信号或槽函数不存在，或者是信号和槽的参数无法匹配，编译期间就会报错。因此在实际开发中，虽然Qt5为了和Qt4兼容，依然保留了Qt的信号槽连接语法，但除非我们使用Qt4进行开发，否则我们不应再继续使用Qt4的信号槽连接语法。
+任何方法都是有利有弊，Qt5虽然解决了Qt4中的信号槽连接语法的缺陷，但也随之带来了一个问题。继续以上面的例子为基础，我们在`foo.h`添加一个槽函数
+``` cpp
+// foo.h
+void World(double d, int i);
+```
+然后在`foo.cpp`中添加一个空实现。这样我们其实是添加了一个槽函数`World`的重载，Qt的槽函数是允许有重载的。但是当我们再次进行编译时，编译器报错了
+
+>  error: no matching function for call to ‘Foo::connect(Foo*, void (Foo::*)(int), Foo*, <unresolved overloaded function type>)’
+>  connect(this, &Foo::Hello, this, &Foo::World);
+>                                           ^
+
+编译器提示我们第四个参数是`unresolved overloaded function type`，也就是未解析的重载函数类型。我们再次将Qt4和Qt5的信号槽连接代码进行对比
+``` cpp
+connect(this, SIGNAL(Helo(int i)), this, SLOT(World(int i))); // Qt4
+connect(this, &Foo::Hello, this, &Foo::World); // Qt5
+```
+我们可以看到，由于Qt5使用了成员函数指针，相对于Qt4，其丢失了参数信息，这样就导致了一旦信号函数或槽函数有重载，编译器就不知道该使用哪一个。解决这个问题有两个方法。
+1. 创建指向类成员函数的函数指针，再将该指针作为参数传入。
+ ``` cpp
+ void (Foo::*world_i)(int i) = &Foo::World;
+ connect(this, &Foo::Hello, this, world_i);
+ ```
+这里我们创建了一个类型为`void (Foo::*)(int i)`的成员函数指针，并将指向`void World(int i)`的函数指针赋值给类型为该成员函数指针的`world_i`，然后将`world_i`作为参数传入，从而避免了二义性。
+
 4. `QMetaObject::Connection	connect(const QObject *sender, PointerToMemberFunction signal, Functor functor)`
 这种方式是用于关联信号和一个可调用对象，最常用的便是传入一个`lambda`表达式，我们也可以通过这种方式间接实现将一个非`QObject`子类的类的成员函数作为槽函数使用。
  ``` cpp
