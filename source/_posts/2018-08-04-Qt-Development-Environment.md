@@ -1,5 +1,5 @@
 ---
-title: Qt从0到1之工具篇（1）：开发环境
+title: Qt从0到1之工具篇：开发环境
 author: 张帆
 tags:
   - Qt

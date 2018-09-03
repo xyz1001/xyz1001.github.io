@@ -1,5 +1,5 @@
 ---
-title: Qt从0到1之工具篇（2）：qmake
+title: Qt从0到1之工具篇：qmake
 author: 张帆
 tags:
   - Qt
