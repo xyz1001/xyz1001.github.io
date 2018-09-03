@@ -10,6 +10,8 @@ abbrlink: 19581
 date: 2018-08-17 11:01:23
 ---
 
+[示例代码](https://github.com/xyz1001/QtExamples/tree/master/SignalsAndSlots)
+
 ## What
 
 Qt提供了很多机制，其中的一个核心机制就是信号槽，信号槽在Qt程序中有着广泛的使用，是Qt有别于其他框架的一个显著特点。信号槽实际上是一种对象间通信的技术，内部使用了观察者模式。
