@@ -21,39 +21,43 @@ date: 2017-08-28 23:30:33
 在实际使用过程中发现，影响边框设置效果成功与否一共有5个影响因素，分别是
 
 - 控件类型
-    - `QWidget`及继承于`QWidget`的自定义控件
-    以下简称*`QWidget`系控件*
-    - `QFrame`及继承于`QFrame`的自定义控件
-    以下简称*`QFrame`系控件*
+  - `QWidget`及继承于`QWidget`的自定义控件
+  以下简称*`QWidget`系控件*
+  - `QFrame`及继承于`QFrame`的自定义控件
+  以下简称*`QFrame`系控件*
 - 控件角色
-    - 控件做主窗口时
-    - 控件做子部件时
+  - 控件做主窗口时
+  - 控件做子部件时
 - 边框类型
-    - 单侧边框
-    - 四周边框(全边框)
+  - 单侧边框
+  - 四周边框(全边框)
 - `paintEvent`函数提供与否
-    - 提供`paintEvent`函数相关实现，实现如下：
-    ```
-    void CustomWidget::paintEvent(QPaintEvent *)
-    {
-        QStyleOption opt;
-        opt.init(this);
-        QPainter p(this);
-        style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-    }
-    ```
-    以下简称*特定`paintEvent`实现*
-    - 不提供如上的`paintEvent`实现
+  - 提供`paintEvent`函数相关实现，实现如下：
+
+   ```
+   void CustomWidget::paintEvent(QPaintEvent *)
+   {
+       QStyleOption opt;
+       opt.init(this);
+       QPainter p(this);
+       style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+   }
+   ```
+
+   以下简称*特定`paintEvent`实现*
+  - 不提供如上的`paintEvent`实现
 - 背景颜色属性
-    - 在边框属性设置前设置背景颜色属性，如
-    ```
-    setStyleSheet("QWidget{"
-                  "background-color:#FFFFFF;"  // 设置背景颜色属性
-                  "border:2px solid gray;"
-                  "}");
-    ```
-       以下简称*正确设置背景颜色属性*
-    - 不设置背景颜色属性或未在边框属性设置前设置
+  - 在边框属性设置前设置背景颜色属性，如
+
+   ```
+   setStyleSheet("QWidget{"
+                 "background-color:#FFFFFF;"  // 设置背景颜色属性
+                 "border:2px solid gray;"
+                 "}");
+   ```
+
+   以下简称*正确设置背景颜色属性*
+  - 不设置背景颜色属性或未在边框属性设置前设置
 
 下面将以控件类型和控件角色为分类标准一一介绍**在正确提供边框设置的QSS语句条件下**如何设置不同边框效果
 

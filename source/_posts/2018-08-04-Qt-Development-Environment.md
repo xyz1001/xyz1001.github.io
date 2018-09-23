@@ -28,12 +28,13 @@ Qt Creator的构建套件是指用于Qt开发所需要的一系列外部工具�
 ### 插件支持
 
 Qt Creator默认集成了一些插件，可在帮助->关于插件中启用或关闭。列举一些我常用的插件。
+
 1. FakeVim
-该插件提供了对Vim编辑模式的支持，而且可以支持导入Vim基本配置文件，对于Vimer来说必不可少。当然，Qt Creator提供了EmacsKeys插件，Emacs用户可以尝试一下。
+ 该插件提供了对Vim编辑模式的支持，而且可以支持导入Vim基本配置文件，对于Vimer来说必不可少。当然，Qt Creator提供了EmacsKeys插件，Emacs用户可以尝试一下。
 2. Beautifier
-该插件用于代码的格式化，其提供了包括`clang-format`，`astyle`在内的代码格式化工具的支持。
+ 该插件用于代码的格式化，其提供了包括`clang-format`，`astyle`在内的代码格式化工具的支持。
 3. Valgrind
-这个插件提供了对`Valgrind`的支持，默认是开启的。`Valgrind`是一个用于内存调试，内存泄漏检测和性能分析的命令行工具。我们可以在Qt Creator的分析菜单中找到`Valgrind`相关的功能项，Qt Creator会将相关结果在图形化界面上展现出来。需要注意的是在使用前我们需要先安装`Valgrind`这个软件。
+ 这个插件提供了对`Valgrind`的支持，默认是开启的。`Valgrind`是一个用于内存调试，内存泄漏检测和性能分析的命令行工具。我们可以在Qt Creator的分析菜单中找到`Valgrind`相关的功能项，Qt Creator会将相关结果在图形化界面上展现出来。需要注意的是在使用前我们需要先安装`Valgrind`这个软件。
 
 ## Visual Studio
 
