@@ -205,7 +205,7 @@ QPushButton:pressed:hover {
 
 ## 使用
 
-`QWidget`类提供了一个`void	setStyleSheet(const QString &sheet)`方法，我们可以通过该方法来加载`QSS`。个人的习惯是将`QSS`放到单独的文件中，运行时再去读取该文件的内容并设置。由于不同的Qt控件的`QSS`差别很大，其中也有不少需要注意的问题，因此后续还会再针对具体的控件进行`QSS`使用讲解，这里就不过多展开。下面是使用`QSS`时的一些通用的注意事项和最佳实践。
+`QWidget`类提供了一个`void setStyleSheet(const QString &sheet)`方法，我们可以通过该方法来加载`QSS`。个人的习惯是将`QSS`放到单独的文件中，运行时再去读取该文件的内容并设置。由于不同的Qt控件的`QSS`差别很大，其中也有不少需要注意的问题，因此后续还会再针对具体的控件进行`QSS`使用讲解，这里就不过多展开。下面是使用`QSS`时的一些通用的注意事项和最佳实践。
 
 - 为自定义的QWidget子类设置`QSS`时，我们需要添加以下`paintEvent`的实现
 

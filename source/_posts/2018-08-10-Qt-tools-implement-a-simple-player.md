@@ -12,6 +12,7 @@ date: 2018-08-10 21:52:35
 [示例代码](https://github.com/xyz1001/QtExamples/tree/master/QtPlayer)
 
 Qt提供了相当多的工具方便我们进行开发，但其中有部分工具不便于单独讲解，因此本文将通过实现一个简单的播放器来介绍如何使用这些工具。本文将通过两种途径来完成软件的开发，一种使用Qt的图形化（`GUI`）工具来完成，另一种主要使用命令行（`CLI`）工具，两种途径不是绝对独立的，完全可以在不同的步骤中使用命令行或图形化工具，这需要看个人的使用习惯。由于本文重点是让大家对Qt的工具在开发过程中的作用有一个初步了解，因此每一步的具体细节将不会展开，大家可以查阅相关文档深入了解。
+
 我们要实现的播放器主要功能是打开并播放选择的视频文件，并提供暂停和停止播放功能，程序的效果如下图所示
 ![播放器效果图](http://onyvldqhl.bkt.clouddn.com/simple_player/qtplayer.png)
 为了实现这个播放器，我们将使用到一个第三方库[VLC-Qt](https://github.com/vlc-qt/vlc-qt)，这个库可以用来播放多种视频格式，性能优秀，相对于Qt自带的`QMultiMedia`模块要强大很多。这个库需要手动编译，我们可以参考[官方文档](https://github.com/vlc-qt/vlc-qt/blob/master/BUILDING.md)进行编译，Windows和Macos下我们也可以直接[下载](https://github.com/vlc-qt/vlc-qt/releases)已编译好的动态库，这里不再赘述。
@@ -40,7 +41,7 @@ Qt提供了相当多的工具方便我们进行开发，但其中有部分工具
 
 ### 设置UI布局
 
-1. 双击生成的`.ui`文件，进入内置的`Qt Designer`界面，我们拖出我们需要的UI界面。如下图所示。
+双击生成的`.ui`文件，进入内置的`Qt Designer`界面，我们拖出我们需要的UI界面。如下图所示。
 ![UI布局](http://onyvldqhl.bkt.clouddn.com/simple_player/ui_layout.png)
 
 ### 编写代码
@@ -177,6 +178,7 @@ void Widget::Stop() {
 ### 安装必要文件
 
 编译完成后，点击运行，在Windows平台下我们可能会遇到无法启动，提示找不到运行库的问题。这是因为程序运行时没有找到我们用到的`VLC-Qt`库的动态库。我们需要手动将两个`dll`文件复制到可执行文件的运行目录，这时就可以正常运行了。但手动复制文件相对比较麻烦，也不利于后期对外发布，因此我们可以利用`qmake`提供的安装功能，在构建时将依赖的动态库安装到指定目录。我们在`pro`文件中添加以下代码：
+
 ``` qmake
 DESTDIR = $$PWD/out
 
@@ -193,10 +195,12 @@ INSTALLS += vlc_lib
 ### 添加资源文件
 
 运行后，我们会发现按钮上的图片没有显示，这时因为我们在代码中使用了相对路径，程序会在运行时去加载相对于 **当前工作目录**的相对路径的文件，由于我们在程序目录下没有放置图片文件，所以程序没有找到对应的图片资源，也就无法显示。我们只需要将图片复制到程序目录即可。但对于程序必要的资源文件，为了避免手动复制和不小心误删，我们可以利用Qt的资源系统来将管理这些文件。添加至资源管理系统中的文件将在编译期间编译至可执行程序中，这样就可以避免找不到文件的问题。
+
 1. 右键项目->选择`添加新文件(Add New...)`，选择`Qt`模板下的`Qt Resource file`，输入文件名，这里我们建立一个用于管理图片资源的资源管理文件，因此命名为`image`，点击完成。
 2. 我们可以发现项目管理窗口多了一项`Resource`，我们点击下方的`添加(Add)`按钮，添加一个前缀(`Add Prefix`)，修改为`/`。
 3. 再点击`添加(Add)`按钮，选择`添加文件(Add Files)`，将我们需要的图片添加至资源管理系统。
 4. 修改代码中的相对路径，替换为资源管理系统中对应文件的路径。
+
  ``` cpp
  ui->open_btn_->setIcon(QIcon(":/open.png"));
  ui->pause_btn_->setIcon(QIcon(":/pause.png"));
@@ -207,13 +211,17 @@ INSTALLS += vlc_lib
 ### 国际化翻译
 
 目前我们的程序界面上显示的都是英文，我们需要将其翻译为中文。这需要用到`Qt语言家(Qt Linguist)`。
+
 1. 在`pro`文件中添加生成语言文件的代码，保存后执行qmake
+
  ```
  TRANSLATIONS += zh_CN.ts
  ```
+
 2. 在`Qt Creator`中选择`工具(Tools)`->`外部(External)`->`语言家(Linguist)`->`更新翻译(Update Translations(lupdate))`，生成ts文件，这里面包括了我们要翻译的字符串。
 3. 用`Qt Linguist`打开生成的ts文件，选择要翻译的源语言和目标语言，进行翻译。翻译完成后保存并发布，生成二进制文件`.qm`文件
 4. 在`main.cpp`中添加相关代码，安装中文翻译。
+
  ``` cpp
  QTranslator translator;   // 需添加头文件 #include <QTranslator>
  translator.load("./zh_CN.qm");
@@ -225,6 +233,7 @@ INSTALLS += vlc_lib
 ### 打包发布
 
 由于我们的程序运行需要依赖一系列Qt的库，因此我们在对外发布我们的程序时需要将这些动态库一并发布。但Qt的库很多，我们一个一个找我们程序以来的库比较麻烦，因此我们可以借助Qt的部署工具来寻找依赖的动态库。Windows下工具名为`windeployqt`，MacOS下叫`macdeployqt`，linux下官方暂时没有提供工具，但有一个强大的第三方工具`linuxdeployqt`。下面以Windows下为例进行说明。
+
 1. 将编译好的可执行程序及依赖的第三方库复制到一个单独的目录
 2. 打开`Qt命令行处理程序`，进入可执行程序目录，执行命令`windeployqt QtPlayer-GUI`即可
 
@@ -237,6 +246,7 @@ INSTALLS += vlc_lib
 1. 创建目录`QtPlayer-CLI`并创建`main.cpp`，`player.h`，`player.cpp`三个文件
 2. 执行`qmake -project .`生成`pro`文件
 3. 修改`pro`文件，引入Qt模块
+
  ```
  QT += core gui widgets
  ```
@@ -245,6 +255,7 @@ INSTALLS += vlc_lib
 
 1. 将`VLC-Qt`的库复制到项目目录下`dev`目录
 2. 修改`pro`文件，添加以下代码
+
  ```
  LIBS+= $$PWD/dev/lib64 -lVLCQtCore -lVLCQtWidgets
  INCLUDEPATH += $$PWD/dev/include
@@ -253,6 +264,7 @@ INSTALLS += vlc_lib
 ### 编写代码
 
 这里我们将通过代码对控件进行布局。具体代码如下。
+
 ``` cpp
 // main.cpp
 #include "player.h"
@@ -420,6 +432,7 @@ void Player::InitButtons() {
 ### 配置动态库路径
 
 编译完成后我们执行编译出的可执行程序，发现无法运行，提示缺少`VLC-Qt`的运行库，我们需要设置运行库路径，在`build`目录下执行命令
+
 ``` bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../dev/lib64
 ```
@@ -431,10 +444,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../dev/lib64
 1. 创建`image`文件夹，将图片文件放入，便于管理
 2. 执行命令`rcc --project . -o image.qrc`，生成资源管理文件
 3. 修改`pro`文件，将生成的资源管理文件添加至`RESOURCES`变量中
+
  ```
  RESOURCES += $$PWD/image/image.qrc
  ```
+
 4. 修改代码中的图片路径，替换为`qrc`文件中的路径
+
  ``` cpp
  ui->open_btn_->setIcon(QIcon(":./open.png"));
  ui->pause_btn_->setIcon(QIcon(":./pause.png"));
@@ -447,7 +463,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../dev/lib64
 1. 在`QtPlayer-CLI.pro`文件中添加`TRANSLATIONS += zh_CN.ts`
 2. 执行`lupdate ./QtPlayer-CLI.pro`命令，生成`ts`文件
 3. 如果我们熟悉`ts`文件格式，可以手动去修改`ts`文件，这里我们还是调用Qt语言家(`linguist`)进行翻译。执行命令`linguist zh_CN.ts`，后续步骤同使用GUI工具中的[国际化翻译](#国际化翻译)的3，4步
-
 
 ### 打包发布
 

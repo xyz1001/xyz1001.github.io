@@ -85,7 +85,6 @@ void SeekBar::resizeEvent(QResizeEvent *event) {
 }
 ```
 
-
 ## 屏蔽setValue()时的信号
 
 由于在大多数情况下，`QSlider`只是作为一个进度指示的控件，我们往往会监听`QSlider::valueChanged`信号做出相应的跳转动作，也会在进度改变时使用`QSlider::setValue()`设置值，这就导致我们可能会在设置值后收到`valueChanged`信号并在做出相应处理后又调用`setValue`，从而导致死循环。如在一个播放器中，我们可能会监听`QSlider::valueChanged`信号，在用户手动调整进度时调用`QMediaPlayer::setPosition`调整播放进度，而且会在`QMediaPlayer`发出`positionChanged`信号后调用`QSlider::setValue`。一旦这样，就会发生以下循环：
@@ -106,6 +105,7 @@ void SeekBar::setValue(int value) {
 
 1. 由于我们在QSS中为进度条左右各设置了宽度为1/2滑块高度的`margin`，进度条的的左端点并非控件的最左端，进度条的宽度也并非控件的宽度，导致当我们点击进度条左右端点时，预期应该设置为最小/最大值，然而实际上却并非如此。因此，我们在通过位置计算比例确定值时，需要进行一些调整。
 2. 滑块拖动释放后也会触发，触发了两次`valueChanged`信号，在存在误差的情况下会导致细微的抖动
+
 经过修正后的代码如下
 
 ``` c++
