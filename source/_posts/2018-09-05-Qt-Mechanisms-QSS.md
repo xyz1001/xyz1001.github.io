@@ -21,7 +21,7 @@ date: 2018-09-05 09:50:31
 `QSS`的语法类似于`CSS2`的语法，因此建议在学习`QSS`时可以先去了解下CSS2相关的知识。一条`QSS`规则由作用目标和若干条声明组成，语法如下：
 
 ``` css
-选择器[:子控件 ...][:伪状态 ...] {
+选择器[:子控件][:伪状态 ...] {
     属性: 值;
     ...
 }
@@ -118,7 +118,7 @@ Qt提供了众多的控件，有一些复杂控件本身又有多个组成部分
 对于子控件，其支持两个特殊的属性`subcontrol-origin`和`subcontrol-position`。这两个属于用于对子控件进行定位。
 
 - `subcontrol-origin`
- 由于`CSS`使用盒子模型，一个盒子模型从内到外分为`content`，`padding`，`border`和`margin`。那么对于子控件，其位于其父控件的那部分呢？这就是`subcontrol-origin`属性的作用。该属性用语确定子控件位于父控件盒子模型中的哪一部分。该属性的默认值为`padding`，即子控件默认位于父控件的`padding`区域。
+ 由于`CSS`使用[盒子模型](https://www.w3schools.com/css/css_boxmodel.asp)，一个盒子模型从内到外分为`content`，`padding`，`border`和`margin`。那么对于子控件，其位于其父控件的那部分呢？这就是`subcontrol-origin`属性的作用。该属性用语确定子控件位于父控件盒子模型中的哪一部分。该属性的默认值为`padding`，即子控件默认位于父控件的`padding`区域。
 
 - `subcontrol-position`
  该属性用于设置子控件的相对于父控件的位置，值类型为[`Alignment`](http://doc.qt.io/qt-5/stylesheet-reference.html#alignment)，即对齐方式。
@@ -139,7 +139,7 @@ QSpinBox::down-button {
 
 ## 伪状态
 
-对于同一个控件，我们经常可以看到在不同的场景下其样式也是不一样的。如对于同一个按钮，正常情况下和鼠标按下时效果是不一样的。为了实现这种效果，我们可以在`QSS`规则中指定控件的伪状态，语法为`选择器[:伪状态 ...]`，注意这里是一个冒号。伪状态描述了一个特定的场景，如被按下`pressed`，被选中`checked`等。不同的控件支持的伪状态类型不一样，我们同样可以通过[Qt Style Sheets Reference](http://doc.qt.io/qt-5/stylesheet-reference.html)来查看具体的控件支持哪些伪状态。对于同一段`QSS`，我们可以同时指定多个互不冲突的伪状态，只有当指定的伪状态同时满足时`QSS`规则才会生效。如下面的`QSS`，将只对已被选择且鼠标悬浮在其上的按钮生效。
+对于同一个控件，我们经常可以看到在不同的场景下其样式也是不一样的。如对于同一个按钮，正常情况下和鼠标按下时效果是不一样的。为了实现这种效果，我们可以在`QSS`规则中指定控件的伪状态，伪状态是源自CSS中的术语（stack overflow上关于[为什么叫伪状态的讨论](https://stackoverflow.com/questions/1281407/why-is-a-pseudo-class-so-called)）。伪状态的语法为`选择器[:伪状态 ...]`，注意这里是一个冒号。伪状态描述了一个特定的场景，如被按下`pressed`，被选中`checked`等。不同的控件支持的伪状态类型不一样，我们同样可以通过[Qt Style Sheets Reference](http://doc.qt.io/qt-5/stylesheet-reference.html)来查看具体的控件支持哪些伪状态。对于同一段`QSS`，我们可以同时指定多个互不冲突的伪状态，只有当指定的伪状态同时满足时`QSS`规则才会生效。如下面的`QSS`，将只对已被选择且鼠标悬浮在其上的按钮生效。
 
 ``` css
 QPushButton:hover:checked {
