@@ -18,7 +18,7 @@ date: 2018-05-27 21:47:49
 使用过QSS(Qt Style Sheet)自定义过比较复杂的控件，如QSlider等一般都知道Qt中的控件包含一到多个subcontrol(下文翻译为子控件)。Qt自带的控件所包含的子控件可以在[Qt stylesheet reference](http://doc.qt.io/qt-5/stylesheet-reference.html)上查阅。但文档上并没有给出子控件间的相对关系。
 
 经查阅文档中的QMenu一栏，我们可以知道QMenu包含`item`, `indicator`,`separator`,`right-arrow`,`scroller`,`tearoff`,相对来说属于子控件比较多的控件了，其中`item`, `indicator`,`separator`,`right-arrow`是较为为常见的子控件。为了确定子控件的相对位置关系，我们可以通过对子控件设置不同的背景色和边框来进行查看。效果如图所示。
-![QMenu subcontrol](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/custom_qmenu/qss_subcontrol.png)
+![QMenu subcontrol](https://blog-1251989759.picgz.myqcloud.com/blog/custom_qmenu/qss_subcontrol.png/blog)
 根据图片，我们可以得知，QMenu由若干行组成，每一行可能是一个`::item`获`::separator`。注意到`::indicator`和`::right-arrow`位于`::item`边框内部，我们可以推出`::indicator`和`right-arrow`两个子控件包含在`::item`内。`::indicator`位于`::item`的左侧中央，`::right-arrow`位于`::item`的右侧中央。图片中`::item`的文字是和`::indicator`和`::right-arrow`重叠在一起的，因此为了避免遮挡，我们需要为`::item`设置合适的`padding-left`和`padding-right`。
 
 ## QMenu的边框阴影
@@ -35,7 +35,7 @@ QMenu {
 }
 ```
 
-![wrong border width](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/custom_qmenu/wrong_border_width.png)
+![wrong border width](https://blog-1251989759.picgz.myqcloud.com/blog/custom_qmenu/wrong_border_width.png/blog)
 
 经过多次调整比较，我发现，无论四边`border-width`设置了什么样的值，实际上的边框宽度均为最后一个数值，设置的边框宽度部分会显示边框颜色，对于多出来的边框部分，则填充了背景色。这就导致我无法很好地显示边框阴影，边框阴影往往会有一定的偏移，四边的阴影宽度不会完全一致。经过一番尝试，依然无解，只好与设计师协商，提供以最宽的阴影边为边框宽度，其他边填充合适的透明部分的切图暂时避开了这个问题。
 
