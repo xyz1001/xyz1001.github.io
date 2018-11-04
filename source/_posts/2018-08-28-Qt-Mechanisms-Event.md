@@ -25,7 +25,7 @@ date: 2018-08-28 17:31:45
 - [事件类型](http://doc.qt.io/qt-5/qevent.html#Type-enum)：`QEvent`及其子类有一个`type`方法，用于获取事件类型。事件类型是一个`QEvent::Type`枚举类型，如对于一个鼠标事件，事件类型可能是`MouseButtonDblClick`,`MouseButtonPress`,`MouseButtonRelease`等。
 
 也就是说事件对象类型可能有一到多种事件类型。这些事件接着会在事件循环中被分发到事件作用的目标组件，然后事件将会以该组件在对象树中的位置为起点，向着对象树的根节点链世传播，直到事件被接受或传播到根节点。对于一个事件，在事件处理函数中，我们通过调用`QEvent::accept()`来主动接受一个事件，表示这个事件我已经处理了，不需要再继续传播了。如果我们不想要处理这个事件，我们可以调用`QEvent::ignore()`来忽略这个事件，Qt事件循环将会将这个事件传递给当前组件的父组件，也就是对象树上的父节点去处理。如果我们两个方法都没手动调用，那么这个事件将会默认接受。
-![Qt事件分发](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/qt_event/event_dispatch.png)
+![Qt事件分发](https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/event_dispatch.png/blog)
 
 Qt的事件可能容易和信号混为一谈，但实际上二者并无太大关系。二者的区别如下
 
@@ -37,7 +37,7 @@ Qt的事件可能容易和信号混为一谈，但实际上二者并无太大关
 如果我们需要自定义一个控件，我们就往往需要去关心各类事件了。在收到事件后，Qt的事件循环首先会去调用对应控件的`event()`函数，该函数会对根据事件类型，对事件进行二次分发，调用不同事件类型对应的事件处理函数，如对一个`QEvent::Timer`类型的`QTimerEvent`事件会调用`timerEvent()`。
 
 举个栗子，对于下面的程序，如果我们将鼠标移到按钮`Button C`上，按下鼠标左键会发生什么？
-![示例程序窗口](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/qt_event/demo_window.png)
+![示例程序窗口](https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/demo_window.png/blog)
 
 1. 首先鼠标会发出左键按下的电信号经过转换传递给操作系统，操作系统在收到这个信号后会生成鼠标按下的消息，如在`Windows`下就是一个`MSG`结构体的消息，消息ID为`WM_LBUTTONDOWN`。
 2. 接着Windows系统会将这个消息传给Qt，告诉Qt程序，有个消息要发给控件`Button C`。

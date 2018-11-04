@@ -38,4 +38,4 @@ Qt的授权有过一段比较混乱的历史，使用过包括GPL，QPL等。目
 
 ## 概览
 
-![Qt概览](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/qt_framework_overview/QtOverview.png)
+![Qt概览](https://blog-1251989759.picgz.myqcloud.com/blog/qt_framework_overview/QtOverview.png/blog)

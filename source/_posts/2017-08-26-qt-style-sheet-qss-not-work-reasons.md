@@ -54,7 +54,7 @@ Widget::Widget(QWidget *parent)
 
 这段QSS的作用是添加一个灰色左边框，然而由于`btn_`被调整为和`Widget`一样尺寸，导致左边框被按钮遮挡，效果图如下：
 
-![左边框被遮挡](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/qss_not_workborder-hidden.png)
+![左边框被遮挡](https://blog-1251989759.picgz.myqcloud.com/blog/qss_not_work/border-hidden.png/blog)
 
 对于这种情况，有两种解决方法，
 
@@ -65,7 +65,7 @@ Widget::Widget(QWidget *parent)
 
 设置后效果如下
 
-![左边框可见](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/qss_not_work/border-shown.png)
+![左边框可见](https://blog-1251989759.picgz.myqcloud.com/blog/qss_not_work/border-shown.png/blog)
 
 **注**：
 

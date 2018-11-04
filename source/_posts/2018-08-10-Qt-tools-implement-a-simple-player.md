@@ -14,7 +14,7 @@ date: 2018-08-10 21:52:35
 Qt提供了相当多的工具方便我们进行开发，但其中有部分工具不便于单独讲解，因此本文将通过实现一个简单的播放器来介绍如何使用这些工具。本文将通过两种途径来完成软件的开发，一种使用Qt的图形化（`GUI`）工具来完成，另一种主要使用命令行（`CLI`）工具，两种途径不是绝对独立的，完全可以在不同的步骤中使用命令行或图形化工具，这需要看个人的使用习惯。由于本文重点是让大家对Qt的工具在开发过程中的作用有一个初步了解，因此每一步的具体细节将不会展开，大家可以查阅相关文档深入了解。
 
 我们要实现的播放器主要功能是打开并播放选择的视频文件，并提供暂停和停止播放功能，程序的效果如下图所示
-![播放器效果图](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/simple_player/qtplayer.png)
+![播放器效果图](https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/qtplayer.png/blog)
 为了实现这个播放器，我们将使用到一个第三方库[VLC-Qt](https://github.com/vlc-qt/vlc-qt)，这个库可以用来播放多种视频格式，性能优秀，相对于Qt自带的`QMultiMedia`模块要强大很多。这个库需要手动编译，我们可以参考[官方文档](https://github.com/vlc-qt/vlc-qt/blob/master/BUILDING.md)进行编译，Windows和Macos下我们也可以直接[下载](https://github.com/vlc-qt/vlc-qt/releases)已编译好的动态库，这里不再赘述。
 
 <!--more-->
@@ -42,7 +42,7 @@ Qt提供了相当多的工具方便我们进行开发，但其中有部分工具
 ### 设置UI布局
 
 双击生成的`.ui`文件，进入内置的`Qt Designer`界面，我们拖出我们需要的UI界面。如下图所示。
-![UI布局](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/simple_player/ui_layout.png)
+![UI布局](https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/ui_layout.png/blog)
 
 ### 编写代码
 

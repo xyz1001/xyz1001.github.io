@@ -17,7 +17,7 @@ date: 2018-04-05 14:27:08
 <!--more-->
 
 为了解决以上问题，我们需要继承`QSlider`，实现自己的`SeekBar`类。实现效果如下
-![SeekBar](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/seekbar/seekbar.png)
+![SeekBar](https://blog-1251989759.picgz.myqcloud.com/blog/seekbar/seekbar.png/blog)
 
 ## 使用QSS进行修饰美化
 
@@ -88,7 +88,7 @@ void SeekBar::resizeEvent(QResizeEvent *event) {
 ## 屏蔽setValue()时的信号
 
 由于在大多数情况下，`QSlider`只是作为一个进度指示的控件，我们往往会监听`QSlider::valueChanged`信号做出相应的跳转动作，也会在进度改变时使用`QSlider::setValue()`设置值，这就导致我们可能会在设置值后收到`valueChanged`信号并在做出相应处理后又调用`setValue`，从而导致死循环。如在一个播放器中，我们可能会监听`QSlider::valueChanged`信号，在用户手动调整进度时调用`QMediaPlayer::setPosition`调整播放进度，而且会在`QMediaPlayer`发出`positionChanged`信号后调用`QSlider::setValue`。一旦这样，就会发生以下循环：
-![死循环](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/seekbar/seekbar_circle.png)
+![死循环](https://blog-1251989759.picgz.myqcloud.com/blog/seekbar/seekbar_circle.png/blog)
 为了避免这个死循环，我们在调用`QSlider::setValue`时需要屏蔽`QSlider::valueChanged`信号。因此我们重写该方法。
 
 ``` c++
