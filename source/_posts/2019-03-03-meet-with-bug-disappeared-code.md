@@ -8,6 +8,8 @@ abbrlink: 58691
 date: 2019-03-03 12:37:05
 ---
 
+[示例代码](https://github.com/xyz1001/BlogExamples/tree/master/DisapperedCode)
+
 ## 踩坑
 
 最近在开发一个跨平台的 C++库时，在 Linux 平台运行非常正常，但在 Windows 下却怎么都没有预期的输出。为了简化问题，这里有一个存在同样问题的[示例](https://github.com/xyz1001/BlogExamples/tree/master/DisapperedCode)，可以看到示例中的代码非常简单，很显然预期输出应该是 5。
