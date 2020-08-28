@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="在Windows桌面软件开发完成并发布给用户使用后，难免会遇到崩溃问题。通过CrashDump文件来分析崩溃问题是一个行之有效的途径。我们可以在程序崩溃时在客户电脑上生成CrashDump文件并收集这些文件。但要打开并分析CrashDump文件，我们还需要产生CrashDump文件的可执行文件（后续称为PE文件，包括exe和dll文件）以及编译该PE文件时产生的符号文件（PDB）。比较基础的做法一">
+<meta name="keywords" content="运维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建Windows符号服务器">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/22247.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="在Windows桌面软件开发完成并发布给用户使用后，难免会遇到崩溃问题。通过CrashDump文件来分析崩溃问题是一个行之有效的途径。我们可以在程序崩溃时在客户电脑上生成CrashDump文件并收集这些文件。但要打开并分析CrashDump文件，我们还需要产生CrashDump文件的可执行文件（后续称为PE文件，包括exe和dll文件）以及编译该PE文件时产生的符号文件（PDB）。比较基础的做法一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="搭建Windows符号服务器">
+<meta name="twitter:description" content="在Windows桌面软件开发完成并发布给用户使用后，难免会遇到崩溃问题。通过CrashDump文件来分析崩溃问题是一个行之有效的途径。我们可以在程序崩溃时在客户电脑上生成CrashDump文件并收集这些文件。但要打开并分析CrashDump文件，我们还需要产生CrashDump文件的可执行文件（后续称为PE文件，包括exe和dll文件）以及编译该PE文件时产生的符号文件（PDB）。比较基础的做法一">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>搭建Windows符号服务器 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Setup-Windows-Symbol-Server" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/22247.html" class="article-date">
+      <time datetime="2019-01-21T09:03:04.000Z" itemprop="datePublished">2019-01-21</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      搭建Windows符号服务器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在Windows桌面软件开发完成并发布给用户使用后，难免会遇到崩溃问题。通过<code>CrashDump</code>文件来分析崩溃问题是一个行之有效的途径。我们可以在程序崩溃时<a href="https://docs.microsoft.com/en-us/windows/desktop/wer/collecting-user-mode-dumps" target="_blank" rel="noopener">在客户电脑上生成CrashDump文件</a>并收集这些文件。但要打开并<a href="https://docs.microsoft.com/en-us/windows/desktop/dxtecharts/crash-dump-analysis" target="_blank" rel="noopener">分析CrashDump</a>文件，我们还需要产生<code>CrashDump</code>文件的可执行文件（后续称为<code>PE</code>文件，包括<code>exe</code>和<code>dll</code>文件）以及编译该<code>PE</code>文件时产生的符号文件（<code>PDB</code>）。比较基础的做法一般是在从客户电脑上拿到<code>CrashDump</code>文件和可执行文件后，再根据可执行文件的版本，编译时间等信息从构建服务器等地方找到相对应的<code>PDB</code>文件。这样带来的一个问题是我们需要手动做文件的匹配，由于<code>PE</code>文件，<code>PDB</code>文件和<code>CrashDump</code>文件三者是严格匹配的，即使是相同的代码，每次编译产生的文件都不一样，因此手动匹配稍有差错就会找不到正确的符号，导致无法分析<code>CrashDump</code>。为了解决这一问题，一个更好的方法是搭建一个符号服务器，在符号服务器上保存每次自动构建出的<code>PE</code>文件和<code>PDB</code>文件，让调试器根据<code>CrashDump</code>文件自动识别和匹配。下面将会介绍如何搭建一个私有的符号服务器。</p>
+<a id="more"></a>
+<h2 id="服务器环境配置"><a href="#服务器环境配置" class="headerlink" title="服务器环境配置"></a>服务器环境配置</h2><ul>
+<li>Debugging Tools for Windows</li>
+</ul>
+<p>创建、添加和删除符号需要用到Windows提供的工具<code>symstore</code>，该工具包含在<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/" target="_blank" rel="noopener">Debugging Tools for Windows</a>包中，安装完成后需要将<code>symstore</code>程序所在目录（我的目录为<code>C:\Program Files (x86)\Windows Kits\10\Debuggers\x64</code>）添加到环境变量的<code>path</code>路径</p>
+<ul>
+<li><code>IIS</code></li>
+</ul>
+<p>我们需要<code>IIS</code>来搭建一个提供文件访问的HTTP服务器用于符号的对外访问。安装<code>IIS</code>的方法网上已有很多教程，这里不再赘述。操作路径为控制面板-&gt;程序与功能-&gt;启用或关闭WIndows功能-&gt;勾选<code>Internet Information Service</code>。</p>
+<h2 id="存储符号"><a href="#存储符号" class="headerlink" title="存储符号"></a>存储符号</h2><ol>
+<li>创建存放符号的文件夹。由于符号文件会占用大量的磁盘空间，因此我们需要选择一块较大的磁盘，创建一个文件夹用于存放符号。这里假设我使用文件夹路径的是<code>D:\Symbols</code>。</li>
+<li><p>生成符号文件。我们在编译过程中，一般只会在编译Debug版本时会生成PDB文件，若需要<a href="https://www.wintellect.com/correctly-creating-native-c-release-build-pdbs" target="_blank" rel="noopener">为Release版本生成PDB文件</a>，需要在构建时添加一些参数。若使用qmake作为构建工具，则在pro文件中添加两行即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QMAKE_LFLAGS_RELEASE += /debug /opt:ref</span><br><span class="line">QMAKE_CFLAGS_RELEASE += /Zi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>存储生成的<code>PE</code>和<code>PDB</code>文件。调试分析<code>CrashDump</code>文件需要<code>PE</code>和<code>PDB</code>文件，因此我们需要将生成的<code>PE</code>和<code>PDB</code>文件存储到符号库里。需要使用到的命令为<code>symstore</code>。利用该命令添加一个文件到符号库的命令如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">symstore add /f FilePath /s StorePath /t Product [/v Version] [/c Comment]</span><br><span class="line">symstore add /r /f DirPath /s StorePath /t Product [/v Version] [/c Comment]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第一条命令用于添加某个特定的文件，第二个命令用于递归的搜索指定目录下的<code>PE</code>或<code>PDB</code>文件并存储。其中，<code>FilePath</code>为要存储的<code>PDB</code>或<code>PE</code>的路径，可以为相对路径或绝对路径。<code>DirPath</code>为包含<code>PE</code>或<code>PDB</code>文件的目录。<code>StorePath</code>为符号文件的保存路径，即我们刚创建的文件夹的路径，可以为本地路径，用于保存到本机的其他目录或网络路径，用于保存到其他服务器上。<code>Product</code>为产品名，一般为我们项目工程名，<code>Version</code>和<code>Commect</code>为可选项，分别为版本和描述信息。<br>执行该命令后我们会在符号文件存放目录看到通过一定规则存储的文件。我们可以将该命令添加到自动构建脚本中。</p>
+<h2 id="搭建HTTP服务"><a href="#搭建HTTP服务" class="headerlink" title="搭建HTTP服务"></a>搭建HTTP服务</h2><p>我们需要提供对外访问符号文件的途径，最简便的方式就是使用<code>IIS</code>创建一个<code>HTTP</code>服务并对外开放。使用搭<code>SII</code>建HTTP服务器的教程网上很多，这里简述以下。</p>
+<ol>
+<li>打开<code>IIS</code>，选择网站-&gt;右键“添加网站”</li>
+<li>输入网站名称，如<code>Symbols</code>，选择刚创建的符号文件存储目录为物理路径，其他保持默认，点击确定。这里需要注意的一点是若使用默认的80端口，需要将<code>Default Web Site</code>停止或删除，因为80端口已被其占用。</li>
+<li>在网站主页中打开<code>MIME类型</code>，右侧添加，文件扩展名输入<code>PDB</code>,MIME类型输入<code>application/octet-stream</code>。这一步是为了允许从该站点访问读取<code>PDB</code>类型的文件。</li>
+<li>设置权限。我们创建的网站默认情况下是不允许匿名用户访问的，为了允许调试器下载符号，我们需要添加一定的权限。点击右键我们的网站-&gt;编辑权限-&gt;选择<code>安全</code>选项卡-&gt;添加<code>IIS_IUSRS</code>用户或<code>everyone</code>用户并赋予<code>Read &amp; execute</code>，<code>List folder contents</code>和<code>Read</code>三项权限。</li>
+<li>左侧右键刚创建的网站-&gt;管理网站-&gt;重新启动。</li>
+</ol>
+<h2 id="在Visual-Studio中使用"><a href="#在Visual-Studio中使用" class="headerlink" title="在Visual Studio中使用"></a>在Visual Studio中使用</h2><p>我们将崩溃产生的<code>CrashDump</code>文件使用<code>Visual Studio</code>打开，然后选择设置符号路径，将我们的HTTP网站的网址（一般为<code>http://服务器IP</code>）填进去即可调试</p>
+<h2 id="过期符号的清理"><a href="#过期符号的清理" class="headerlink" title="过期符号的清理"></a>过期符号的清理</h2><p>由于每次编译均会生成符号文件，如果不定期清理，会大量占用磁盘空间。<code>symstore</code>没有清理过期文件的功能，但每次成功调用<code>symstore</code>命令后都会有一个唯一的操作ID，我们可以通过该ID来删除添加的文件。在符号文件存储目录下的<code>000Admin</code>目录里，有一个<code>history.txt</code>文件，该文件记录了所有<code>symstore</code>命令的历史记录，我们可以通过分析该文件来获取操作ID，添加时间等信息，确定需要清理的文件。<code>symstore</code>删除指定操作添加的文件的命令如下</p>
+ <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`symstore` <span class="built_in">del</span> /i ID /s StorePath</span><br></pre></td></tr></table></figure>
+<p>这样是非常繁琐的，需要手动操作，但目前并没有找到一个很好的方式去批量或自动处理这一问题。可能需要实现一个程序去分析<code>history.txt</code>并执行相关处理。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/22247.html">搭建Windows符号服务器</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2019-01-21, 17:03:04</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/22247.html" title="搭建Windows符号服务器">http://www.xyz1001.xyz/articles/22247.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/22247.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/58691.html">
+                    踩坑记 - 消失的代码
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/58209.html">
+                    加快Qt程序的编译速度
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器环境配置"><span class="toc-number">1.</span> <span class="toc-text">服务器环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储符号"><span class="toc-number">2.</span> <span class="toc-text">存储符号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建HTTP服务"><span class="toc-number">3.</span> <span class="toc-text">搭建HTTP服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在Visual-Studio中使用"><span class="toc-number">4.</span> <span class="toc-text">在Visual Studio中使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过期符号的清理"><span class="toc-number">5.</span> <span class="toc-text">过期符号的清理</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"搭建Windows符号服务器　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/58691.html" title="上一篇: 踩坑记 - 消失的代码">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/58209.html" title="下一篇: 加快Qt程序的编译速度">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

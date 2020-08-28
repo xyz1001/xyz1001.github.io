@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="本人平时比较喜欢发掘和尝试各种能够为自己带来便利或乐趣的软件，但折腾的软件一多，或着部分仅在特定情况下才会去使用的软件，时间一长也便忘了如何使用，又要重新折腾一遍，因此通过《软件折腾笔记》系列进行一个记录。本文用于此系列文章的目录汇总。">
+<meta name="keywords" content="软件折腾笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件折腾笔记">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/24426.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="本人平时比较喜欢发掘和尝试各种能够为自己带来便利或乐趣的软件，但折腾的软件一多，或着部分仅在特定情况下才会去使用的软件，时间一长也便忘了如何使用，又要重新折腾一遍，因此通过《软件折腾笔记》系列进行一个记录。本文用于此系列文章的目录汇总。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/web.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/nonfree.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png">
+<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.115Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件折腾笔记">
+<meta name="twitter:description" content="本人平时比较喜欢发掘和尝试各种能够为自己带来便利或乐趣的软件，但折腾的软件一多，或着部分仅在特定情况下才会去使用的软件，时间一长也便忘了如何使用，又要重新折腾一遍，因此通过《软件折腾笔记》系列进行一个记录。本文用于此系列文章的目录汇总。">
+<meta name="twitter:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>软件折腾笔记 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-software-usage-note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/24426.html" class="article-date">
+      <time datetime="2018-01-01T08:17:57.000Z" itemprop="datePublished">2018-01-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      软件折腾笔记
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>本人平时比较喜欢发掘和尝试各种能够为自己带来便利或乐趣的软件，但折腾的软件一多，或着部分仅在特定情况下才会去使用的软件，时间一长也便忘了如何使用，又要重新折腾一遍，因此通过《软件折腾笔记》系列进行一个记录。本文用于此系列文章的目录汇总。<br><a id="more"></a></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>本文在各软件条目后会通过一些图标标识该软件的一些属性，图标含义如下表。</p>
+<table>
+<thead>
+<tr>
+<th>图标</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"></td>
+<td>Linux软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"></td>
+<td>Windows软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png" alt="android"></td>
+<td>Android软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/web.png" alt="web"></td>
+<td>网页软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"></td>
+<td>免费软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/nonfree.png" alt="nonfree"></td>
+<td>付费软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"></td>
+<td>开源软件</td>
+</tr>
+<tr>
+<td><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"></td>
+<td>命令行软件</td>
+</tr>
+</tbody>
+</table>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><p><a href="http://xyz1001.xyz/articles/10685.html" target="_blank" rel="noopener">WordPress</a> - 博客系统 <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>一款基于PHP开发的动态博客系统，具有丰富的主题、插件。</p>
+</li>
+<li><p><a href="http://xyz1001.xyz/articles/17074.html" target="_blank" rel="noopener">hexo</a> - 静态博客系统 <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>一款基于nodejs开发的静态博客系统，具有丰富的主题和插件。</p>
+</li>
+<li><p><a href="http://xyz1001.xyz/articles/16675.html" target="_blank" rel="noopener">shadowsocks</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png" alt="android"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"></p>
+</li>
+<li><p><a href="https://github.com/aria2/aria2" target="_blank" rel="noopener">aria2</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>一个强大的下载器后端，可以和众多前端工具配合使用，如uGet，浏览器插件甚至是网页等。<a href="https://github.com/xyz1001/dotfiles/tree/master/.aria2" target="_blank" rel="noopener">相关配置文件</a></p>
+</li>
+<li><p><a href="https://github.com/axel-download-accelerator/axel" target="_blank" rel="noopener">axel</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下载器，支持多线程下载，可通过命令<code>axel -n [线程数] -a [百度网盘下载连接]</code>提高百度网盘下载速度。</p>
+</li>
+<li><p><a href="https://github.com/iikira/BaiduPCS-Go" target="_blank" rel="noopener">BaiduPCS-go</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>使用Golang开发的第三方命令行百度网盘，最大的特点是使用了类似命令行下文件操作的方式对百度网盘进行管理。</p>
+</li>
+<li><p><a href="https://github.com/sharkdp/bat" target="_blank" rel="noopener">bat</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br><code>cat</code>命令的升级版，支持输出语法高亮和Git集成。可使用<code>alias cat=&quot;bat&quot;</code>替换<code>cat</code>命令，对于需要使用原始的<code>cat</code>命令时，使用<code>\cat</code>取消alias。类似的还有<a href="https://github.com/jingweno/ccat" target="_blank" rel="noopener">ccat</a>，<code>ccat</code>更加轻量级，<a href="https://github.com/sharkdp/bat/blob/master/doc/alternatives.md" target="_blank" rel="noopener">详细对比</a></p>
+</li>
+<li><p><a href="https://www.ipip.net/product/client.html" target="_blank" rel="noopener">besttrace</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br><code>traceroute</code>命令的升级版，支持显示ip所在地。</p>
+</li>
+<li><p><a href="https://github.com/bpython/bpython" target="_blank" rel="noopener">bpython</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>  默认Python解释器的升级版，一个具有强大的代码提示和补全，语法高亮功能的python解释器。</p>
+</li>
+<li><p>chrome-remote-desktop <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>Chrome的远程桌面，PC全平台可用，效果出色。</p>
+</li>
+<li><p><a href="https://github.com/AlDanial/cloc" target="_blank" rel="noopener">cloc</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下的代码行数统计工具。</p>
+</li>
+<li><p><a href="https://hluk.github.io/CopyQ/" target="_blank" rel="noopener">copyq</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>PC全平台可用的剪切板管理工具，类似于Windows下的<code>Ditto</code>。特色是支持Vim按键操作。</p>
+</li>
+<li><p><a href="http://www.doxygen.nl/" target="_blank" rel="noopener">doxygen</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>代码文档生成工具</p>
+</li>
+<li><p><a href="https://eslint.org/" target="_blank" rel="noopener">eslint</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>Javascript lint工具，可配合其他前端工具使用，如<code>Vim</code>的<a href="https://github.com/w0rp/ale" target="_blank" rel="noopener">ale</a>插件</p>
+</li>
+<li><p><a href="http://manpages.ubuntu.com/manpages/trusty/man1/evtest.1.html" target="_blank" rel="noopener">evtest</a>  <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>Linux下监听和查询事件输入（如按键，鼠标，触摸等）的工具</p>
+</li>
+<li><p><a href="https://wiki.gnome.org/Apps/Gitg/" target="_blank" rel="noopener">gitg</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>Linux下的Git图形化操作软件，平时用来看看分支图还是很好用的。</p>
+</li>
+<li><p><a href="https://github.com/so-fancy/diff-so-fancy" target="_blank" rel="noopener">diff-so-fancy</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br><code>git diff</code>命令的升级版，提供了更加易读的方式呈现文件对比信息，可通过<a href="https://github.com/xyz1001/dotfiles/blob/master/gitconfig" target="_blank" rel="noopener">配置</a>替换默认的<code>git diff</code>命令。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[core]</span></span><br><span class="line">    pager = diff-so-fancy | less --tabs=4 -RFX</span><br><span class="line"><span class="section">[color]</span></span><br><span class="line">    ui = true</span><br><span class="line"><span class="section">[color "diff-highlight"]</span></span><br><span class="line">    oldNormal = red bold</span><br><span class="line">    oldHighlight = red bold 52</span><br><span class="line">    newNormal = green bold</span><br><span class="line">    newHighlight = green bold 22</span><br><span class="line"><span class="section">[color "diff"]</span></span><br><span class="line">    meta = yellow</span><br><span class="line">    frag = magenta bold</span><br><span class="line">    commit = yellow bold</span><br><span class="line">    old = red bold</span><br><span class="line">    new = green bold</span><br><span class="line">    whitespace = red reverse</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="http://www.graphicsmagick.org/" target="_blank" rel="noopener">graphicsmagick</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下强大的图片处理工具，是一系列工具软件的集合，以下是其中部分工具：</p>
+<ul>
+<li>convert<br>图片格式转换工具</li>
+<li>identity<br>图片信息读取工具</li>
+<li>mogrify<br>添加图片效果工具</li>
+<li>composite<br>图片合成工具</li>
+</ul>
+</li>
+<li><p><a href="http://www.andre-simon.de/doku/highlight/highlight.php" target="_blank" rel="noopener">highlight</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>将文件渲染成带语法高亮的HTML</p>
+</li>
+<li><p><a href="https://stedolan.github.io/jq/" target="_blank" rel="noopener">jq</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下的<code>json</code>格式化工具，Vim中可使用命令<code>:%!jq &#39;.&#39;</code>格式化json文件</p>
+</li>
+<li><p><a href="https://kid3.sourceforge.io/" target="_blank" rel="noopener">kid3-qt</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png" alt="android"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>音乐文件id3标签编辑工具，可用于解决音乐文件在播放器中信息显示乱码</p>
+</li>
+<li><p><a href="http://meldmerge.org/" target="_blank" rel="noopener">meld</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>PC全平台可用的文件对比工具，<code>diff</code>命令的GUI版本。</p>
+</li>
+<li><p>mlocate <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>本地文件搜索工具，通过提前生成索引加快文件搜索速度。</p>
+</li>
+<li><p><a href="https://mosh.org/" target="_blank" rel="noopener">mosh</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>具有更高的稳定性的ssh，适合在网络不稳定的情况下使用。</p>
+</li>
+<li><p><a href="https://joeyh.name/code/moreutils/" target="_blank" rel="noopener">moreutils</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>一系列有用的小工具的集合。下面是部分工具：</p>
+<ul>
+<li>chronic<br>以安静的方式执行一个命令，仅输出错误信息</li>
+<li>errno<br>查询errno的信息</li>
+<li>ifdata<br>查询网络相关信息而无需解析<code>ifconfig</code>命令的输出，适合用于脚本。</li>
+<li>ifno<br>一般用在管道里，仅当标准输入不为空时才执行后面的命令，避免一些命令在标准输入为空时报错，如<code>find . -name &quot;null&quot; | xargs rm</code>，在没有找到文件时rm命令会报错，修改为<code>find . -name &quot;null&quot; | ifne xargs rm</code>则不会</li>
+<li>isutf8<br>用于判断一个文件或标准输入是否是<code>utf-8</code>编码</li>
+<li>lckdo<br>命令执行的互斥锁，将来会被<code>flock</code>替换</li>
+<li>mispipe<br>执行两条命令通过管道组成的命令，但将第一条命令的返回值作为整个命令的返回值。</li>
+<li>parallel<br>并行执行命令</li>
+<li>pee<br>将标准输入作为管道传递给多个其他命令，类比于<code>tee</code>，<code>tee</code>是将标准输入传递给文件。</li>
+<li>sponge<br>在完整接收标准输入后再将标准输入写入文件，避免类似与<code>sort file &gt; file</code>导致的文件被清空的问题，我们可以使用<code>sort file | sponge file</code>来解决这个问题。</li>
+<li>ts<br>在标准输入每行前加上时间戳信息，如<code>yes | ts</code></li>
+<li>vidir<br>使用编辑器编辑目录下的文件名，可实现快速批量删除，重命名操作等。可搭配<code>find</code>命令使用，更加强大。</li>
+<li>vipe<br>将标准输入导入文件并将文件用默认编辑器打开，编辑完成后输出到终端</li>
+<li>zrun<br>自动解压压缩文件并将解压后的文件作为参数传递给后面的命令作为参数。参考<a href="https://unix.stackexchange.com/questions/115894/can-you-provide-an-example-use-for-zrun" target="_blank" rel="noopener">Can you provide an example use for <code>zrun</code>?</a></li>
+</ul>
+</li>
+<li><p><a href="http://mypaint.org/" target="_blank" rel="noopener">mypaint</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>Linux下的<code>画图</code></p>
+</li>
+<li><p><a href="https://dev.yorhel.nl/ncdu" target="_blank" rel="noopener">ncdu</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下的磁盘分析器，支持Vim操作，清理磁盘就用这个。</p>
+</li>
+<li><p><a href="https://notepadqq.com/" target="_blank" rel="noopener">notepadqq</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>Linux下的<code>Notepad++</code></p>
+</li>
+<li><p><a href="https://www.privoxy.org/" target="_blank" rel="noopener">privoxy</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>用于将<code>socks</code>协议转化为<code>http</code>协议，搭配<code>ss</code>使用，用于支持一些仅支持<code>http</code>代理的软件，如<code>zeal</code>，相关配置命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo bash -c <span class="string">'echo "forward-socks5 / 127.0.0.1:1080 ." &gt;&gt; /etc/privoxy/config'</span></span><br><span class="line">sudo systemctl start privoxy.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://github.com/rofl0r/proxychains-ng" target="_blank" rel="noopener">proxychains-ng</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>用于强制让一些不支持设置代理的终端程序使用网络代理。可搭配<code>ss</code>使用，配置命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i &apos;s/socks4\s*127.0.0.1\s*9050/socks5 \t127.0.0.1 1080/g&apos; /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://github.com/ranger/ranger" target="_blank" rel="noopener">ranger</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>终端下的文件管理器，支持Vim操作。</p>
+</li>
+<li><p><a href="http://jonls.dk/redshift/" target="_blank" rel="noopener">redshift</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>中文名叫红移，屏幕色温调整工具，可自动获取地理位置。Windows下可使用<a href="https://justgetflux.com/" target="_blank" rel="noopener">f.lux</a></p>
+</li>
+<li><p><a href="https://github.com/BurntSushi/ripgrep" target="_blank" rel="noopener">ripgrep</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br><code>grep</code>命令的升级版，速度最快的<code>grep</code>（来源于官方测试数据）。类似的还有<a href="https://github.com/ggreer/the_silver_searcher" target="_blank" rel="noopener">Ag</a></p>
+</li>
+<li><p><a href="https://www.shellcheck.net/" target="_blank" rel="noopener">shellcheck</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br><code>shell</code>脚本的lint工具</p>
+</li>
+<li><p><a href="https://github.com/MaartenBaert/ssr" target="_blank" rel="noopener">simplescreenrecorder</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>Linux下的屏幕录制工具</p>
+</li>
+<li><p><a href="http://www.html-tidy.org/" target="_blank" rel="noopener">tidy</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br><code>HTML</code>和<code>XML</code>代码格式化和错误处理工具</p>
+</li>
+<li><p><a href="https://github.com/jonas/tig" target="_blank" rel="noopener">tig</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下的git历史查看工具</p>
+</li>
+<li><p><a href="https://github.com/andreafrancia/trash-cli" target="_blank" rel="noopener">trash-cli</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>命令行下的<code>回收站</code>，可避免文件被误删</p>
+</li>
+<li><p>tree <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>树状的列出当前目录和文件结构</p>
+</li>
+<li><p><a href="https://github.com/universal-ctags/ctags" target="_blank" rel="noopener">universal-ctags</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>替换早已停止维护的<a href="http://ctags.sourceforge.net/" target="_blank" rel="noopener">exuberant ctags</a></p>
+</li>
+<li><p><a href="https://github.com/alols/xcape" target="_blank" rel="noopener">xcape</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>Linux下的按键映射工具，可将修饰键映射为其他按键。搭配<code>setxkbmap</code>命令使用更为强大。如可通过下面的命令将<code>Caps</code>键敲击时映射为<code>Esc</code>键，作为修饰键时映射为<code>Ctrl</code>键，Vim党的福音。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setxkbmap -option ctrl:nocaps</span><br><span class="line">xcape -e <span class="string">'Control_L=Escape'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://github.com/astrand/xclip" target="_blank" rel="noopener">xclip</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>Linux下在命令行对X11桌面环境的剪贴板进行操作的工具，一些其他工具的功能依赖该工具。</p>
+</li>
+<li><p><a href="https://github.com/jordansissel/xdotool" target="_blank" rel="noopener">xdotool</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png" alt="cmd"><br>Linux下模拟鼠标和键盘输入的工具，可利用该工具实现一些自动化操作</p>
+</li>
+<li><p><a href="https://zealdocs.org/" target="_blank" rel="noopener">zeal</a> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png" alt="linux"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png" alt="windows"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png" alt="free"> <img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png" alt="opensoure"><br>PC全平台的离线开发文档查看程序，类似于macOS下的<code>Dash</code>，文档资源来源于<code>Dash</code>。Linux下使用体验很棒，但Windows下很卡，易崩溃。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/24426.html">软件折腾笔记</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2018-01-01, 16:17:57</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/24426.html" title="软件折腾笔记">http://www.xyz1001.xyz/articles/24426.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/24426.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/53989.html">
+                    CMake&#34;变量污染&#34;
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/30986.html">
+                    Git命令整理
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-number">1.</span> <span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">2.</span> <span class="toc-text">目录</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"软件折腾笔记　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/53989.html" title="上一篇: CMake&#34;变量污染&#34;">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/30986.html" title="下一篇: Git命令整理">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

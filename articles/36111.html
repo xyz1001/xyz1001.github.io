@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="Vim是什么Vim，一款被称之为编辑器之神的上古神器，从出生到现在已经有27年了。程序员普遍是喜新厌旧的，在这个存在着一票有着现代化的UI，各种智能操作的编辑器，IDE的时代，Vim看上去就像是早就应该被抛弃的IE6，但为什么一款这么古老的编辑器却依然有一批坚定地拥护者呢？要回答这个问题，我们必须知道，Vim是什么？Vim是什么，相信绝大多数听过的人的第一反应都是黑黑的终端下的一个编辑器。是的，V">
+<meta name="keywords" content="vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim, 不仅仅是一个编辑器">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/36111.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="Vim是什么Vim，一款被称之为编辑器之神的上古神器，从出生到现在已经有27年了。程序员普遍是喜新厌旧的，在这个存在着一票有着现代化的UI，各种智能操作的编辑器，IDE的时代，Vim看上去就像是早就应该被抛弃的IE6，但为什么一款这么古老的编辑器却依然有一批坚定地拥护者呢？要回答这个问题，我们必须知道，Vim是什么？Vim是什么，相信绝大多数听过的人的第一反应都是黑黑的终端下的一个编辑器。是的，V">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.115Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim, 不仅仅是一个编辑器">
+<meta name="twitter:description" content="Vim是什么Vim，一款被称之为编辑器之神的上古神器，从出生到现在已经有27年了。程序员普遍是喜新厌旧的，在这个存在着一票有着现代化的UI，各种智能操作的编辑器，IDE的时代，Vim看上去就像是早就应该被抛弃的IE6，但为什么一款这么古老的编辑器却依然有一批坚定地拥护者呢？要回答这个问题，我们必须知道，Vim是什么？Vim是什么，相信绝大多数听过的人的第一反应都是黑黑的终端下的一个编辑器。是的，V">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Vim, 不仅仅是一个编辑器 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-vim-not-only-an-editor" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/36111.html" class="article-date">
+      <time datetime="2018-07-22T09:50:08.000Z" itemprop="datePublished">2018-07-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vim, 不仅仅是一个编辑器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Vim是什么"><a href="#Vim是什么" class="headerlink" title="Vim是什么"></a>Vim是什么</h2><p>Vim，一款被称之为编辑器之神的上古神器，从出生到现在已经有27年了。程序员普遍是喜新厌旧的，在这个存在着一票有着现代化的UI，各种智能操作的编辑器，IDE的时代，Vim看上去就像是早就应该被抛弃的IE6，但为什么一款这么古老的编辑器却依然有一批坚定地拥护者呢？要回答这个问题，我们必须知道，Vim是什么？<br>Vim是什么，相信绝大多数听过的人的第一反应都是黑黑的终端下的一个编辑器。是的，Vim是一款广泛应用在类UNIX系统下的文本编辑器，是基于更古老的一款编辑器VI发展而来的。Vim和其他的编辑器最大的差别就在于它的编辑方式。几乎所有其他的编辑器，都或多或少地依赖鼠标操作，但Vim可以说是完全抛弃了鼠标。为了达到离开鼠标的目的，Vim发展出了一套独特的按键操作，这让众多的新手纷纷放弃。在StackOverflow上，关于如何退出Vim的回答有一百万的浏览量。就这样一款让新手退出Vim可以用来生成随机字符串的的按键规则，才是Vim的精髓之所在。Vim发展到现在，早已不仅仅是一款编辑器，它更多的是代表了一套可以摆脱鼠标的按键规则。在文本编辑领域，目前几乎所有的主流编辑器都直接获间接提供了对这一套按键规则的支持；在主流的浏览器上，都可以安装提供这一套按键规则的插件；还有诸如Ranger等CLI程序，均可以使用Vim的按键规则。</p>
+<a id="more"></a>
+<h2 id="为什么学Vim"><a href="#为什么学Vim" class="headerlink" title="为什么学Vim"></a>为什么学Vim</h2><p>那我们为什么要学习Vim呢？首先我们必须纠正几个错误的观念。</p>
+<ul>
+<li><strong>用Vim很有逼格</strong>。很多新手都觉得在终端下操作是一件很炫酷的事，如果用Vim在终端下写代码，那就更炫酷了。于是这些人为了更有逼格，开始盲目地学习Vim。然而其中的绝大部分人，被Vim可怕的学习曲线吓到了，在仅仅知道如何退出Vim后变带着反人类的怨念离开了。Vim在部分人心中已经成了装逼的象征。带着这样的心理去学习Vim的人，是永远也无法感受Vim的魅力的。Vim只是一套按键规则，并没有什么技术含量，Vim用的熟练的人，无他，唯手熟尔。</li>
+<li><strong>使用Vim可以提高开发效率</strong>。如果说在上古时期，和其他文本编辑器做对比，Vim或许真的有提高开发效率的作用。但在IDE越来越智能化的现在，尤其是像Visual Studio和Android Studio这些大型IDE的出现和完善，单单使用Vim反而会降低开发效率。首先，在开发中编码其实只占其中的一部分。而在编码中，编辑又只占其中一部分，思考，调试实际上花费的时间可能会更多。整个软件开周期，真正花在编辑器上的时间所占比例其实并不高。而在除代码编辑外的其他方面，IDE则体现出极大的优势。相对于Visual Studio的调试功能，Android Studio的项目管理，Vim可以说是简陋甚至是残缺了。因此不要妄想使用Vim可以提高多少开发效率，这也不应该是我们学习Vim的动力。</li>
+<li><strong>Vim通过插件可以达到IDE的水平</strong>。不可否认，Vim的可扩展性十分强大，自由的配置和众多的插件大大提高了Vim的可定制性。但不得不承认，近几年类似与Atom，VSCode等编辑器的插件要比Vim的插件发展速度迅猛的多，而且IDE在代码调试，性能分析等方面的优势是Vim目前难以实现的，更别提VS，AS等大型IDE目前也支持大量的插件来进行扩展。</li>
+</ul>
+<p>因此，如果你是抱着上面这三个观念来学习使用Vim，抱歉，Vim并非适合你的工具。学习Vim的真正目的应该是以下几点。</p>
+<ul>
+<li><strong>通用的一套按键规则</strong>。正如上文所说，Vim的精髓在于一套无需鼠标的按键规则，这套按键规则源于Vim编辑器，但如今已不仅限于Vim编辑器。众多的编辑器，IDE都可以使用Vim的按键规则来进行代码的编辑。掌握了这一套按键规则，我们可以省下大量的编辑器或IDE的学习联系时间。我们可以在VSCode中使用dd删除一行代码，也可以在Android Studio中使用同样的命令实现完全一样的效果。</li>
+<li><strong>高度的可定制化</strong>。Vim提供了强大的扩展接口，我们可以定制几乎一切。我们可以调整按键，添加自己的命令组合，通过多种语言编写Vim的插件。很多初学者习惯直接照搬他人的Vim配置，虽然这样前期可能会方便很多，但每个人都有自己的按键习惯，操作方式，没有哪一套配置是可以满足所有人的口味的。Vim是一个需要积累的编辑器，只有搭配出最适合自己的一套配置，才能用得更舒服。</li>
+<li><strong>极低的环境依赖性</strong>。很多IDE都有平台，甚至是配置的限制。Visual Studio过于庞大，安装一次都需要一上午，Android Studio对内存的占用“可能”间接导致了内存条的涨价。IDE的笨重和平台依赖性导致我们很多时候不得不选择Vim。Vim几乎可以运行在所有平台，而且Vim对配置的要求极低。而且由于终端编辑器的特性，我们只需要一个终端，我们就可以进行开发，我甚至尝试过在手机上使用Vim（<a href="https://termux.com/" target="_blank" rel="noopener">Termux</a>）。对于需要基于进行Linux开发的人来说，Vim可能是仅有的几个选择。</li>
+</ul>
+<h2 id="Vim修炼秘籍"><a href="#Vim修炼秘籍" class="headerlink" title="Vim修炼秘籍"></a>Vim修炼秘籍</h2><p><a href="https://coolshell.cn/articles/3125.html" target="_blank" rel="noopener">Vim的学习曲线</a>是极其可怕的。相对于其他编辑器或IDE，Vim的入门门槛相当高。根据个人的学习使用经历，下面将分为几个阶段来分享一下如何修炼Vim。</p>
+<h3 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h3><p><strong>学习Vim基本按键规则</strong>。很多人学习Vim的一个误区是尚未掌握Vim的精髓便去折腾各种配置，插件。最终折腾的心力交瘁，含恨脱坑。一开始就去折腾这些往往是拣了芝麻丢了西瓜，因为Vim的按键规则才是具有普适性的核心。<br>和其他编辑器或IDE不同，学习Vim的第一个阶段对于绝大部分新手来说是最痛苦的。因为我们必须抛弃以往的操作习惯，最直接的莫过于移动光标。绝大部分人最习惯的都是使用鼠标获键盘上的上下左右键来进行光标移动，而Vim则是看上去毫无理由的hjkl键，对新手来说可以称之为反人类了。大批的新手死在了第一阶段，选择从入门到放弃。<br>在这个阶段，我比较推荐的是Vim自带的Vimtutor帮助程序。简短，边学边练，是一个相当适合新手的工具。但切忌走马观花，草草浏览一遍就过了，必须要熟悉里面提到的每一个知识点，并进行一定次数的训练。在日后的不断使用中，这些操作都将形成肌肉记忆。</p>
+<h3 id="第二阶段"><a href="#第二阶段" class="headerlink" title="第二阶段"></a>第二阶段</h3><p><strong>学习Vim的高级用法和基本配置</strong>。这里强烈推荐<code>Practical Vim</code>（中译名《Vim使用技巧》）这本书。在掌握Vim的基本按键规则后，这本书可以帮助我们深入了解Vim，掌握Vim的使用技巧。大部分技巧都会针对使用例子讲解如何使用Vim更快更好地处理。建议对于每一个例子，可以先自己去思考如何实现，然后再根据书中的说明，动手操作。这样我们可以更好地理解为何书中的处理称之为技巧。<br>同时，这个阶段可以慢慢去进行一些Vim选项的个性化配置，这些配置往往可以被其他编辑器或IDE支持，也是具有一定的普适性，目前我接触过的IDE中，Visual Studio，Android Studio和QtCreator都是支持加载Vim的基本配置文件的。<br>对于绝大部分并不经常直接使用Vim编辑器的人来说，完成第二阶段就已经足够了。但如果你经常需要使用Vim编辑器进行开发，我们还需要对Vim进行更多地打磨。</p>
+<h3 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h3><p><strong>完善Vim编辑器</strong>。在经过前两个阶段的学习，我们已经基本掌握了Vim的用法。但一个未添加任何扩展的Vim要运用到实际开发中是不够的。我们需要借助插件来扩展Vim的功能。在选择插件时，我们必须记住，贵精不贵多，过多鸡肋的插件反而会拖慢Vim的速度。但如何挑选插件，这里有几点可供参考。</p>
+<ol>
+<li>参考他人的配置，但不可盲目复制。对于一些使用较长时间vim的人来说，他们的插件往往已经经过多次的筛选调整，十分具有参考价值。这里推荐几个比较出名的Vim配置。<ul>
+<li><a href="https://github.com/SpaceVim/SpaceVim" target="_blank" rel="noopener">SpaceVim</a> 一位国内Vim的积极推动者的Vim配置</li>
+<li><a href="https://github.com/wklken/k-vim" target="_blank" rel="noopener">k-vim</a></li>
+</ul>
+</li>
+<li>不选择无人维护的。由于Vim的时间跨度很大，不少插件已经年久失修，无人维护了。这些插件往往对新的特性缺乏支持，性能或兼容性上有所欠缺</li>
+<li>善于搜索</li>
+</ol>
+<p>找到合适的插件后，是需要学习和配置的。为什么我不推荐直接使用他人现成的配置，除了不一定适合外，由于直接照搬他人的配置，很多插件的配置和使用难以真正掌握，我们难以针对性的进行配置，无法了解到某个功能具体是由哪个插件提供的。当我们选择使用一个插件，至少应当读一下插件在Github上的README，了解下有哪些配置和默认参数，并进行一些适合自己的调整。<br>对于插件配置管理，我强烈建议不要把所有的配置项都往<code>.vimrc</code>这一个文件中放，这会导致你的<code>vimrc</code>腐烂，失去控制最终无法维护。善于使用<code>source</code>命令，保持配置文件的整洁，对于Vim的配置管理至关重要。</p>
+<h3 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h3><p><strong>编写你自己的插件</strong>。当现有的插件已经无法满足我们的需求的时候，我们可能需要自己动手编写插件了。vim提供了多种语言的支持，包括VimScript，Python，Lua等，我们可以使用任何一种我们熟悉的语言来对Vim进行扩展。</p>
+<h2 id="个人经验"><a href="#个人经验" class="headerlink" title="个人经验"></a>个人经验</h2><p>以下是我学习使用Vim两年多以来的一些个人经验。</p>
+<ul>
+<li>坚持再坚持，一日不脱坑，就离目标更近一点。</li>
+<li>学习Vim基本功时切忌走马观花，过一遍教程，浏览一下书籍便过了。一定要反复练习，不求达到肌肉记忆，至少也得大脑长期记忆。</li>
+<li>刻意练习。一种效果往往可以通过多种操作实现，比较差异，刻意练习更好地那种</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2018-07-22, 17:50:08</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/36111.html" title="Vim, 不仅仅是一个编辑器">http://www.xyz1001.xyz/articles/36111.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/36111.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/36680.html">
+                    初识应用软件开发
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/6460.html">
+                    自定义QMenu样式
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vim是什么"><span class="toc-number">1.</span> <span class="toc-text">Vim是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么学Vim"><span class="toc-number">2.</span> <span class="toc-text">为什么学Vim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vim修炼秘籍"><span class="toc-number">3.</span> <span class="toc-text">Vim修炼秘籍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一阶段"><span class="toc-number">3.1.</span> <span class="toc-text">第一阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二阶段"><span class="toc-number">3.2.</span> <span class="toc-text">第二阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三阶段"><span class="toc-number">3.3.</span> <span class="toc-text">第三阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四阶段"><span class="toc-number">3.4.</span> <span class="toc-text">第四阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#个人经验"><span class="toc-number">4.</span> <span class="toc-text">个人经验</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Vim, 不仅仅是一个编辑器　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/36680.html" title="上一篇: 初识应用软件开发">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/6460.html" title="下一篇: 自定义QMenu样式">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

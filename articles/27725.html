@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="本节示例代码 在Web前端开发中，有一个很重要的部分是CSS，用于修饰Html中的控件，如按钮，输入框等元素。CSS的出现分离了交互逻辑和视觉效果的开发，极大地方便了前端开发。因此这套设计理念被很多其他前端开发框架所借鉴，如Qt，Gtk，JavaFX等。在Qt中，默认的控件样式是平台相关的原始风格，很多时候难以满足视觉设计的要求，因此我们可以借助Qt中的CSS – Qt Style Sheet（一">
+<meta name="keywords" content="Qt,QSS,Qt从0到1,Qt机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt从0到1之机制篇 - Qt样式表">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/27725.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="本节示例代码 在Web前端开发中，有一个很重要的部分是CSS，用于修饰Html中的控件，如按钮，输入框等元素。CSS的出现分离了交互逻辑和视觉效果的开发，极大地方便了前端开发。因此这套设计理念被很多其他前端开发框架所借鉴，如Qt，Gtk，JavaFX等。在Qt中，默认的控件样式是平台相关的原始风格，很多时候难以满足视觉设计的要求，因此我们可以借助Qt中的CSS – Qt Style Sheet（一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qt从0到1之机制篇 - Qt样式表">
+<meta name="twitter:description" content="本节示例代码 在Web前端开发中，有一个很重要的部分是CSS，用于修饰Html中的控件，如按钮，输入框等元素。CSS的出现分离了交互逻辑和视觉效果的开发，极大地方便了前端开发。因此这套设计理念被很多其他前端开发框架所借鉴，如Qt，Gtk，JavaFX等。在Qt中，默认的控件样式是平台相关的原始风格，很多时候难以满足视觉设计的要求，因此我们可以借助Qt中的CSS – Qt Style Sheet（一">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Qt从0到1之机制篇 - Qt样式表 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Qt-Mechanisms-QSS" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/27725.html" class="article-date">
+      <time datetime="2018-09-05T01:50:31.000Z" itemprop="datePublished">2018-09-05</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Qt从0到1之机制篇 - Qt样式表
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QSS/">QSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt机制/">Qt机制</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="https://github.com/xyz1001/QtExamples/tree/master/QtStyleSheet" target="_blank" rel="noopener">本节示例代码</a></p>
+<p>在Web前端开发中，有一个很重要的部分是<code>CSS</code>，用于修饰<code>Html</code>中的控件，如按钮，输入框等元素。<code>CSS</code>的出现分离了交互逻辑和视觉效果的开发，极大地方便了前端开发。因此这套设计理念被很多其他前端开发框架所借鉴，如Qt，Gtk，JavaFX等。在Qt中，默认的控件样式是平台相关的原始风格，很多时候难以满足视觉设计的要求，因此我们可以借助Qt中的<code>CSS</code> – <code>Qt Style Sheet</code>（一般简称为<code>QSS</code>）来对控件进行修饰美化，定制化出我们想要的效果。</p>
+<a id="more"></a>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p><code>QSS</code>的语法类似于<code>CSS2</code>的语法，因此建议在学习<code>QSS</code>时可以先去了解下CSS2相关的知识。一条<code>QSS</code>规则由作用目标和若干条声明组成，语法如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">选择器<span class="selector-attr">[:子控件]</span><span class="selector-attr">[:伪状态 ...]</span> &#123;</span><br><span class="line">    属性: 值;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>[]</code>表示这部分是可选的，<code>...</code>表示该部分是可重复的。<br>下面是一个最简单的<code>QSS</code>规则示例，其中<code>QPushButton</code>是选择器。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>QSS</code>的注释规则和<code>CSS</code>一致，使用<code>/* */</code>，类似C/C++中的块注释，注意不要使用<code>//</code>，这样是无效的，反而会导致解析出错，<code>QSS</code>加载异常。</p>
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h2><p>选择器用于指定<code>QSS</code>规则的作用于哪些目标控件。Qt支持所有<code>CSS2</code>中定义的<a href="http://www.w3.org/TR/REC-CSS2/selector.html#q1" target="_blank" rel="noopener">选择器</a>，下面是我比较常用的一些选择器。</p>
+<table>
+<thead>
+<tr>
+<th>选择器类型</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类型选择器</td>
+<td>类名</td>
+</tr>
+<tr>
+<td>ID选择器</td>
+<td>类名#对象名</td>
+</tr>
+<tr>
+<td>属性选择器</td>
+<td>类名[属性=”值”]</td>
+</tr>
+<tr>
+<td>全局选择器</td>
+<td>*</td>
+</tr>
+<tr>
+<td>类选择器</td>
+<td>.类名</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>类型选择器<br>类型选择器通过指定一个类名来确定<code>QSS</code>规则的作用目标。所有该类及其子类的对象均会收到该<code>QSS</code>规则的影响。如上面的例子中，所有类型为<code>QPushButton</code>及其子类的控件的文字颜色均会被设置为红色</p>
+</li>
+<li><p>ID选择器<br>ID选择器需要指定类名和控件对象名，需要注意的是这里的控件对象名不是对象的变量名，而是通过<code>QObject::setObjectName(const QString &amp;name)</code>方法设置的对象名，多个对象可以设置同一个对象名。该选择器表示当前<code>QSS</code>规则将会作用于类型为指定类及其子类且类型名为指定名称的控件。如下面的例子中，所有类型为<code>QPushButton</code>及其子类且对象名为<code>ok</code>的控件的按钮文字颜色都会被设置为红色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-id">#ok</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>属性选择器<br>属性选择器需要指定类名和属性值。属性选择器表示当前<code>QSS</code>会作用于所有类型为指定类及其子类且具有值为给定值的属性的控件。所有支持<code>QVariant::toString()</code>方法的Qt属性都可以用在这里，Qt属性可以参考<a href="http://doc.qt.io/qt-5/properties.html" target="_blank" rel="noopener">Qt属性机制</a>。无论设置的值的类型是什么，这里的值统一用字符串表示，如属性值类型为<code>bool</code>，那么属性选择器中等号后面应该是<code>&quot;false&quot;</code>或<code>&quot;true&quot;</code>。Qt对象除了一些自带的默认属性外，我们还可以在运行期通过<code>bool QObject::setProperty(const char *name, const QVariant &amp;value)</code>来添加和修改属性。因此我们可以利用属性选择器实现<code>QSS</code>的动态改变。下面的例子表示所有类型为<code>QPushButon</code>及其子类且具有属性值为<code>1</code>的属性<code>order</code>的控件的文字颜色将会被设置为红色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-attr">[order=<span class="string">"1"</span>]</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>全局选择器<br>全局选择器表示当前<code>QSS</code>规则会作用于所有的Qt控件上。如下面的例子，所有的<code>QWidget</code>极其子类控件的文字都会被设置为红色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类选择器<br>类选择器和类型选择器的区别在于类选择器在类名前加了一个<code>.</code>，表示只对该类的对象起作用，而不会影响到该类的子类对象。如下面的例子中的<code>QSS</code>规则只会将类型为<code>QPushButton</code>的控件的文字设置为红色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.QPushButton</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这里需要注意的一点是如果类声明在命名空间内部，我们需要在类名前添加命名空间信息，语法为<code>[命名空间-- ...]类名</code>，其中多个命名空间之间需要使用<code>--</code>连接。例如对于下面的类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> out &#123;</span><br><span class="line"><span class="keyword">namespace</span> inner &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButton</span> :</span> <span class="keyword">public</span> QPushButton &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要在类型选择器中使用该类<code>QSS</code>，我们可以使用以下语法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">out--inner--MyButton</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="子控件"><a href="#子控件" class="headerlink" title="子控件"></a>子控件</h2><p>Qt提供了众多的控件，有一些复杂控件本身又有多个组成部分。如<code>QSpinBox</code>，其可以很清楚的看到还包括了一个向上的按钮和一个向下的按钮。对于这些控件，我们经常需要对具体的某个组成部分进行样式调整。为了更方便地对这些控件进行精准的调整，我们可以在QSS中指定子控件，然后将子控件看做一个独立的控件来调整样式。不同的控件可能包括不同的子控件，我们可以查阅<a href="http://doc.qt.io/qt-5/stylesheet-reference.html" target="_blank" rel="noopener">Qt Style Sheets Reference</a>来查询某个控件支持哪些子控件。</p>
+<p>如对于<a href="http://doc.qt.io/qt-5/stylesheet-reference.html#qspinbox-widget" target="_blank" rel="noopener"><code>QSpinBox</code></a>，我们可以看到其除了直接包含了向上按钮<code>up-button</code>和向下按钮<code>down-button</code>，这两个子控件分别还包含了一个子控件，分别是向上箭头<code>up-arrow</code>和向下箭头<code>down-arrow</code>，也就是说，子控件中是可以继续包含其他子控件的。我们可以通过语法<code>选择器::子控件</code>来将<code>QSS</code>规则的作用目标设为子控件。</p>
+<p>对于子控件，其支持两个特殊的属性<code>subcontrol-origin</code>和<code>subcontrol-position</code>。这两个属于用于对子控件进行定位。</p>
+<ul>
+<li><p><code>subcontrol-origin</code><br>由于<code>CSS</code>使用<a href="https://www.w3schools.com/css/css_boxmodel.asp" target="_blank" rel="noopener">盒子模型</a>，一个盒子模型从内到外分为<code>content</code>，<code>padding</code>，<code>border</code>和<code>margin</code>。那么对于子控件，其位于其父控件的那部分呢？这就是<code>subcontrol-origin</code>属性的作用。该属性用语确定子控件位于父控件盒子模型中的哪一部分。该属性的默认值为<code>padding</code>，即子控件默认位于父控件的<code>padding</code>区域。</p>
+</li>
+<li><p><code>subcontrol-position</code><br>该属性用于设置子控件的相对于父控件的位置，值类型为<a href="http://doc.qt.io/qt-5/stylesheet-reference.html#alignment" target="_blank" rel="noopener"><code>Alignment</code></a>，即对齐方式。</p>
+</li>
+</ul>
+<p>下面的例子中，我们将QSpinBox中的按钮移到左边，并将其宽度设为5px。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QSpinBox</span><span class="selector-pseudo">::up-button</span> &#123;</span><br><span class="line">    <span class="attribute">subcontrol-position</span>: left top;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">QSpinBox</span><span class="selector-pseudo">::down-button</span> &#123;</span><br><span class="line">    <span class="attribute">subcontrol-position</span>: left bottom;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="伪状态"><a href="#伪状态" class="headerlink" title="伪状态"></a>伪状态</h2><p>对于同一个控件，我们经常可以看到在不同的场景下其样式也是不一样的。如对于同一个按钮，正常情况下和鼠标按下时效果是不一样的。为了实现这种效果，我们可以在<code>QSS</code>规则中指定控件的伪状态，伪状态是源自CSS中的术语（stack overflow上关于<a href="https://stackoverflow.com/questions/1281407/why-is-a-pseudo-class-so-called" target="_blank" rel="noopener">为什么叫伪状态的讨论</a>）。伪状态的语法为<code>选择器[:伪状态 ...]</code>，注意这里是一个冒号。伪状态描述了一个特定的场景，如被按下<code>pressed</code>，被选中<code>checked</code>等。不同的控件支持的伪状态类型不一样，我们同样可以通过<a href="http://doc.qt.io/qt-5/stylesheet-reference.html" target="_blank" rel="noopener">Qt Style Sheets Reference</a>来查看具体的控件支持哪些伪状态。对于同一段<code>QSS</code>，我们可以同时指定多个互不冲突的伪状态，只有当指定的伪状态同时满足时<code>QSS</code>规则才会生效。如下面的<code>QSS</code>，将只对已被选择且鼠标悬浮在其上的按钮生效。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-pseudo">:hover</span><span class="selector-pseudo">:checked</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: gray;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以通过在伪状态前添加<code>!</code>表示非该状态下。</p>
+<h2 id="冲突"><a href="#冲突" class="headerlink" title="冲突"></a>冲突</h2><p>对于一个具体的控件，可能会受到多条<code>QSS</code>规则的影响，这个时候若多条<code>QSS</code>规则中设置了同样的属性就可能会发生冲突。<code>QSS</code>的最小冲突单位是声明，而不是<code>QSS</code>规则，即两条<code>QSS</code>规则均可生效，则其中没有冲突的声明将会正常生效，而冲突的声明则会根据冲突规则决定是否生效。在发生冲突时，Qt的处理规则如下</p>
+<ol>
+<li>使用满足要求的</li>
+<li>使用作用范围更小的（即更具有特异性的）</li>
+<li>使用最后设置的</li>
+</ol>
+<p>这三条规则的优先级依次降低。其中特异性有具体的计算规则，可以参考<code>CSS</code>中的<a href="https://www.w3.org/TR/CSS2/cascade.html#specificity" target="_blank" rel="noopener">特异性计算规则</a>。考虑下面的<code>QSS</code></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 规则1 */</span></span><br><span class="line"><span class="selector-tag">QWidget</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 规则2 */</span></span><br><span class="line"><span class="selector-tag">QPushButton</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 规则3 */</span></span><br><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-pseudo">:checked</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: green;</span><br><span class="line">    <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 规则4 */</span></span><br><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-pseudo">:pressed</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 规则5 */</span></span><br><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: white;</span><br><span class="line">    <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 规则6 */</span></span><br><span class="line"><span class="selector-tag">QPushButton</span><span class="selector-pseudo">:pressed</span><span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将该<code>QSS</code>设置在主窗口上，运行后我们可以看到以下现象：</p>
+<ol>
+<li>主窗口(<code>QWidget</code>)背景被设置为黄色，而按钮<code>QPushButton</code>背景被设为红色。这是因为因为对于主窗口，只有规则1满足要求，所以规则1生效，而对于按钮，规则1和规则2均可生效，但相对于规则1，规则2的作用范围更小，因此使用规则二。</li>
+<li>我们将鼠标悬浮在按钮上时，按钮的背景色变为白色，字体颜色变为绿色。这是因为此时规则5也满足了要求，且规则5相对与规则1,2，作用范围更小。</li>
+<li>接着我们在按钮上按下鼠标时，按钮背景又变成粉红色，而字体依然是绿色。此时规则1，2, 4，5，6均满足，其中规则6作用范围最小，因此背景颜色属性被设为粉红色。而由于规则4中还有字体颜色的声明，该声明与规则6并不冲突，因此规则4的第二条声明也是生效的。</li>
+<li>然后我们松开鼠标，此时按钮恢复成白色背景和绿色字体，此时规则1,2,3,5均满足，先排除范围较大的规则1,2，规则3,5的作用范围是同一层级的，无法区分范围大小，此时根据<code>QSS</code>冲突处理规则第三条，最后被设置的<code>QSS</code>规则将生效，即规则5将生效。</li>
+<li>最后我们将鼠标从按钮上移开，按钮变成绿色背景，红色字体，根据上一步，此时规则5已失效，因此作用范围最小的规则只有规则3，因此规则3生效。</li>
+</ol>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>当我们为某个控件设置了<code>QSS</code>后，该<code>QSS</code>将会对递归作用于该控件及该控件下的所有子控件。因此对于一些全局的<code>QSS</code>设置，如字体等，我们可以直接将<code>QSS</code>设置在<code>qApp</code>上。继承同样可能带来冲突，对于继承产生的冲突解决规则是优先使用最近继承的<code>QSS</code>规则，即为该控件设置的<code>QSS</code>规则优先于父控件的<code>QSS</code>规则，父控件的<code>QSS</code>规则优先于祖父控件的<code>QSS</code>规则，以此类推。同样的，冲突的最小单位也是声明。对于上面的例子，我们为主窗口设置了<code>QSS</code>，但并未为按钮设置<code>QSS</code>，由于按钮是主窗口的子控件，因此其继承了主窗口的<code>QSS</code>，主窗口的<code>QSS</code>对其同样有效果。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><code>QWidget</code>类提供了一个<code>void setStyleSheet(const QString &amp;sheet)</code>方法，我们可以通过该方法来加载<code>QSS</code>。个人的习惯是将<code>QSS</code>放到单独的文件中，运行时再去读取该文件的内容并设置。由于不同的Qt控件的<code>QSS</code>差别很大，其中也有不少需要注意的问题，因此后续还会再针对具体的控件进行<code>QSS</code>使用讲解，这里就不过多展开。下面是使用<code>QSS</code>时的一些通用的注意事项和最佳实践。</p>
+<ul>
+<li><p>为自定义的QWidget子类设置<code>QSS</code>时，我们需要添加以下<code>paintEvent</code>的实现</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CustomWidget::paintEvent</span><span class="params">(QPaintEvent *)</span> </span>&#123;</span><br><span class="line">    QStyleOption opt;</span><br><span class="line">    opt.init(<span class="keyword">this</span>);</span><br><span class="line">    <span class="function">QPainter <span class="title">p</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    style()-&gt;drawPrimitive(QStyle::PE_Widget, &amp;opt, &amp;p, <span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>border</code>属性同时设置边框宽度，样式和颜色时，三者必须严格保持宽度，样式，颜色的顺序，否则设置无效</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border</span>: 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-tag">red</span>; <span class="comment">/* work     */</span></span><br><span class="line"><span class="selector-tag">border</span>: <span class="selector-tag">solid</span> 1<span class="selector-tag">px</span> <span class="selector-tag">red</span>; <span class="comment">/* not work */</span></span><br><span class="line"><span class="selector-tag">border</span>: <span class="selector-tag">red</span> 1<span class="selector-tag">px</span> <span class="selector-tag">solid</span>; <span class="comment">/* not work */</span></span><br><span class="line"><span class="selector-tag">border</span>: <span class="selector-tag">red</span> <span class="selector-tag">solid</span> 1<span class="selector-tag">px</span>; <span class="comment">/* not work */</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在调用<code>setStyleSheet</code>方法<code>QSS</code>并不立即生效。如果我们在<code>QSS</code>设置了类似于字体大小等属性，我们在加载了<code>QSS</code>后是无法立即拿到设置的属性值的。在使用需要依赖<code>QSS</code>设置的属性的方法时一定要特别注意。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>关于<code>QSS</code>的Qt官方文档还是非常详细的，尤其是<code>Qt Style Sheets Reference</code>，平时使用时需要多翻一翻。</p>
+<ul>
+<li><a href="http://doc.qt.io/qt-5/stylesheet.html" target="_blank" rel="noopener">Qt Style Sheets</a></li>
+<li><a href="http://doc.qt.io/qt-5/stylesheet-syntax.html" target="_blank" rel="noopener">The Style Sheet Syntax</a></li>
+<li><a href="http://doc.qt.io/qt-5/stylesheet-reference.html" target="_blank" rel="noopener">Qt Style Sheets Reference</a></li>
+<li><a href="https://blog.csdn.net/liang19890820/article/details/51691212" target="_blank" rel="noopener">Qt 之 QSS（样式表语法）</a></li>
+<li><a href="https://www.cnblogs.com/wangqiguo/p/4960776.html#_label3" target="_blank" rel="noopener">QSS总结以及最近做的Qt项目</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2018-09-05, 09:50:31</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/27725.html" title="Qt从0到1之机制篇 - Qt样式表">http://www.xyz1001.xyz/articles/27725.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/27725.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/58209.html">
+                    加快Qt程序的编译速度
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/11422.html">
+                    Qt从0到1之机制篇 - 事件
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#语法"><span class="toc-number">1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择器"><span class="toc-number">2.</span> <span class="toc-text">选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#子控件"><span class="toc-number">3.</span> <span class="toc-text">子控件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伪状态"><span class="toc-number">4.</span> <span class="toc-text">伪状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#冲突"><span class="toc-number">5.</span> <span class="toc-text">冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">6.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">7.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">8.</span> <span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Qt从0到1之机制篇 - Qt样式表　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/58209.html" title="上一篇: 加快Qt程序的编译速度">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/11422.html" title="下一篇: Qt从0到1之机制篇 - 事件">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系统。在看了一位同事的博客之后，我坚定地转向了hexo。但在安装配置和使用的过程中摸索了较长时间，也遇到了较多的坑点。 如果是初次接触hexo，推荐去阅读一下hexo的官方文档，会让我们对hexo的使用有一个基本的了解。 在搭建自己的hexo博客的过程中，我较多的参考了这位同事对hexo介绍的一篇文章及他托管在Github上">
+<meta name="keywords" content="软件折腾笔记,hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件折腾笔记之hexo">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/17074.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系统。在看了一位同事的博客之后，我坚定地转向了hexo。但在安装配置和使用的过程中摸索了较长时间，也遇到了较多的坑点。 如果是初次接触hexo，推荐去阅读一下hexo的官方文档，会让我们对hexo的使用有一个基本的了解。 在搭建自己的hexo博客的过程中，我较多的参考了这位同事对hexo介绍的一篇文章及他托管在Github上">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.112Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件折腾笔记之hexo">
+<meta name="twitter:description" content="hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系统。在看了一位同事的博客之后，我坚定地转向了hexo。但在安装配置和使用的过程中摸索了较长时间，也遇到了较多的坑点。 如果是初次接触hexo，推荐去阅读一下hexo的官方文档，会让我们对hexo的使用有一个基本的了解。 在搭建自己的hexo博客的过程中，我较多的参考了这位同事对hexo介绍的一篇文章及他托管在Github上">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>软件折腾笔记之hexo | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-software-usage-of-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/17074.html" class="article-date">
+      <time datetime="2017-04-02T09:05:47.000Z" itemprop="datePublished">2017-04-02</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      软件折腾笔记之hexo
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>hexo是一个基于nodejs、轻量、原生支持markdown写作的的博客系统。在看了一位同事的博客之后，我坚定地转向了hexo。但在安装配置和使用的过程中摸索了较长时间，也遇到了较多的坑点。 如果是初次接触hexo，推荐去阅读一下hexo的<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a>，会让我们对hexo的使用有一个基本的了解。 在搭建自己的hexo博客的过程中，我较多的参考了这位同事对hexo介绍的一篇<a href="http://blog.guorongfei.com/2016/01/01/update-blog-with-hexo/" target="_blank" rel="noopener">文章</a>及他托管在Github上的<a href="https://github.com/zhaohuaxishi/zhaohuaxishi.github.io" target="_blank" rel="noopener">hexo博客</a>。</p>
+<a id="more"></a>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>debian系列Linux系统(我用的是Deepin)</li>
+<li>使用Github Pages搭建博客</li>
+<li>Git已配置好ssh key并已部署公钥到Github</li>
+</ul>
+<p>所需要的相关软件安装命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git npm nodejs-legacy <span class="comment">#安装git</span></span><br><span class="line">sudo npm install npm@lts -g</span><br><span class="line">sudo npm install -g hexo-cli    <span class="comment">#安装hexo命令行接口，可通过命令使用hexo</span></span><br></pre></td></tr></table></figure>
+<p>其他情况请自行作出修改。</p>
+<h2 id="hexo搭建"><a href="#hexo搭建" class="headerlink" title="hexo搭建"></a>hexo搭建</h2><h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><p>通常情况下的做法是在Github上建立一个Github Pages仓库<code>yourname.github.io</code>用来存放生成静态网页供访问，另外再新建一个仓库存放hexo及markdown源码，此类情况下的hexo博客搭建教程网上已经有很多，在此不再赘述。但由于这样做导致需要两个管理两个仓库，相对比较麻烦。因此我参考了同事的做法，使用不同的分支进行管理。具体方法如下：</p>
+<ol>
+<li>创建Github Pages仓库；</li>
+<li><code>git clone</code>至本地；</li>
+<li><p>创建<code>.gitignore</code>文件，文件内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*</span><br><span class="line">!.gitignore</span><br></pre></td></tr></table></figure>
+<p>即忽略除了<code>.gitignore</code>以外的所有文件，然后添加后提交；</p>
+</li>
+<li><p>创建新分支<code>source</code>，切换至<code>source</code>；</p>
+</li>
+<li>在外部新建一个临时文件夹<code>hexo_init</code>并在此目录初始化<code>hexo</code>；</li>
+<li>将<code>hexo_init</code>目录中所有文件复制至仓库文件夹并删除临时文件夹<code>hexo_init</code>；</li>
+<li><p>修改<code>hexo</code>配置文件<code>_config.yml</code>，将<code>deploy</code>条目做如下修改，注意添加上你的<code>Github Pages</code>仓库地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Deploymen</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: #your github pages repo</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>推送<code>source</code>分支至Github</p>
+</li>
+<li>在Github上将<code>source</code>分支设为默认分支</li>
+</ol>
+<h3 id="部分命令"><a href="#部分命令" class="headerlink" title="部分命令"></a>部分命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> <span class="comment">#your github pages repo    #克隆Github Pages仓库</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"*\n\!.gitignore"</span> &gt; .gitignore   <span class="comment">#创建本地仓库master分支下.gitignore</span></span><br><span class="line">git add . &amp;&amp; git commit -m <span class="string">"忽略本地master分支所有文件"</span></span><br><span class="line">git checkout -b <span class="built_in">source</span>      <span class="comment">#创建并切换至新分支sourece</span></span><br><span class="line"><span class="built_in">cd</span> .. &amp;&amp; mkdir hexo_init    <span class="comment">#创建初始化hexo的临时目录</span></span><br><span class="line"><span class="built_in">cd</span> hexo_init &amp;&amp; hexo init   <span class="comment">#初始化hexo</span></span><br><span class="line"><span class="built_in">cd</span> .. &amp;&amp; mv hexo_init/* hexo_init/.gitignore <span class="comment">#your repo dir    #复制文件至你的仓库目录下</span></span><br><span class="line">rmdir hexo_init    <span class="comment">#删除临时文件夹</span></span><br><span class="line">git add . &amp;&amp; git commit -m <span class="string">"初始化hexo"</span>    <span class="comment">#添加并提交source分支更改</span></span><br><span class="line">git push --<span class="built_in">set</span>-upstream origin <span class="built_in">source</span>   <span class="comment">#推送新创建的分支source至Github</span></span><br></pre></td></tr></table></figure>
+<h3 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h3><ul>
+<li><strong>为什么要忽略本地master分支所有文件？</strong></li>
+</ul>
+<blockquote>
+<p>因为在本地仓库，我们是用不到master分支中的任何文件的。master分支后续是由<code>hexo-deploy-git</code>插件控制，我们并不直接使用，因此我们忽略本地仓库master分支内所有文件，以免后续误操作。</p>
+</blockquote>
+<ul>
+<li><strong>为什么不在仓库目录直接初始化hexo?</strong></li>
+</ul>
+<blockquote>
+<p>因为这样会删除掉你的<code>.git</code>文件导致仓库被破坏！<code>hexo init</code>内部实现会先清空当前目录<code>git</code>相关信息</p>
+</blockquote>
+<ul>
+<li><strong>为什么要将<code>source</code>分支设为默认？</strong></li>
+</ul>
+<blockquote>
+<p>博客搭建完成后一般都是在<code>source</code>分支下写作，极少会切换至<code>master</code>分支</p>
+</blockquote>
+<h2 id="主题管理"><a href="#主题管理" class="headerlink" title="主题管理"></a>主题管理</h2><p>主题位于<code>hexo</code>目录<code>theme</code>目录下，由于往往需要对主题进行自定义，主题也需要进行同步。默认情况下，主题是一个单独的仓库，因此需要将主题文件夹中的<code>.git</code>信息删除。</p>
+<h2 id="hexo恢复"><a href="#hexo恢复" class="headerlink" title="hexo恢复"></a>hexo恢复</h2><p>当更换电脑或本地文件丢失时，我们需要在新电脑上恢复hexo，具体步骤如下：</p>
+<ol>
+<li><p>安装<code>git</code>和<code>npm</code>,<code>hexo-cli</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>克隆博客仓库至本地</p>
+</li>
+<li><p>安装npm模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="SEO"><a href="#SEO" class="headerlink" title="SEO"></a>SEO</h2><p>参考<a href="https://jactor-sue.github.io/how-githubio-blog-can-be-searched-by-google/" target="_blank" rel="noopener">让Google搜索到搭建在Github Pages上的博客</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/17074.html">软件折腾笔记之hexo</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2017-04-02, 17:05:47</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/17074.html" title="软件折腾笔记之hexo">http://www.xyz1001.xyz/articles/17074.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/17074.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/16675.html">
+                    软件折腾笔记之Shadowsocks
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/61027.html">
+                    踩坑记---命名空间污染
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前提"><span class="toc-number">1.</span> <span class="toc-text">前提</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo搭建"><span class="toc-number">2.</span> <span class="toc-text">hexo搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#操作步骤"><span class="toc-number">2.1.</span> <span class="toc-text">操作步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分命令"><span class="toc-number">2.2.</span> <span class="toc-text">部分命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关问题"><span class="toc-number">2.3.</span> <span class="toc-text">相关问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题管理"><span class="toc-number">3.</span> <span class="toc-text">主题管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hexo恢复"><span class="toc-number">4.</span> <span class="toc-text">hexo恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SEO"><span class="toc-number">5.</span> <span class="toc-text">SEO</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"软件折腾笔记之hexo　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/16675.html" title="上一篇: 软件折腾笔记之Shadowsocks">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/61027.html" title="下一篇: 踩坑记---命名空间污染">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

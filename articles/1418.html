@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="使用了Manjaro Deepin有一段时间了，从最初的Ubuntu kylin，到Ubuntu，CentOS，Deepin，直到去年发现了Manjaro这个发行版，被其相对简单的安装和强大的软件源所深深吸引。刚从Debian系切换过来还不是很习惯，相对于Deepin的开箱即用，Manjaro还是有一些需要手动去配置的地方。本文将以刚安装完成的Manjaro为前提，一步一步记录下自己的个性化配置步">
+<meta name="keywords" content="manjaro,配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Manjaro个性化配置">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/1418.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="使用了Manjaro Deepin有一段时间了，从最初的Ubuntu kylin，到Ubuntu，CentOS，Deepin，直到去年发现了Manjaro这个发行版，被其相对简单的安装和强大的软件源所深深吸引。刚从Debian系切换过来还不是很习惯，相对于Deepin的开箱即用，Manjaro还是有一些需要手动去配置的地方。本文将以刚安装完成的Manjaro为前提，一步一步记录下自己的个性化配置步">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.115Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Manjaro个性化配置">
+<meta name="twitter:description" content="使用了Manjaro Deepin有一段时间了，从最初的Ubuntu kylin，到Ubuntu，CentOS，Deepin，直到去年发现了Manjaro这个发行版，被其相对简单的安装和强大的软件源所深深吸引。刚从Debian系切换过来还不是很习惯，相对于Deepin的开箱即用，Manjaro还是有一些需要手动去配置的地方。本文将以刚安装完成的Manjaro为前提，一步一步记录下自己的个性化配置步">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Manjaro个性化配置 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-manjaro-custom-configuration" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/1418.html" class="article-date">
+      <time datetime="2018-02-27T13:32:16.000Z" itemprop="datePublished">2018-02-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Manjaro个性化配置
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/配置/">配置</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>使用了Manjaro Deepin有一段时间了，从最初的Ubuntu kylin，到Ubuntu，CentOS，Deepin，直到去年发现了Manjaro这个发行版，被其相对简单的安装和强大的软件源所深深吸引。刚从Debian系切换过来还不是很习惯，相对于Deepin的开箱即用，Manjaro还是有一些需要手动去配置的地方。本文将以刚安装完成的Manjaro为前提，一步一步记录下自己的个性化配置步骤，方便以后查阅，同时也为他人提供借鉴。</p>
+<p>注：本文所示系统为Manjaro Deepin 17.1.2，不保证在其他Linux发行版/桌面环境/版本下完全可用。请根据自身的需求谨慎参考。具体相关命令可参考<a href="https://raw.githubusercontent.com/xyz1001/software-notes/master/backup_and_restore/manjaro/setup.sh" target="_blank" rel="noopener">Manjaro个性化配置脚本</a></p>
+<a id="more"></a>
+<h2 id="基础软件安装"><a href="#基础软件安装" class="headerlink" title="基础软件安装"></a>基础软件安装</h2><h3 id="调整软件源"><a href="#调整软件源" class="headerlink" title="调整软件源"></a>调整软件源</h3><ol>
+<li><p>根据速度切换软件源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman-mirrors -i -c China -b stable -a</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向<code>/etc/pacman.conf</code>添加archlinux源</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">SigLevel = Optional TrustAll</span><br><span class="line">Server = http://mirrors.ustc.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="恢复官方软件"><a href="#恢复官方软件" class="headerlink" title="恢复官方软件"></a>恢复官方软件</h3><ol>
+<li><p>卸载不需要的软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -R `comm -12 &lt;(cat uninstall.lst | sort) &lt;(pacman -Qnq | sort)`</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装密钥环</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S gnupg archlinuxcn-keyring manjaro-keyring --needed</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新软件数据库和软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syyu</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装备份的官方软件仓库中的软件，即可通过<code>pacman</code>进行安装的软件，生成已安装软件列表的方法可参考<a href="/2018/03/02/manjaro-backup-installed-packages/">Manjaro下备份已安装软件包</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S $(&lt; pacman.lst) --needed</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注：若archlinux源<code>SigLevel</code>字段设置为<code>TrustedOnly</code>，此处可能会出现<code>Signature from &quot;User &lt;email@gmail.com&gt;&quot; is unknown trust, installation failed</code>错误，目前原因未知，可能和系统镜像较旧有关，网上推荐的<a href="https://forum.manjaro.org/t/invalid-or-corrupted-package-pgp-signature/324/4" target="_blank" rel="noopener">解决方式</a>如下，我尝试过，依然不行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -r /etc/pacman.d/gnupg</span><br><span class="line">sudo pacman -Sy gnupg archlinux-keyring manjaro-keyring</span><br><span class="line">sudo pacman-key --init</span><br><span class="line">sudo pacman-key --populate archlinux manjaro</span><br><span class="line">sudo pacman-key --refresh-keys</span><br><span class="line">sudo pacman -Sc</span><br></pre></td></tr></table></figure>
+<h2 id="基本环境配置"><a href="#基本环境配置" class="headerlink" title="基本环境配置"></a>基本环境配置</h2><h3 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h3><p>复制<code>.ssh</code>备份文件夹至<code>~</code>并将权限修改为600</p>
+<h3 id="dotfiles"><a href="#dotfiles" class="headerlink" title="dotfiles"></a>dotfiles</h3><p><code>dotfiles</code>中保存了HOME目录下主要的<code>.</code>开头的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:xyz1001/dotfiles.git &amp;&amp; <span class="built_in">cd</span> dotfiles &amp;&amp; ./install.py</span><br></pre></td></tr></table></figure>
+<h3 id="ss-qt5"><a href="#ss-qt5" class="headerlink" title="ss-qt5"></a>ss-qt5</h3><p>略</p>
+<h3 id="privoxy"><a href="#privoxy" class="headerlink" title="privoxy"></a>privoxy</h3><p>用于将socks5代理转换为http代理</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo bash -c <span class="string">'echo "forward-socks5 / 127.0.0.1:1080 ." &gt;&gt; /etc/privoxy/config'</span> <span class="comment"># 修改配置文件</span></span><br><span class="line">sudo systemctl start privoxy.service <span class="comment"># 运行服务</span></span><br></pre></td></tr></table></figure>
+<h3 id="调整HOME目录下文件夹"><a href="#调整HOME目录下文件夹" class="headerlink" title="调整HOME目录下文件夹"></a>调整HOME目录下文件夹</h3><ol>
+<li><p>修改中文目录名为英文，若安装时的语言选择的不是中文，此步可跳过<br>修改<code>~/.config/user-dirs.dirs</code>文件如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">XDG_DESKTOP_DIR=&quot;$HOME/Desktop&quot;</span><br><span class="line">XDG_DOWNLOAD_DIR=&quot;$HOME/Download&quot;</span><br><span class="line">XDG_TEMPLATES_DIR=&quot;$HOME/Templates&quot;</span><br><span class="line">XDG_PUBLICSHARE_DIR=&quot;$HOME/Public&quot;</span><br><span class="line">XDG_DOCUMENTS_DIR=&quot;$HOME/Documents&quot;</span><br><span class="line">XDG_MUSIC_DIR=&quot;$HOME/Music&quot;</span><br><span class="line">XDG_PICTURES_DIR=&quot;$HOME/Pictures&quot;</span><br><span class="line">XDG_VIDEOS_DIR=&quot;$HOME/Videos&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除中文目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~ &amp;&amp; rmdir 文档 公共 模板 下载 音乐 桌面 视频 &amp;&amp; rm -r 图片</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建其他所需文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/&#123;Project,Code,Application&#125;</span><br><span class="line">ln -s /tmp ~/Temp</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="恢复其他软件"><a href="#恢复其他软件" class="headerlink" title="恢复其他软件"></a>恢复其他软件</h2><h3 id="配置安装环境"><a href="#配置安装环境" class="headerlink" title="配置安装环境"></a>配置安装环境</h3><ol>
+<li><p>配置终端代理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> https_proxy=127.0.0.1:8118</span><br><span class="line"><span class="built_in">export</span> http_proxy=127.0.0.1:8118</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置Git代理，若Git配置文件<code>~/.gitconfig</code>中已配置，可跳过此步</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy <span class="string">'socks5://127.0.0.1:1080'</span></span><br><span class="line">git config --global https.proxy <span class="string">'socks5://127.0.0.1:1080'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Python软件"><a href="#Python软件" class="headerlink" title="Python软件"></a>Python软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pip2 --proxy 127.0.0.1:8118 install youdao</span><br><span class="line">sudo pip --proxy 127.0.0.1:8118 install you-get thefuck tldr</span><br></pre></td></tr></table></figure>
+<h3 id="npm软件"><a href="#npm软件" class="headerlink" title="npm软件"></a>npm软件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -E npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<h3 id="自行编译软件"><a href="#自行编译软件" class="headerlink" title="自行编译软件"></a>自行编译软件</h3><h4 id="dde-system-monitor"><a href="#dde-system-monitor" class="headerlink" title="dde-system-monitor"></a>dde-system-monitor</h4><p>dock上的系统资源监视器,方便查看内存及网速</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp &amp;&amp; git <span class="built_in">clone</span> git@github.com:xyz1001/dde-system-monitor.git</span><br><span class="line"><span class="built_in">cd</span> dde-system-monitor &amp;&amp; mkdir build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">qmake .. &amp;&amp; make</span><br><span class="line">sudo cp libdock-system-monitor.so /usr/lib/dde-dock/plugins &amp;&amp; pkill dde-dock</span><br></pre></td></tr></table></figure>
+<h4 id="XMemo"><a href="#XMemo" class="headerlink" title="XMemo"></a>XMemo</h4><p>便签软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp &amp;&amp; git <span class="built_in">clone</span> git@github.com:xyz1001/XMemo.git</span><br><span class="line"><span class="built_in">cd</span> XMemo &amp;&amp; mkdir build &amp;&amp; <span class="built_in">cd</span> build</span><br><span class="line">qmake ../src &amp;&amp; make</span><br><span class="line">sudo cp -r ../package/fakeroot/usr/* /usr/</span><br><span class="line">sudo cp xmemo /usr/<span class="built_in">local</span>/bin</span><br></pre></td></tr></table></figure>
+<h4 id="cppiniter"><a href="#cppiniter" class="headerlink" title="cppiniter"></a>cppiniter</h4><p>c++工程初始化脚本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /tmp &amp;&amp; git <span class="built_in">clone</span> git@github.com:xyz1001/cppiniter.git</span><br><span class="line"><span class="built_in">cd</span> cppiniter &amp;&amp; sudo ./install.py</span><br></pre></td></tr></table></figure>
+<h3 id="AUR软件"><a href="#AUR软件" class="headerlink" title="AUR软件"></a>AUR软件</h3><h4 id="albert"><a href="#albert" class="headerlink" title="albert"></a>albert</h4><p><code>Albert</code>需要单独安装，指定内核模块<br>yaourt -S albert</p>
+<h3 id="deepinwine系列软件"><a href="#deepinwine系列软件" class="headerlink" title="deepinwine系列软件"></a>deepinwine系列软件</h3><p>该系列软件经常会安装出错，故单独安装，避免yaourt批量安装多次失败<br>yaourt -S deepin.com.qq.office<br>yaourt -S deepin.com.thunderspeed<br>yaourt -S deepin.com.wechat</p>
+<h4 id="其他软件"><a href="#其他软件" class="headerlink" title="其他软件"></a>其他软件</h4><p>安装Archlinux社区软件仓库中的软件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yaourt -S $(&lt; yaourt.lst) --needed --noconfirm</span><br></pre></td></tr></table></figure>
+<h2 id="软件配置"><a href="#软件配置" class="headerlink" title="软件配置"></a>软件配置</h2><h3 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h3><ol>
+<li><p>将<code>zsh</code>设置为默认shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /usr/bin/zsh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行zsh，将自动安装相关插件</p>
+</li>
+</ol>
+<h3 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h3><ol>
+<li>在控制中心中添加开启终端时启动tmux快捷键<code>Ctrl+Alt+T</code>，覆盖默认设置启动命令为<code>deepin-terminal -e tmux -2</code></li>
+<li><p>安装tmux插件管理器tpm</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行tmux，按下快捷键<code>Ctrl+a</code>，<code>I</code>安装tmux插件</p>
+</li>
+</ol>
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><ol>
+<li>运行vim，自动安装插件</li>
+<li><p>编译<code>Youcompleteme</code>依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.vim/plugged/YouCompleteMe/ &amp;&amp; ./install.py --clang-completer --system-libclang</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="proxychains"><a href="#proxychains" class="headerlink" title="proxychains"></a>proxychains</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i &quot;s/socks4\s*127.0.0.1\s*9050/socks5 \t127.0.0.1 1080/g&quot; /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><ol>
+<li><p>以代理模式启动Chrome</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">google-chrome-stable --proxy-server=socks5://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>登陆Chrome进行个人数据同步</p>
+</li>
+</ol>
+<h3 id="深度终端"><a href="#深度终端" class="headerlink" title="深度终端"></a>深度终端</h3><ul>
+<li>调整主题为<code>solarized dark</code></li>
+<li>调整字体为<code>firacode</code></li>
+<li>启动时最大化</li>
+<li><p>关闭退出提示</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i <span class="string">"s/print_notify_after_script_finish.*/print_notify_after_script_finish=false/g"</span> ~/.config/deepin/deepin-terminal/config.conf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关闭雷神终端的标题栏</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i <span class="string">"s/show_quakewindow_tab.*/show_quakewindow_tab=false/g"</span> ~/.config/deepin/deepin-terminal/config.conf</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="坚果云"><a href="#坚果云" class="headerlink" title="坚果云"></a>坚果云</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo pacman -S gvfs python-notify2 jdk8-openjdk --needed</span><br><span class="line">wget http://www.jianguoyun.com/static/exe/installer/nutstore_linux_dist_x64.tar.gz -O /tmp/nutstore_bin.tar.gz</span><br><span class="line">mkdir -p ~/.nutstore/dist &amp;&amp; tar zxf /tmp/nutstore_bin.tar.gz -C ~/.nutstore/dist</span><br><span class="line">~/.nutstore/dist/bin/install_core.sh</span><br><span class="line">sed -i <span class="string">"s/env python/env python2/g"</span> <span class="string">"<span class="variable">$&#123;HOME&#125;</span>/.nutstore/dist/bin/nutstore-pydaemon.py"</span> <span class="comment"># 坚果云仅支持python2</span></span><br><span class="line">sed -i <span class="string">"s/enterprise=false/enterprise=true/g"</span> <span class="string">"<span class="variable">$&#123;HOME&#125;</span>/.nutstore/dist/conf/nutstore.properties"</span> <span class="comment"># 开启企业模式</span></span><br></pre></td></tr></table></figure>
+<h3 id="StarUML"><a href="#StarUML" class="headerlink" title="StarUML"></a>StarUML</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 破解</span></span><br><span class="line">sudo sed -i <span class="string">'/var pk, decrypted/a\        return &#123;\n            name: "0xcc",\n            product: "StarUML",\n            licenseType: "vip",\n            quantity: "www.qq.com",\n            licenseKey: "later equals never!"\n        &#125;;'</span> /opt/staruml/www/license/node/LicenseManagerDomain.js</span><br></pre></td></tr></table></figure>
+<h2 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h2><h3 id="控制中心相关设置"><a href="#控制中心相关设置" class="headerlink" title="控制中心相关设置"></a>控制中心相关设置</h3><ul>
+<li>更换头像</li>
+<li>亮度中开启<code>自动调节色温</code></li>
+<li>默认程序</li>
+<li>标准字体修改为<code>Noto Sans CJK SC</code>，等宽字体修改为<code>Fira Code</code></li>
+<li>更换图标主题</li>
+<li>关闭音效</li>
+<li>开启时间<code>自动同步</code></li>
+<li>开启<code>插入鼠标禁用触摸板</code></li>
+</ul>
+<h3 id="其他软件设置"><a href="#其他软件设置" class="headerlink" title="其他软件设置"></a>其他软件设置</h3><ul>
+<li>albert</li>
+<li>notepadqq</li>
+<li>fcitx</li>
+<li>Android Studio</li>
+<li>Zeal</li>
+<li>StarUML</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/1418.html">Manjaro个性化配置</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2018-02-27, 21:32:16</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/1418.html" title="Manjaro个性化配置">http://www.xyz1001.xyz/articles/1418.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/1418.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/12471.html">
+                    Manjaro下备份已安装软件包
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/64010.html">
+                    JNI中&#34;No implementation found for native&#34;错误的原因总结
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础软件安装"><span class="toc-number">1.</span> <span class="toc-text">基础软件安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#调整软件源"><span class="toc-number">1.1.</span> <span class="toc-text">调整软件源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#恢复官方软件"><span class="toc-number">1.2.</span> <span class="toc-text">恢复官方软件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本环境配置"><span class="toc-number">2.</span> <span class="toc-text">基本环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH-key"><span class="toc-number">2.1.</span> <span class="toc-text">SSH key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dotfiles"><span class="toc-number">2.2.</span> <span class="toc-text">dotfiles</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ss-qt5"><span class="toc-number">2.3.</span> <span class="toc-text">ss-qt5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#privoxy"><span class="toc-number">2.4.</span> <span class="toc-text">privoxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调整HOME目录下文件夹"><span class="toc-number">2.5.</span> <span class="toc-text">调整HOME目录下文件夹</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#恢复其他软件"><span class="toc-number">3.</span> <span class="toc-text">恢复其他软件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置安装环境"><span class="toc-number">3.1.</span> <span class="toc-text">配置安装环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python软件"><span class="toc-number">3.2.</span> <span class="toc-text">Python软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm软件"><span class="toc-number">3.3.</span> <span class="toc-text">npm软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自行编译软件"><span class="toc-number">3.4.</span> <span class="toc-text">自行编译软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#dde-system-monitor"><span class="toc-number">3.4.1.</span> <span class="toc-text">dde-system-monitor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XMemo"><span class="toc-number">3.4.2.</span> <span class="toc-text">XMemo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cppiniter"><span class="toc-number">3.4.3.</span> <span class="toc-text">cppiniter</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AUR软件"><span class="toc-number">3.5.</span> <span class="toc-text">AUR软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#albert"><span class="toc-number">3.5.1.</span> <span class="toc-text">albert</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deepinwine系列软件"><span class="toc-number">3.6.</span> <span class="toc-text">deepinwine系列软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#其他软件"><span class="toc-number">3.6.1.</span> <span class="toc-text">其他软件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#软件配置"><span class="toc-number">4.</span> <span class="toc-text">软件配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#zsh"><span class="toc-number">4.1.</span> <span class="toc-text">zsh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux"><span class="toc-number">4.2.</span> <span class="toc-text">tmux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vim"><span class="toc-number">4.3.</span> <span class="toc-text">vim</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proxychains"><span class="toc-number">4.4.</span> <span class="toc-text">proxychains</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chrome"><span class="toc-number">4.5.</span> <span class="toc-text">Chrome</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深度终端"><span class="toc-number">4.6.</span> <span class="toc-text">深度终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#坚果云"><span class="toc-number">4.7.</span> <span class="toc-text">坚果云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#StarUML"><span class="toc-number">4.8.</span> <span class="toc-text">StarUML</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他配置"><span class="toc-number">5.</span> <span class="toc-text">其他配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#控制中心相关设置"><span class="toc-number">5.1.</span> <span class="toc-text">控制中心相关设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他软件设置"><span class="toc-number">5.2.</span> <span class="toc-text">其他软件设置</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Manjaro个性化配置　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/12471.html" title="上一篇: Manjaro下备份已安装软件包">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/64010.html" title="下一篇: JNI中&#34;No implementation found for native&#34;错误的原因总结">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="为窗口或控件添加边框是经常需要用到的一个操作，通常可以使用两种方式，一是在代码中通过QPainter绘制边框，这种方式比较灵活，可以实现很多特殊效果，然而使用起来并不是很方便。另外一种是通过Qt Style Sheet（以下简称QSS），可以通过简单的几行代码实现。然而QSS本身存在很多需要特别注意的问题，稍不注意可能就无法达到想要的效果。本文探讨了一下QSS在不同情况下如何正确设置边框。">
+<meta name="keywords" content="Qt,QSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正确使用Qt Style Sheet设置边框">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/39640.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="为窗口或控件添加边框是经常需要用到的一个操作，通常可以使用两种方式，一是在代码中通过QPainter绘制边框，这种方式比较灵活，可以实现很多特殊效果，然而使用起来并不是很方便。另外一种是通过Qt Style Sheet（以下简称QSS），可以通过简单的几行代码实现。然而QSS本身存在很多需要特别注意的问题，稍不注意可能就无法达到想要的效果。本文探讨了一下QSS在不同情况下如何正确设置边框。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.115Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正确使用Qt Style Sheet设置边框">
+<meta name="twitter:description" content="为窗口或控件添加边框是经常需要用到的一个操作，通常可以使用两种方式，一是在代码中通过QPainter绘制边框，这种方式比较灵活，可以实现很多特殊效果，然而使用起来并不是很方便。另外一种是通过Qt Style Sheet（以下简称QSS），可以通过简单的几行代码实现。然而QSS本身存在很多需要特别注意的问题，稍不注意可能就无法达到想要的效果。本文探讨了一下QSS在不同情况下如何正确设置边框。">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>正确使用Qt Style Sheet设置边框 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-set-border-with-qt-style-sheet-correctly" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/39640.html" class="article-date">
+      <time datetime="2017-08-28T15:30:33.000Z" itemprop="datePublished">2017-08-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正确使用Qt Style Sheet设置边框
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QSS/">QSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>为窗口或控件添加边框是经常需要用到的一个操作，通常可以使用两种方式，一是在代码中通过<code>QPainter</code>绘制边框，这种方式比较灵活，可以实现很多特殊效果，然而使用起来并不是很方便。另外一种是通过<code>Qt Style Sheet</code>（以下简称<code>QSS</code>），可以通过简单的几行代码实现。然而QSS本身存在很多需要特别注意的问题，稍不注意可能就无法达到想要的效果。本文探讨了一下QSS在不同情况下如何正确设置边框。</p>
+<a id="more"></a>
+<h2 id="边框属性顺序"><a href="#边框属性顺序" class="headerlink" title="边框属性顺序"></a>边框属性顺序</h2><p>若要添加一个边框，一般需要设置边框的三个属性：宽度，线条样式和颜色。虽然看上去这个属性是互不相关，即正交的，然而，在实际使用时，三者的顺序决定了能否达到预期的效果。经过测试，三者必须严格保持宽度，线条样式和颜色的顺序进行设置才会有效，缺少任意一个属性或交换了任意两条属性的顺序，都会导致没有任何边框效果。至于原因，可能是因为这三条属性的设置在转换成代码后其实是有相互影响的。</p>
+<h2 id="不同情况下的边框设置"><a href="#不同情况下的边框设置" class="headerlink" title="不同情况下的边框设置"></a>不同情况下的边框设置</h2><p>在实际使用过程中发现，影响边框设置效果成功与否一共有5个影响因素，分别是</p>
+<ul>
+<li>控件类型<ul>
+<li><code>QWidget</code>及继承于<code>QWidget</code>的自定义控件<br>以下简称<em><code>QWidget</code>系控件</em></li>
+<li><code>QFrame</code>及继承于<code>QFrame</code>的自定义控件<br>以下简称<em><code>QFrame</code>系控件</em></li>
+</ul>
+</li>
+<li>控件角色<ul>
+<li>控件做主窗口时</li>
+<li>控件做子部件时</li>
+</ul>
+</li>
+<li>边框类型<ul>
+<li>单侧边框</li>
+<li>四周边框(全边框)</li>
+</ul>
+</li>
+<li><p><code>paintEvent</code>函数提供与否</p>
+<ul>
+<li><p>提供<code>paintEvent</code>函数相关实现，实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void CustomWidget::paintEvent(QPaintEvent *)</span><br><span class="line">&#123;</span><br><span class="line">    QStyleOption opt;</span><br><span class="line">    opt.init(this);</span><br><span class="line">    QPainter p(this);</span><br><span class="line">    style()-&gt;drawPrimitive(QStyle::PE_Widget, &amp;opt, &amp;p, this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下简称<em>特定<code>paintEvent</code>实现</em></p>
+</li>
+<li>不提供如上的<code>paintEvent</code>实现</li>
+</ul>
+</li>
+<li><p>背景颜色属性</p>
+<ul>
+<li><p>在边框属性设置前设置背景颜色属性，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setStyleSheet(&quot;QWidget&#123;&quot;</span><br><span class="line">              &quot;background-color:#FFFFFF;&quot;  // 设置背景颜色属性</span><br><span class="line">              &quot;border:2px solid gray;&quot;</span><br><span class="line">              &quot;&#125;&quot;);</span><br></pre></td></tr></table></figure>
+<p>以下简称<em>正确设置背景颜色属性</em></p>
+</li>
+<li>不设置背景颜色属性或未在边框属性设置前设置</li>
+</ul>
+</li>
+</ul>
+<p>下面将以控件类型和控件角色为分类标准一一介绍<strong>在正确提供边框设置的QSS语句条件下</strong>如何设置不同边框效果</p>
+<h3 id="作为主窗口的QWidget系控件"><a href="#作为主窗口的QWidget系控件" class="headerlink" title="作为主窗口的QWidget系控件"></a>作为主窗口的<code>QWidget</code>系控件</h3><p>对于<code>QWidget</code>类，QSS<a href="http://doc.qt.io/qt-5/stylesheet-reference.html" target="_blank" rel="noopener">官方文档</a>上有这样一句话</p>
+<blockquote>
+<p>Supports only the background, background-clip and background-origin properties.</p>
+</blockquote>
+<p>也就是说，<code>QWidget</code>实际上是不支持盒子模型的，具体使用时，需要按一定规则重写<code>void paintEvent(QPaintEvent *e)</code>函数来实现对盒子模型的支持。因此理论上来说在未重写该函数时，我们是无法通过设置<code>border</code>相关属性来对一个<code>QWidget</code>来添加边框。在对于<code>QWidget</code>及继承于<code>QWidget</code>的自定义控件作为主窗口时均需要提供特定的<code>paintEvent</code>函数相关实现。</p>
+<h4 id="单侧边框"><a href="#单侧边框" class="headerlink" title="单侧边框"></a>单侧边框</h4><p>需要满足的条件为：</p>
+<ul>
+<li>提供了特定<code>paintEvent</code>实现</li>
+</ul>
+<h4 id="全边框"><a href="#全边框" class="headerlink" title="全边框"></a>全边框</h4><p>需要满足的条件为：</p>
+<ul>
+<li>提供了特定<code>paintEvent</code>实现</li>
+<li>正确设置背景颜色属性</li>
+</ul>
+<h3 id="作为子部件的QWidget系控件"><a href="#作为子部件的QWidget系控件" class="headerlink" title="作为子部件的QWidget系控件"></a>作为子部件的<code>QWidget</code>系控件</h3><p>虽然<code>QWidget</code>并不支持盒子模型，然而这一特性貌似仅在<code>QWidget</code>系控件作为主窗口时才有效，当<code>QWidget</code>系控件作为子部件时，无需任何条件即可实现任意边框效果</p>
+<h4 id="单侧边框-全边框"><a href="#单侧边框-全边框" class="headerlink" title="单侧边框/全边框"></a>单侧边框/全边框</h4><p>无需任何条件</p>
+<h3 id="作为主窗口的QFrame系控件"><a href="#作为主窗口的QFrame系控件" class="headerlink" title="作为主窗口的QFrame系控件"></a>作为主窗口的<code>QFrame</code>系控件</h3><p>对于<code>QFrame</code>来说，其与<code>QWidget</code>在对QSS的支持上最大的区别在于<code>QFrame</code>支持盒子模型，因此，<code>QFrame</code>系控件无需提供特定<code>paintEvent</code>实现即可实现边框效果，然而其在作为主窗口时会受到背景颜色属性是否正确设置的影响。</p>
+<h4 id="单侧边框-1"><a href="#单侧边框-1" class="headerlink" title="单侧边框"></a>单侧边框</h4><p>需要满足的条件为：</p>
+<ul>
+<li>正确设置背景颜色属性</li>
+</ul>
+<h4 id="全边框-1"><a href="#全边框-1" class="headerlink" title="全边框"></a>全边框</h4><p>需要满足的条件为：</p>
+<ul>
+<li>正确设置背景颜色属性</li>
+</ul>
+<h3 id="作为子部件的QFrame系控件"><a href="#作为子部件的QFrame系控件" class="headerlink" title="作为子部件的QFrame系控件"></a>作为子部件的<code>QFrame</code>系控件</h3><p><code>QFrame</code>系控件在作为子部件时，依然无需提供特定<code>paintEvent</code>实现即可实现边框效果，然而背景颜色属性是否正确设置的影响却根据边框类型而有不同的结果。</p>
+<h4 id="单侧边框-2"><a href="#单侧边框-2" class="headerlink" title="单侧边框"></a>单侧边框</h4><p>需要满足的条件为：</p>
+<ul>
+<li>正确设置背景颜色属性</li>
+</ul>
+<h4 id="全边框-2"><a href="#全边框-2" class="headerlink" title="全边框"></a>全边框</h4><p>无需任何条件</p>
+<p>以上所有情况均在<code>Qt 5.8.0 (GCC 5.3.1 (Deepin 15.4.1), 64 bit)</code>环境下实际验证，不排除会受到Qt、编译器和操作系统的类型和版本的影响而产生不同的效果。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>综合所有情况，大致可以得出以下结论：</p>
+<ol>
+<li>对于<code>QWidget</code>类控件，为了保证QSS的边框效果正常显示，除非我们能确保该控件一定不会作为一个主窗口来使用，否则请一定提供特定<code>paintEvent</code>实现。</li>
+<li>对于<code>QFrame</code>类控件，为了更好的复用性、拓展性，务必在设置边框属性前设置背景颜色属性。</li>
+<li>推荐使用<code>QFrame</code>作为主窗口的基类，而使用<code>QWidget</code>作为子部件的基类，如不确定，请尽量使用<code>QFrame</code>作为基类。</li>
+</ol>
+<p>最后，本文仅仅验证了边框（<code>border</code>）属性，理论上<code>padding</code>和<code>margin</code>将会和<code>border</code>会有一致的表现。具体各位读者可自行验证。另外，对于Qt提供的其他控件，如<code>QPushButton</code>，<code>QLabel</code>等控件可能存在其他情况，本文列举的情况并不一定适用，使用时需注意实际情况。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2017-08-28, 23:30:33</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/39640.html" title="正确使用Qt Style Sheet设置边框">http://www.xyz1001.xyz/articles/39640.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/39640.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/30986.html">
+                    Git命令整理
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/9919.html">
+                    qt style sheet(QSS)无效原因整理
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#边框属性顺序"><span class="toc-number">1.</span> <span class="toc-text">边框属性顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不同情况下的边框设置"><span class="toc-number">2.</span> <span class="toc-text">不同情况下的边框设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#作为主窗口的QWidget系控件"><span class="toc-number">2.1.</span> <span class="toc-text">作为主窗口的QWidget系控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单侧边框"><span class="toc-number">2.1.1.</span> <span class="toc-text">单侧边框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#全边框"><span class="toc-number">2.1.2.</span> <span class="toc-text">全边框</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为子部件的QWidget系控件"><span class="toc-number">2.2.</span> <span class="toc-text">作为子部件的QWidget系控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单侧边框-全边框"><span class="toc-number">2.2.1.</span> <span class="toc-text">单侧边框/全边框</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为主窗口的QFrame系控件"><span class="toc-number">2.3.</span> <span class="toc-text">作为主窗口的QFrame系控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单侧边框-1"><span class="toc-number">2.3.1.</span> <span class="toc-text">单侧边框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#全边框-1"><span class="toc-number">2.3.2.</span> <span class="toc-text">全边框</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为子部件的QFrame系控件"><span class="toc-number">2.4.</span> <span class="toc-text">作为子部件的QFrame系控件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单侧边框-2"><span class="toc-number">2.4.1.</span> <span class="toc-text">单侧边框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#全边框-2"><span class="toc-number">2.4.2.</span> <span class="toc-text">全边框</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"正确使用Qt Style Sheet设置边框　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/30986.html" title="上一篇: Git命令整理">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/9919.html" title="下一篇: qt style sheet(QSS)无效原因整理">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

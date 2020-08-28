@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="示例代码 Qt提供了相当多的工具方便我们进行开发，但其中有部分工具不便于单独讲解，因此本文将通过实现一个简单的播放器来介绍如何使用这些工具。本文将通过两种途径来完成软件的开发，一种使用Qt的图形化（GUI）工具来完成，另一种主要使用命令行（CLI）工具，两种途径不是绝对独立的，完全可以在不同的步骤中使用命令行或图形化工具，这需要看个人的使用习惯。由于本文重点是让大家对Qt的工具在开发过程中的作用有">
+<meta name="keywords" content="Qt,Qt从0到1,Qt工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt从0到1之工具篇：实现一个简陋的播放器">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/16527.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="示例代码 Qt提供了相当多的工具方便我们进行开发，但其中有部分工具不便于单独讲解，因此本文将通过实现一个简单的播放器来介绍如何使用这些工具。本文将通过两种途径来完成软件的开发，一种使用Qt的图形化（GUI）工具来完成，另一种主要使用命令行（CLI）工具，两种途径不是绝对独立的，完全可以在不同的步骤中使用命令行或图形化工具，这需要看个人的使用习惯。由于本文重点是让大家对Qt的工具在开发过程中的作用有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/qtplayer.png/blog">
+<meta property="og:image" content="https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/ui_layout.png/blog">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.115Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qt从0到1之工具篇：实现一个简陋的播放器">
+<meta name="twitter:description" content="示例代码 Qt提供了相当多的工具方便我们进行开发，但其中有部分工具不便于单独讲解，因此本文将通过实现一个简单的播放器来介绍如何使用这些工具。本文将通过两种途径来完成软件的开发，一种使用Qt的图形化（GUI）工具来完成，另一种主要使用命令行（CLI）工具，两种途径不是绝对独立的，完全可以在不同的步骤中使用命令行或图形化工具，这需要看个人的使用习惯。由于本文重点是让大家对Qt的工具在开发过程中的作用有">
+<meta name="twitter:image" content="https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/qtplayer.png/blog">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Qt从0到1之工具篇：实现一个简陋的播放器 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Qt-tools-implement-a-simple-player" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/16527.html" class="article-date">
+      <time datetime="2018-08-10T13:52:35.000Z" itemprop="datePublished">2018-08-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Qt从0到1之工具篇：实现一个简陋的播放器
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt工具/">Qt工具</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="https://github.com/xyz1001/QtExamples/tree/master/QtPlayer" target="_blank" rel="noopener">示例代码</a></p>
+<p>Qt提供了相当多的工具方便我们进行开发，但其中有部分工具不便于单独讲解，因此本文将通过实现一个简单的播放器来介绍如何使用这些工具。本文将通过两种途径来完成软件的开发，一种使用Qt的图形化（<code>GUI</code>）工具来完成，另一种主要使用命令行（<code>CLI</code>）工具，两种途径不是绝对独立的，完全可以在不同的步骤中使用命令行或图形化工具，这需要看个人的使用习惯。由于本文重点是让大家对Qt的工具在开发过程中的作用有一个初步了解，因此每一步的具体细节将不会展开，大家可以查阅相关文档深入了解。</p>
+<p>我们要实现的播放器主要功能是打开并播放选择的视频文件，并提供暂停和停止播放功能，程序的效果如下图所示<br><img src="https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/qtplayer.png/blog" alt="播放器效果图"><br>为了实现这个播放器，我们将使用到一个第三方库<a href="https://github.com/vlc-qt/vlc-qt" target="_blank" rel="noopener">VLC-Qt</a>，这个库可以用来播放多种视频格式，性能优秀，相对于Qt自带的<code>QMultiMedia</code>模块要强大很多。这个库需要手动编译，我们可以参考<a href="https://github.com/vlc-qt/vlc-qt/blob/master/BUILDING.md" target="_blank" rel="noopener">官方文档</a>进行编译，Windows和Macos下我们也可以直接<a href="https://github.com/vlc-qt/vlc-qt/releases" target="_blank" rel="noopener">下载</a>已编译好的动态库，这里不再赘述。</p>
+<a id="more"></a>
+<h2 id="使用GUI工具"><a href="#使用GUI工具" class="headerlink" title="使用GUI工具"></a>使用GUI工具</h2><h3 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h3><ol>
+<li>运行<code>Qt Creator</code>，在欢迎界面(<code>Welcome</code>) -&gt; 项目(<code>Projects</code>)中选择新建项目(<code>New Project</code>)，进入新建向导。</li>
+<li>选择项目类型为<code>Application</code> -&gt; <code>Qt Widget Application</code>，点击确定，进入<code>Qt Widget Application</code>项目配置。</li>
+<li>输入项目名并选择项目文件夹目录。这里项目命名为QtPlayer-GUI<br>对于常用的目录，我们可以选择<code>设为默认项目目录(Use as a default project location)</code>，避免重复选择。</li>
+<li>选择构建套件。这里会列出我们在设置中添加的所有可用的构建套件，我们需要根据软件的需求和外部条件来选择合适的套件，如为了更好地兼容性，我们可以选择32位的构建套件。当然我们可以选择多个构建套件，在构建时切换。若我们选错了构建套件，最简单的解决办法是关闭<code>Qt Creator</code>，删除<code>Qt Creator</code>生成的<code>.pro.user</code>文件夹，然后再用<code>Qt Creator</code>打开<code>.pro</code>文件，这样会让我们重新选择构建套件。这里我们需要选择和编译<code>VLC-Qt</code>时一致的构建套件环境，避免链接时出错。</li>
+<li>设置主界面类。这里我们可以选择主界面类的基类类型，设置类名和文件名，并选择是否添加对应的UI文件。这里我们将基类设为<code>QWidget</code>，其他保持保持默认即可。</li>
+<li>信息总览。直接点击确定，我们可以看到，<code>Qt Creator</code>自动帮我们生成了一些基本的代码。</li>
+</ol>
+<h3 id="引入第三方库"><a href="#引入第三方库" class="headerlink" title="引入第三方库"></a>引入第三方库</h3><ol>
+<li>右键项目管理窗口中项目名 -&gt; 选择<code>添加库...(Add Library...)</code>，弹出库添加向导。</li>
+<li>选择<code>外部库(External Library)</code>，点击下一步</li>
+<li>选择<code>VLC-Qt</code>库的库文件和头文件目录，这里我们需要用到<code>VLCQtCore</code>和<code>VLCQtWidgets</code>两个库，我们需要添加两次。</li>
+</ol>
+<p>添加完第三方库后，我们可以打开<code>.pro</code>文件，可以看到<code>Qt Creator</code>中自动添加了第三方库的相关配置，无需我们手动编写。</p>
+<h3 id="设置UI布局"><a href="#设置UI布局" class="headerlink" title="设置UI布局"></a>设置UI布局</h3><p>双击生成的<code>.ui</code>文件，进入内置的<code>Qt Designer</code>界面，我们拖出我们需要的UI界面。如下图所示。<br><img src="https://blog-1251989759.picgz.myqcloud.com/blog/simple_player/ui_layout.png/blog" alt="UI布局"></p>
+<h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><p>参考<code>VLC-Qt</code>提供的<a href="https://github.com/vlc-qt/examples/tree/master/simple-player" target="_blank" rel="noopener">examples</a>，我们可以很方便地实现相关功能，这部分不是重点，这里仅贴出相关代码，不过多解释。需要注意的是在Windows下，若直接下载的预编译好的<code>VLC-Qt</code>的库，推荐编译release版本，因为当前（2018.08.11）预编译版本（<code>VLC-Qt 1.1.0</code>）依赖<code>Visual Studio 2013</code>（<code>VC12</code>）的运行库（？？？大坑），Debug版本会找不到相关运行库。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// widget.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> WIDGET_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WIDGET_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QWidget&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"VLCQtCore/Instance.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"VLCQtCore/Media.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"VLCQtCore/MediaPlayer.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"VLCQtWidgets/WidgetVideo.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Ui &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span>;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span> :</span> <span class="keyword">public</span> QWidget &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Widget</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line">    ~Widget();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Open</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Pause</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Play</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Stop</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    VlcInstance *instance_;</span><br><span class="line">    VlcMedia *media_;</span><br><span class="line">    VlcMediaPlayer *player_;</span><br><span class="line">    VlcWidgetVideo *video_widget_;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Ui::Widget *ui;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">// WIDGET_H</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// widget.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"widget.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"ui_widget.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QFileDialog&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QToolButton&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"VLCQtCore/Common.h"</span></span></span><br><span class="line"></span><br><span class="line">Widget::Widget(QWidget *parent) : QWidget(parent), ui(<span class="keyword">new</span> Ui::Widget) &#123;</span><br><span class="line">    ui-&gt;setupUi(<span class="keyword">this</span>);</span><br><span class="line">    setWindowTitle(tr(<span class="string">"QtPlayer"</span>));</span><br><span class="line"></span><br><span class="line">    ui-&gt;open_btn_-&gt;setIcon(QIcon(<span class="string">":/open.png"</span>));</span><br><span class="line"></span><br><span class="line">    ui-&gt;pause_btn_-&gt;setCheckable(<span class="literal">true</span>);</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setChecked(<span class="literal">false</span>);</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":/pause.png"</span>));</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    ui-&gt;stop_btn_-&gt;setIcon(QIcon(<span class="string">":/stop.png"</span>));</span><br><span class="line">    ui-&gt;stop_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    video_widget_ = <span class="keyword">new</span> VlcWidgetVideo(ui-&gt;player_);</span><br><span class="line">    video_widget_-&gt;resize(ui-&gt;player_-&gt;size());</span><br><span class="line"></span><br><span class="line">    instance_ = <span class="keyword">new</span> VlcInstance(VlcCommon::args(), <span class="keyword">this</span>);</span><br><span class="line">    player_ = <span class="keyword">new</span> VlcMediaPlayer(instance_);</span><br><span class="line">    player_-&gt;setVideoWidget(video_widget_);</span><br><span class="line"></span><br><span class="line">    connect(ui-&gt;open_btn_, &amp;QToolButton::clicked, <span class="keyword">this</span>, &amp;Widget::Open);</span><br><span class="line">    connect(ui-&gt;pause_btn_, &amp;QToolButton::clicked, [<span class="keyword">this</span>](<span class="keyword">bool</span> checked) &#123;</span><br><span class="line">        <span class="keyword">if</span> (checked) &#123;</span><br><span class="line">            ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":/play.png"</span>));</span><br><span class="line">            Pause();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":/pause.png"</span>));</span><br><span class="line">            Play();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    connect(ui-&gt;stop_btn_, &amp;QToolButton::clicked, <span class="keyword">this</span>, &amp;Widget::Stop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Widget::~Widget() &#123;</span><br><span class="line">    <span class="keyword">delete</span> ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::Open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    QString file = QFileDialog::getOpenFileName(<span class="keyword">this</span>, tr(<span class="string">"Open file"</span>),</span><br><span class="line">                                                QDir::homePath(),</span><br><span class="line">                                                tr(<span class="string">"Video(*.mp4 *.avi *.mkv)"</span>));</span><br><span class="line">    <span class="keyword">if</span> (file.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ui-&gt;open_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setEnabled(<span class="literal">true</span>);</span><br><span class="line">    ui-&gt;stop_btn_-&gt;setEnabled(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    media_ = <span class="keyword">new</span> VlcMedia(file, <span class="literal">true</span>, instance_);</span><br><span class="line">    player_-&gt;open(media_);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::Pause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    player_-&gt;pause();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::Play</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    player_-&gt;play();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::Stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    player_-&gt;stop();</span><br><span class="line">    <span class="keyword">delete</span> media_;</span><br><span class="line">    media_ = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    ui-&gt;open_btn_-&gt;setEnabled(<span class="literal">true</span>);</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setChecked(<span class="literal">false</span>);</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":/pause.png"</span>));</span><br><span class="line">    ui-&gt;pause_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">    ui-&gt;stop_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="安装必要文件"><a href="#安装必要文件" class="headerlink" title="安装必要文件"></a>安装必要文件</h3><p>编译完成后，点击运行，在Windows平台下我们可能会遇到无法启动，提示找不到运行库的问题。这是因为程序运行时没有找到我们用到的<code>VLC-Qt</code>库的动态库。我们需要手动将两个<code>dll</code>文件复制到可执行文件的运行目录，这时就可以正常运行了。但手动复制文件相对比较麻烦，也不利于后期对外发布，因此我们可以利用<code>qmake</code>提供的安装功能，在构建时将依赖的动态库安装到指定目录。我们在<code>pro</code>文件中添加以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">DESTDIR = $$PWD/out</span><br><span class="line"></span><br><span class="line">vlc_lib.path = $$DESTDIR</span><br><span class="line"></span><br><span class="line">win32 &#123;</span><br><span class="line">    vlc_lib.files += $$PWD/dev/bin/VLCQtCore.dll</span><br><span class="line">    vlc_lib.files += $$PWD/dev/bin/VLCQtWidgets.dll</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">INSTALLS += vlc_lib</span><br></pre></td></tr></table></figure>
+<h3 id="添加资源文件"><a href="#添加资源文件" class="headerlink" title="添加资源文件"></a>添加资源文件</h3><p>运行后，我们会发现按钮上的图片没有显示，这时因为我们在代码中使用了相对路径，程序会在运行时去加载相对于 <strong>当前工作目录</strong>的相对路径的文件，由于我们在程序目录下没有放置图片文件，所以程序没有找到对应的图片资源，也就无法显示。我们只需要将图片复制到程序目录即可。但对于程序必要的资源文件，为了避免手动复制和不小心误删，我们可以利用Qt的资源系统来将管理这些文件。添加至资源管理系统中的文件将在编译期间编译至可执行程序中，这样就可以避免找不到文件的问题。</p>
+<ol>
+<li>右键项目-&gt;选择<code>添加新文件(Add New...)</code>，选择<code>Qt</code>模板下的<code>Qt Resource file</code>，输入文件名，这里我们建立一个用于管理图片资源的资源管理文件，因此命名为<code>image</code>，点击完成。</li>
+<li>我们可以发现项目管理窗口多了一项<code>Resource</code>，我们点击下方的<code>添加(Add)</code>按钮，添加一个前缀(<code>Add Prefix</code>)，修改为<code>/</code>。</li>
+<li>再点击<code>添加(Add)</code>按钮，选择<code>添加文件(Add Files)</code>，将我们需要的图片添加至资源管理系统。</li>
+<li><p>修改代码中的相对路径，替换为资源管理系统中对应文件的路径。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ui-&gt;open_btn_-&gt;setIcon(QIcon(<span class="string">":/open.png"</span>));</span><br><span class="line">ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":/pause.png"</span>));</span><br><span class="line">ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":/play.png"</span>));</span><br><span class="line">ui-&gt;stop_btn_-&gt;setIcon(QIcon(<span class="string">":/stop.png"</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="国际化翻译"><a href="#国际化翻译" class="headerlink" title="国际化翻译"></a>国际化翻译</h3><p>目前我们的程序界面上显示的都是英文，我们需要将其翻译为中文。这需要用到<code>Qt语言家(Qt Linguist)</code>。</p>
+<ol>
+<li><p>在<code>pro</code>文件中添加生成语言文件的代码，保存后执行qmake</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TRANSLATIONS += zh_CN.ts</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>Qt Creator</code>中选择<code>工具(Tools)</code>-&gt;<code>外部(External)</code>-&gt;<code>语言家(Linguist)</code>-&gt;<code>更新翻译(Update Translations(lupdate))</code>，生成ts文件，这里面包括了我们要翻译的字符串。</p>
+</li>
+<li>用<code>Qt Linguist</code>打开生成的ts文件，选择要翻译的源语言和目标语言，进行翻译。翻译完成后保存并发布，生成二进制文件<code>.qm</code>文件</li>
+<li><p>在<code>main.cpp</code>中添加相关代码，安装中文翻译。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QTranslator translator;   <span class="comment">// 需添加头文件 #include &lt;QTranslator&gt;</span></span><br><span class="line">translator.load(<span class="string">"./zh_CN.qm"</span>);</span><br><span class="line">a.installTranslator(&amp;translator);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>对于翻译文件我们同样存在找不到文件导致翻译失败的问题，我们也可以通过资源管理系统来管理翻译后的文件。</p>
+<h3 id="打包发布"><a href="#打包发布" class="headerlink" title="打包发布"></a>打包发布</h3><p>由于我们的程序运行需要依赖一系列Qt的库，因此我们在对外发布我们的程序时需要将这些动态库一并发布。但Qt的库很多，我们一个一个找我们程序以来的库比较麻烦，因此我们可以借助Qt的部署工具来寻找依赖的动态库。Windows下工具名为<code>windeployqt</code>，MacOS下叫<code>macdeployqt</code>，linux下官方暂时没有提供工具，但有一个强大的第三方工具<code>linuxdeployqt</code>。下面以Windows下为例进行说明。</p>
+<ol>
+<li>将编译好的可执行程序及依赖的第三方库复制到一个单独的目录</li>
+<li>打开<code>Qt命令行处理程序</code>，进入可执行程序目录，执行命令<code>windeployqt QtPlayer-GUI</code>即可</li>
+</ol>
+<h2 id="使用CLI工具（Linux环境）"><a href="#使用CLI工具（Linux环境）" class="headerlink" title="使用CLI工具（Linux环境）"></a>使用CLI工具（Linux环境）</h2><p>部分步骤与上文类似，仅作简略介绍</p>
+<h3 id="新建工程-1"><a href="#新建工程-1" class="headerlink" title="新建工程"></a>新建工程</h3><ol>
+<li>创建目录<code>QtPlayer-CLI</code>并创建<code>main.cpp</code>，<code>player.h</code>，<code>player.cpp</code>三个文件</li>
+<li>执行<code>qmake -project .</code>生成<code>pro</code>文件</li>
+<li><p>修改<code>pro</code>文件，引入Qt模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QT += core gui widgets</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="引入第三方库-1"><a href="#引入第三方库-1" class="headerlink" title="引入第三方库"></a>引入第三方库</h3><ol>
+<li>将<code>VLC-Qt</code>的库复制到项目目录下<code>dev</code>目录</li>
+<li><p>修改<code>pro</code>文件，添加以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LIBS+= $$PWD/dev/lib64 -lVLCQtCore -lVLCQtWidgets</span><br><span class="line">INCLUDEPATH += $$PWD/dev/include</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="编写代码-1"><a href="#编写代码-1" class="headerlink" title="编写代码"></a>编写代码</h3><p>这里我们将通过代码对控件进行布局。具体代码如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"player.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    Player w;</span><br><span class="line">    w.show();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// player.h</span></span><br><span class="line"><span class="comment">/* Copyright (©) 2018 xyz1001 All rights reserved.</span></span><br><span class="line"><span class="comment"> * Author: xyz1001 &lt;zgzf1001@gmail.com&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -*- coding: uft-8 -*-</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> PLAYER_H_LDRNQIXJ</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PLAYER_H_LDRNQIXJ</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QToolButton&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QWidget&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;VLCQtCore/Instance.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;VLCQtCore/Media.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;VLCQtCore/MediaPlayer.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;VLCQtWidgets/WidgetVideo.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Player</span> :</span> <span class="keyword">public</span> QWidget &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Player</span><span class="params">(QWidget *parent = <span class="literal">nullptr</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Open</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Pause</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Play</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Stop</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InitButtons</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    VlcInstance *instance_;</span><br><span class="line">    VlcMedia *media_;</span><br><span class="line">    VlcMediaPlayer *player_;</span><br><span class="line">    VlcWidgetVideo *video_widget_;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    QToolButton *open_btn_;</span><br><span class="line">    QToolButton *pause_btn_;</span><br><span class="line">    QToolButton *stop_btn_;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">// PLAYER_H_LDRNQIXJ</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// player.cpp</span></span><br><span class="line"><span class="comment">/* Copyright (©) 2018 xyz1001 All rights reserved.</span></span><br><span class="line"><span class="comment"> * Author: xyz1001 &lt;zgzf1001@gmail.com&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * -*- coding: uft-8 -*-</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"player.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QFileDialog&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"VLCQtCore/Common.h"</span></span></span><br><span class="line"></span><br><span class="line">Player::Player(QWidget *parent) : QWidget(parent) &#123;</span><br><span class="line">    setWindowTitle(tr(<span class="string">"QtPlayer"</span>));</span><br><span class="line">    resize(<span class="number">800</span>, <span class="number">520</span>);</span><br><span class="line"></span><br><span class="line">    InitButtons();</span><br><span class="line"></span><br><span class="line">    video_widget_ = <span class="keyword">new</span> VlcWidgetVideo(<span class="keyword">this</span>);</span><br><span class="line">    video_widget_-&gt;setGeometry(<span class="number">0</span>, <span class="number">0</span>, <span class="number">800</span>, <span class="number">450</span>);</span><br><span class="line"></span><br><span class="line">    instance_ = <span class="keyword">new</span> VlcInstance(VlcCommon::args(), <span class="keyword">this</span>);</span><br><span class="line">    player_ = <span class="keyword">new</span> VlcMediaPlayer(instance_);</span><br><span class="line">    player_-&gt;setVideoWidget(video_widget_);</span><br><span class="line"></span><br><span class="line">    connect(open_btn_, &amp;QToolButton::clicked, <span class="keyword">this</span>, &amp;Player::Open);</span><br><span class="line">    connect(pause_btn_, &amp;QToolButton::clicked, [<span class="keyword">this</span>](<span class="keyword">bool</span> checked) &#123;</span><br><span class="line">        <span class="keyword">if</span> (checked) &#123;</span><br><span class="line">            pause_btn_-&gt;setIcon(QIcon(<span class="string">"./play.png"</span>));</span><br><span class="line">            Pause();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            pause_btn_-&gt;setIcon(QIcon(<span class="string">"./pause.png"</span>));</span><br><span class="line">            Play();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    connect(stop_btn_, &amp;QToolButton::clicked, <span class="keyword">this</span>, &amp;Player::Stop);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Player::Open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    QString file = QFileDialog::getOpenFileName(<span class="keyword">this</span>, tr(<span class="string">"Open file"</span>),</span><br><span class="line">                                                QDir::homePath(),</span><br><span class="line">                                                tr(<span class="string">"Video(*.mp4 *.avi *.mkv)"</span>));</span><br><span class="line">    <span class="keyword">if</span> (file.isEmpty()) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    open_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">    pause_btn_-&gt;setEnabled(<span class="literal">true</span>);</span><br><span class="line">    stop_btn_-&gt;setEnabled(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    media_ = <span class="keyword">new</span> VlcMedia(file, <span class="literal">true</span>, instance_);</span><br><span class="line">    player_-&gt;open(media_);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Player::Pause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    player_-&gt;pause();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Player::Play</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    player_-&gt;play();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Player::Stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    player_-&gt;stop();</span><br><span class="line">    <span class="keyword">delete</span> media_;</span><br><span class="line">    media_ = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    open_btn_-&gt;setEnabled(<span class="literal">true</span>);</span><br><span class="line">    pause_btn_-&gt;setChecked(<span class="literal">false</span>);</span><br><span class="line">    pause_btn_-&gt;setIcon(QIcon(<span class="string">"./pause.png"</span>));</span><br><span class="line">    pause_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">    stop_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Player::InitButtons</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    open_btn_ = <span class="keyword">new</span> QToolButton(<span class="keyword">this</span>);</span><br><span class="line">    open_btn_-&gt;setGeometry(<span class="number">300</span>, <span class="number">460</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    open_btn_-&gt;setIcon(QIcon(<span class="string">"./open.png"</span>));</span><br><span class="line"></span><br><span class="line">    pause_btn_ = <span class="keyword">new</span> QToolButton(<span class="keyword">this</span>);</span><br><span class="line">    pause_btn_-&gt;setGeometry(<span class="number">375</span>, <span class="number">460</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    pause_btn_-&gt;setCheckable(<span class="literal">true</span>);</span><br><span class="line">    pause_btn_-&gt;setChecked(<span class="literal">false</span>);</span><br><span class="line">    pause_btn_-&gt;setIcon(QIcon(<span class="string">"./pause.png"</span>));</span><br><span class="line">    pause_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    stop_btn_ = <span class="keyword">new</span> QToolButton(<span class="keyword">this</span>);</span><br><span class="line">    stop_btn_-&gt;setGeometry(<span class="number">450</span>, <span class="number">460</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    stop_btn_-&gt;setIcon(QIcon(<span class="string">"./stop.png"</span>));</span><br><span class="line">    stop_btn_-&gt;setEnabled(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>创建<code>build</code>目录并进入，执行<code>qmake .. &amp;&amp; make</code>，生成可执行文件。</p>
+<h3 id="配置动态库路径"><a href="#配置动态库路径" class="headerlink" title="配置动态库路径"></a>配置动态库路径</h3><p>编译完成后我们执行编译出的可执行程序，发现无法运行，提示缺少<code>VLC-Qt</code>的运行库，我们需要设置运行库路径，在<code>build</code>目录下执行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=<span class="variable">$LD_LIBRARY_PATH</span>:../dev/lib64</span><br></pre></td></tr></table></figure>
+<h3 id="添加资源文件-1"><a href="#添加资源文件-1" class="headerlink" title="添加资源文件"></a>添加资源文件</h3><p>和使用GUI时情况一样，运行后按钮并没有图片，我们可以使用Qt提供的<code>rcc</code>命令来添加资源管理系统。</p>
+<ol>
+<li>创建<code>image</code>文件夹，将图片文件放入，便于管理</li>
+<li>执行命令<code>rcc --project . -o image.qrc</code>，生成资源管理文件</li>
+<li><p>修改<code>pro</code>文件，将生成的资源管理文件添加至<code>RESOURCES</code>变量中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RESOURCES += $$PWD/image/image.qrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改代码中的图片路径，替换为<code>qrc</code>文件中的路径</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ui-&gt;open_btn_-&gt;setIcon(QIcon(<span class="string">":./open.png"</span>));</span><br><span class="line">ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":./pause.png"</span>));</span><br><span class="line">ui-&gt;pause_btn_-&gt;setIcon(QIcon(<span class="string">":./play.png"</span>));</span><br><span class="line">ui-&gt;stop_btn_-&gt;setIcon(QIcon(<span class="string">":./stop.png"</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="国际化翻译-1"><a href="#国际化翻译-1" class="headerlink" title="国际化翻译"></a>国际化翻译</h3><ol>
+<li>在<code>QtPlayer-CLI.pro</code>文件中添加<code>TRANSLATIONS += zh_CN.ts</code></li>
+<li>执行<code>lupdate ./QtPlayer-CLI.pro</code>命令，生成<code>ts</code>文件</li>
+<li>如果我们熟悉<code>ts</code>文件格式，可以手动去修改<code>ts</code>文件，这里我们还是调用Qt语言家(<code>linguist</code>)进行翻译。执行命令<code>linguist zh_CN.ts</code>，后续步骤同使用GUI工具中的<a href="#国际化翻译">国际化翻译</a>的3，4步</li>
+</ol>
+<h3 id="打包发布-1"><a href="#打包发布-1" class="headerlink" title="打包发布"></a>打包发布</h3><p>linux下，我们可以使用第三方工具<a href="https://github.com/probonopd/linuxdeployqt" target="_blank" rel="noopener">linuxdeployqt</a>来进行打包，该工具可以帮助我们生成<a href="https://appimage.org/" target="_blank" rel="noopener">Appimage</a>文件格式。具体用法可参考项目的README。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2018-08-10, 21:52:35</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/16527.html" title="Qt从0到1之工具篇：实现一个简陋的播放器">http://www.xyz1001.xyz/articles/16527.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/16527.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/19581.html">
+                    Qt从0到1之机制篇 - 信号槽
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/9481.html">
+                    Qt从0到1之工具篇：qmake
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用GUI工具"><span class="toc-number">1.</span> <span class="toc-text">使用GUI工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建工程"><span class="toc-number">1.1.</span> <span class="toc-text">新建工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引入第三方库"><span class="toc-number">1.2.</span> <span class="toc-text">引入第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置UI布局"><span class="toc-number">1.3.</span> <span class="toc-text">设置UI布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写代码"><span class="toc-number">1.4.</span> <span class="toc-text">编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装必要文件"><span class="toc-number">1.5.</span> <span class="toc-text">安装必要文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加资源文件"><span class="toc-number">1.6.</span> <span class="toc-text">添加资源文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化翻译"><span class="toc-number">1.7.</span> <span class="toc-text">国际化翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包发布"><span class="toc-number">1.8.</span> <span class="toc-text">打包发布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用CLI工具（Linux环境）"><span class="toc-number">2.</span> <span class="toc-text">使用CLI工具（Linux环境）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#新建工程-1"><span class="toc-number">2.1.</span> <span class="toc-text">新建工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引入第三方库-1"><span class="toc-number">2.2.</span> <span class="toc-text">引入第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写代码-1"><span class="toc-number">2.3.</span> <span class="toc-text">编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编译"><span class="toc-number">2.4.</span> <span class="toc-text">编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置动态库路径"><span class="toc-number">2.5.</span> <span class="toc-text">配置动态库路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加资源文件-1"><span class="toc-number">2.6.</span> <span class="toc-text">添加资源文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#国际化翻译-1"><span class="toc-number">2.7.</span> <span class="toc-text">国际化翻译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包发布-1"><span class="toc-number">2.8.</span> <span class="toc-text">打包发布</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Qt从0到1之工具篇：实现一个简陋的播放器　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/19581.html" title="上一篇: Qt从0到1之机制篇 - 信号槽">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/9481.html" title="下一篇: Qt从0到1之工具篇：qmake">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>

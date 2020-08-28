@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="张帆(Fun)">
+
+
+
+<meta name="description" content="本节示例代码 相信大家在初学C/C++等编程语言时，编写的都是在命令行下运行的程序，也就是运行时只用一个黑框的应用程序。和我们日常使用的GUI程序相比，这些程序除了没有一个GUI界面外，还有一个很大的区别在于这些程序是一种过程式的执行方式，执行完一行代码后再去执行下一句，执行完一个函数再去执行下一个，执行完之后程序就退出了，类似于一个批处理或脚本程序，而GUI程序是可以根据内部或外部的输入来确定执">
+<meta name="keywords" content="Qt,Qt从0到1,Qt机制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt从0到1之机制篇 - 事件">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/11422.html">
+<meta property="og:site_name" content="Just for Fun">
+<meta property="og:description" content="本节示例代码 相信大家在初学C/C++等编程语言时，编写的都是在命令行下运行的程序，也就是运行时只用一个黑框的应用程序。和我们日常使用的GUI程序相比，这些程序除了没有一个GUI界面外，还有一个很大的区别在于这些程序是一种过程式的执行方式，执行完一行代码后再去执行下一句，执行完一个函数再去执行下一个，执行完之后程序就退出了，类似于一个批处理或脚本程序，而GUI程序是可以根据内部或外部的输入来确定执">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/event_dispatch.png/blog">
+<meta property="og:image" content="https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/demo_window.png/blog">
+<meta property="og:updated_time" content="2020-08-25T08:18:28.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qt从0到1之机制篇 - 事件">
+<meta name="twitter:description" content="本节示例代码 相信大家在初学C/C++等编程语言时，编写的都是在命令行下运行的程序，也就是运行时只用一个黑框的应用程序。和我们日常使用的GUI程序相比，这些程序除了没有一个GUI界面外，还有一个很大的区别在于这些程序是一种过程式的执行方式，执行完一行代码后再去执行下一句，执行完一个函数再去执行下一个，执行完之后程序就退出了，类似于一个批处理或脚本程序，而GUI程序是可以根据内部或外部的输入来确定执">
+<meta name="twitter:image" content="https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/event_dispatch.png/blog">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Just for Fun" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Qt从0到1之机制篇 - 事件 | Just for Fun</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?ededd9b81e550fee6a52529c7f931080";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">张帆(Fun)</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">给未来留点痕迹</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jenkins/">Jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manjaro/">Manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSS/">QSS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QSlider/">QSlider</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt工具/">Qt工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt机制/">Qt机制</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wireshark/">Wireshark</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WordPress/">WordPress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmake/">cmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jni/">jni</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjaro/">manjaro</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/qmake/">qmake</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/信号槽/">信号槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命名空间/">命名空间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑记/">踩坑记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://blog.guorongfei.com">时习之</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">张帆(Fun)</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">给未来留点痕迹</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="/zgzf1001@gmail.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://www.github.com/xyz1001" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Qt-Mechanisms-Event" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/11422.html" class="article-date">
+      <time datetime="2018-08-28T09:31:45.000Z" itemprop="datePublished">2018-08-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Qt从0到1之机制篇 - 事件
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt机制/">Qt机制</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><a href="https://github.com/xyz1001/QtExamples/tree/master/QtEvent" target="_blank" rel="noopener">本节示例代码</a></p>
+<p>相信大家在初学C/C++等编程语言时，编写的都是在命令行下运行的程序，也就是运行时只用一个黑框的应用程序。和我们日常使用的GUI程序相比，这些程序除了没有一个GUI界面外，还有一个很大的区别在于这些程序是一种过程式的执行方式，执行完一行代码后再去执行下一句，执行完一个函数再去执行下一个，执行完之后程序就退出了，类似于一个批处理或脚本程序，而GUI程序是可以根据内部或外部的输入来确定执行哪些代码，以什么样的顺序去执行。这些输入可能是系统的分辨率进行了修改，或者是用户点击了一个按钮，按下了键盘上的某个键，触发了一个定时器等等。程序具体如何运行，是受到这些输入控制的，如果没有任何输入，程序将不执行任何代码。这就是批处理程序设计(<code>batch programming</code>)和事件驱动程序设计(<code>Event-driven programming</code>)的一个显著差异。</p>
+<p>在事件驱动程序设计中，事件是核心要素，一个事件就是一个来自外界的信息输入。接触过Windows编程的人应该会了解过Windows的消息循环机制，这里的消息就类似于事件。Windows程序在收到系统派发的消息后，可以根据消息类型及消息参数的不同，进行不同的处理。例如当我们按下键盘上的<code>Alt + F4</code>快捷键后，Windows就会向当前的活动窗口发送一个类型为<code>WM_CLOSE</code>的消息，这个消息一般用于通过窗口进行关闭。窗口在收到这个消息后，原则上需要将自己关闭，但也可以选择忽略这个消息，这样我们的快捷键就“失效”了。</p>
+<a id="more"></a>
+<h2 id="事件分发"><a href="#事件分发" class="headerlink" title="事件分发"></a>事件分发</h2><p>由于不同的操作系统提供了不同的消息机制，消息类型差异较大，因此Qt为了更好的跨平台性，对常见的通用的消息进行了封装。Qt的程序中，绝大部分情况下我们会在<code>main</code>函数中调用<code>QCoreApplication::exec()</code>方法。这个方法就是用于开启Qt的事件循环。在Qt收到底层窗口管理系统发送过来的消息后，会在事件循环中将这些消息封装成Qt事件。除了来自系统的消息外，Qt事件也可以由程序内部产生，如一个定时器事件。Qt的事件是一个<code>QEvent</code>类型的对象，这些对象保存了事件的具体信息，Qt的事件对象类型和事件类型是不一样的，</p>
+<ul>
+<li><a href="http://doc.qt.io/qt-5/events.html" target="_blank" rel="noopener">事件对象类型</a>：由于Qt中事件是一个C++语法概念上的对象，所有的Qt事件都是<code>QEvent</code>的子类对象。如对于一个鼠标事件，这个事件对象类型是<code>QMouseEvent</code></li>
+<li><a href="http://doc.qt.io/qt-5/qevent.html#Type-enum" target="_blank" rel="noopener">事件类型</a>：<code>QEvent</code>及其子类有一个<code>type</code>方法，用于获取事件类型。事件类型是一个<code>QEvent::Type</code>枚举类型，如对于一个鼠标事件，事件类型可能是<code>MouseButtonDblClick</code>,<code>MouseButtonPress</code>,<code>MouseButtonRelease</code>等。</li>
+</ul>
+<p>也就是说事件对象类型可能有一到多种事件类型。这些事件接着会在事件循环中被分发到事件作用的目标组件，然后事件将会以该组件在对象树中的位置为起点，向着对象树的根节点链世传播，直到事件被接受或传播到根节点。对于一个事件，在事件处理函数中，我们通过调用<code>QEvent::accept()</code>来主动接受一个事件，表示这个事件我已经处理了，不需要再继续传播了。如果我们不想要处理这个事件，我们可以调用<code>QEvent::ignore()</code>来忽略这个事件，Qt事件循环将会将这个事件传递给当前组件的父组件，也就是对象树上的父节点去处理。如果我们两个方法都没手动调用，那么这个事件将会默认接受。<br><img src="https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/event_dispatch.png/blog" alt="Qt事件分发"></p>
+<p>Qt的事件可能容易和信号混为一谈，但实际上二者并无太大关系。二者的区别如下</p>
+<ul>
+<li>信号是由Qt对象发出，是一个函数，</li>
+<li>事件可能来自于外部，也可能是内部的对象生成，是一个<code>QEvent</code>对象</li>
+</ul>
+<p>但事件往往是信号的诱因。如用户点击了一个<code>QPushButton</code>按钮，这个时候点击操作是一个事件，按钮在收到点击事件后会发出一个<code>onClicked</code>的信号。这就导致了在Qt中，我们很多时候使用一个控件不需要去关心事件，而只需要去关心控件的信号就可以了。和其他UI框架相比，如在<code>Android</code>中，如果我们需要关心一个按钮是否被点击，我们需要为按钮设置一个<code>ClickListener</code>并实现<code>onClick</code>方法，也就是直接对点击事件进行处理，而Qt通过信号槽进行了更高层次的封装。</p>
+<p>如果我们需要自定义一个控件，我们就往往需要去关心各类事件了。在收到事件后，Qt的事件循环首先会去调用对应控件的<code>event()</code>函数，该函数会对根据事件类型，对事件进行二次分发，调用不同事件类型对应的事件处理函数，如对一个<code>QEvent::Timer</code>类型的<code>QTimerEvent</code>事件会调用<code>timerEvent()</code>。</p>
+<p>举个栗子，对于下面的程序，如果我们将鼠标移到按钮<code>Button C</code>上，按下鼠标左键会发生什么？<br><img src="https://blog-1251989759.picgz.myqcloud.com/blog/qt_event/demo_window.png/blog" alt="示例程序窗口"></p>
+<ol>
+<li>首先鼠标会发出左键按下的电信号经过转换传递给操作系统，操作系统在收到这个信号后会生成鼠标按下的消息，如在<code>Windows</code>下就是一个<code>MSG</code>结构体的消息，消息ID为<code>WM_LBUTTONDOWN</code>。</li>
+<li>接着Windows系统会将这个消息传给Qt，告诉Qt程序，有个消息要发给控件<code>Button C</code>。</li>
+<li>Qt程序的事件循环在收到这个消息后，会对这个事件进行解析包装，创建一个事件类型为<code>QEvent::MouseButtonPress</code>的事件<code>QMouseEvent</code>，</li>
+<li>然后事件循环将会把这个事件传递给按钮<code>Button C</code>，也就是调用按钮<code>Button C</code>的<code>event(QEvent *event)</code>方法。</li>
+<li>按钮<code>Button C</code>在收到这个事件后，会根据事件类型<code>QEvent::MouseButtonPress</code>，调用对应的具体处理函数<code>mousePressEvent(QMouseEvent *e)</code>。注意默认的<code>QPushButton</code>类此时并不会发送<code>onClicked</code>信号，而是在鼠标抬起，收到<code>QEvent::MouseButtonRelease</code>类型的事件后才会发出信号。在这个函数中事件经过某些处理后将会被接受。一旦事件被接受后，这个事件的声明周期也就完结了。</li>
+</ol>
+<p>但如果鼠标是移到<code>Label C</code>并按下鼠标左键会发生什么？</p>
+<p>首先前4步和上面类似，经过一系列处理后会调用<code>Label C</code>的<code>event(QEvent *event)</code>方法。</p>
+<ol>
+<li>同上</li>
+<li>同上</li>
+<li>同上</li>
+<li>调用<code>Label C</code>的<code>event(QEvent *event)</code>方法。</li>
+<li>由于QLabel默认是不处理<code>QMouseEvent</code>事件的，也就是<code>Label C</code>会忽略这个事件。这个事件会向上传递给<code>Label B</code>。</li>
+<li>同理，<code>Label B</code>也会忽略这个事件，这个事件继续向上传递。</li>
+<li>最后事件被传递到了顶层窗口，这是一个<code>QWidget</code>，由于<code>QWidget</code>默认忽略所有事件，而且这个<code>QWidget</code>已经没有父组件了，因此这个事件将被丢弃，结束其生命周期。</li>
+</ol>
+<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><p>有时候我们可能希望改变默认的事件处理逻辑。如果我们希望在一个<code>QLabel</code>被鼠标左键点击时也能和QPushButton一样发出<code>onClicked</code>信号而且不改变其他行为，该怎么做呢？首先我们可以由于Qt基础控件中的事件处理函数都是虚函数，因此我们可以继承<code>QLabel</code>并添加<code>onClicked</code>信号，然后重写<code>QLable::mouseReleaseEvent()</code>，在函数中发出<code>onClicked</code>信号。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyLabel::mouseReleaseEvent</span><span class="params">(QMouseEvent *event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(event-&gt;buttons() &amp; Qt::LeftButton) &#123;</span><br><span class="line">        <span class="function">emit <span class="title">onClick</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，我们就可以关联<code>onClicked</code>信号，在用户鼠标左键按下时触发槽函数。但此时鼠标抬起事件不再会向父组件传播，因为在上面这个实现中，我们没有对事件调用<code>QEvent::accept()</code>或<code>QEvent::ignore</code>，所以Qt会默认认为该事件已经被接受，不再继续传递。为了避免这个问题，保持<code>QLabel</code>的默认行为，我们可以在重写方法中手动调用父类的同名方法，将事件交由基类去处理。由于绝大部分情况下，我们继承一个已有控件并重写其事件处理函数都是为了添加一些额外的逻辑处理，并不希望影响已有控件的原有效果，因此我们往往需要去调用基类的同名事件处理函数来保证原有处理逻辑不变。如我们继承<code>QPushButton</code>并重写了其<code>mouseReleaseEvent(QMouseEvent *event)</code>时，添加了一个改变按钮文本的处理，如果不调用<code>QPushButton::mouseReleaseEvent(QMouseEvent *event)</code>，那么我们的自定义按钮将无法发出<code>onClicked</code>信号，按钮的一些内部状态也无法被切换。除非我们本来就不希望基类控件的事件处理函数有效果，否则一定要调用基类控件的同名方法。</p>
+<p>对于部分特殊事件，Qt的事件循环会根据事件的接受与否执行不同的处理。我们来看一个例子，对于上面的程序，我们如果希望在用户点击了窗口的关闭按钮后，弹出确定关闭程序对话框，可以重写<code>QWidget</code>的<code>closeEvent(QCloseEvent *event)</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Widget::closeEvent</span><span class="params">(QCloseEvent *event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> <span class="built_in">exit</span> = QMessageBox::question(<span class="keyword">this</span>,</span><br><span class="line">                                  tr(<span class="string">"Quit"</span>),</span><br><span class="line">                                  tr(<span class="string">"Are you sure to quit this application?"</span>),</span><br><span class="line">                                  QMessageBox::Yes | QMessageBox::No,</span><br><span class="line">                                  QMessageBox::No) == QMessageBox::Yes;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">exit</span>) &#123;</span><br><span class="line">        event-&gt;accept();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        event-&gt;ignore();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们弹出了一个对话框询问是否确认退出，然后根据用户的选择决定事件的接受与否。对于一个<code>QCloseEvent</code>事件，若其在处理之后状态为已接受（即<code>QEvent::isAccepted()</code>方法返回<code>true</code>），那么Qt将会关闭当前窗口，否则不会退出。假如这里我们两个函数都没有手动调用，则默认接受，窗口还是会被关闭。</p>
+<p>如果我们希望处理多个事件，我们还可以重写<code>event(QEvent *event)</code>函数，在事件到达具体的事件处理函数之前进行处理。我们利用这个方法重新实现下上面这个效果。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Widget::event</span><span class="params">(QEvent *event)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event-&gt;type() == QEvent::Close) &#123;</span><br><span class="line">        <span class="keyword">bool</span> <span class="built_in">exit</span> = QMessageBox::question(</span><br><span class="line">                            <span class="keyword">this</span>, tr(<span class="string">"Quit"</span>),</span><br><span class="line">                            tr(<span class="string">"Are you sure to quit this application?"</span>),</span><br><span class="line">                            QMessageBox::Yes | QMessageBox::No,</span><br><span class="line">                            QMessageBox::No) == QMessageBox::Yes;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">exit</span>) &#123;</span><br><span class="line">            event-&gt;accept();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            event-&gt;ignore();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">// 用于告诉事件循环该事件有没有被处理。</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> QWidget::event(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重写<code>event(QEvent *event)</code>时我们同样要注意调用基类的同名函数用于处理其他我们不感兴趣的事件，否则会导致其他事件没有任何效果。</p>
+<h2 id="事件拦截"><a href="#事件拦截" class="headerlink" title="事件拦截"></a>事件拦截</h2><p>继承并重写一个组件的事件处理函数虽然可以实现对事件的特殊处理，但这种方式往往显得繁琐，因此Qt提供了事件过滤器。事件过滤器相关的知识在豆子的《Qt学习之路2》中的<a href="https://www.devbean.net/2012/10/qt-study-road-2-event-filter/" target="_blank" rel="noopener">事件过滤器</a>讲解的特别清楚，这里就不再重复。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.devbean.net/2012/09/qt-study-road-2-events/" target="_blank" rel="noopener">Qt 学习之路 2（18）：事件</a></li>
+<li><a href="https://www.devbean.net/2012/09/qt-study-road-2-events-accept-reject/" target="_blank" rel="noopener">Qt 学习之路 2（19）：事件的接受与忽略</a></li>
+<li><a href="https://www.devbean.net/2012/10/qt-study-road-2-event-filter/" target="_blank" rel="noopener">Qt 学习之路 2（21）：事件过滤器</a></li>
+<li><a href="https://www.devbean.net/2012/10/qt-study-road-2-event-summary/" target="_blank" rel="noopener">Qt 学习之路 2（22）：事件总结</a></li>
+<li><a href="http://doc.qt.io/qt-5/eventsandfilters.html" target="_blank" rel="noopener">The Event System</a></li>
+<li><a href="http://doc.qt.io/qt-5/events.html" target="_blank" rel="noopener">Event Classes</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
+        <p><span>发布时间:</span>2018-08-28, 17:31:45</p>
+        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/11422.html" title="Qt从0到1之机制篇 - 事件">http://www.xyz1001.xyz/articles/11422.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/11422.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/27725.html">
+                    Qt从0到1之机制篇 - Qt样式表
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/44230.html">
+                    Qt从0到1之机制篇 - 对象树
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件分发"><span class="toc-number">1.</span> <span class="toc-text">事件分发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理"><span class="toc-number">2.</span> <span class="toc-text">事件处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件拦截"><span class="toc-number">3.</span> <span class="toc-text">事件拦截</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"Qt从0到1之机制篇 - 事件　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/27725.html" title="上一篇: Qt从0到1之机制篇 - Qt样式表">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/44230.html" title="下一篇: Qt从0到1之机制篇 - 对象树">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/5810.html">JNI开发心得</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64676.html">在库中开启Qt事件循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22206.html">修改Windows系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35120.html">踩坑记之Jenkins无权限克隆的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/14590.html">网络分析实践之Dukto</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58691.html">踩坑记 - 消失的代码</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/22247.html">搭建Windows符号服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/58209.html">加快Qt程序的编译速度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/27725.html">Qt从0到1之机制篇 - Qt样式表</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/44230.html">Qt从0到1之机制篇 - 对象树</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/19581.html">Qt从0到1之机制篇 - 信号槽</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16527.html">Qt从0到1之工具篇：实现一个简陋的播放器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9481.html">Qt从0到1之工具篇：qmake</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/35516.html">Vim配置之通用配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/8517.html">Qt从0到1之工具篇：开发环境</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/49894.html">Qt跨平台开发框架概览</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36680.html">初识应用软件开发</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/36111.html">Vim, 不仅仅是一个编辑器</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/6460.html">自定义QMenu样式</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/52996.html">Qt自定义控件之SeekBar</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/12471.html">Manjaro下备份已安装软件包</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/1418.html">Manjaro个性化配置</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/64010.html">JNI中"No implementation found for native"错误的原因总结</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/53989.html">CMake"变量污染"</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/24426.html">软件折腾笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/30986.html">Git命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/39640.html">正确使用Qt Style Sheet设置边框</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/9919.html">qt style sheet(QSS)无效原因整理</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/17074.html">软件折腾笔记之hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/61027.html">踩坑记---命名空间污染</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10685.html">软件折腾笔记之WordPress</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/10856.html">算法---质数筛选法</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2020 张帆(Fun)
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  </div>
+</body>
+</html>
