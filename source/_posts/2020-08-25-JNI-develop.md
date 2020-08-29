@@ -624,17 +624,27 @@ int SystemInfo::GetApiLevel() const {
 2. `jclass`缓存。和上面的原因一致，但由于 JMI 高度的封装，我们很容易忘记这一点，我们依然需要在`JNI_OnLoad`函数中触发 JMI 对`jclass`的缓存。这里可以通过`static_cast<jclass>(<C++适配类名>)`来实现。
 
 
-## ~~Djinni~~
+## Djinni
 
-~~Djinni 是由 Dropbox 开发的一个为 C++ 生成跨语言接口的工具，可以根据提供的 IDL 文件自动生成 C++ 与 JAVA 或 Objective-C 交互的代码。由于 Dropbox 已经[放弃使用C++进行跨平台开发](https://dropbox.tech/mobile/the-not-so-hidden-cost-of-sharing-code-between-ios-and-android)，全面转向原生开发，因此该项目现在也已经不再维护。该工具目前（2020/08/28）已彻底无法安装依赖，无法使用了，非常可惜。~~
+Djinni 是由 Dropbox 开发的一个为 C++ 生成跨语言接口的工具，可以根据提供的 IDL 文件自动生成 C++ 与 JAVA 或 Objective-C 交互的代码。由于 Dropbox 已经[放弃使用C++进行跨平台开发](https://dropbox.tech/mobile/the-not-so-hidden-cost-of-sharing-code-between-ios-and-android)，全面转向原生开发，因此该项目现在也已经不再维护，该工具目前（2020/08/28）已彻底无法安装依赖，无法使用了非常可惜。但用户制作了 [docker 镜像 banuba/djinni-build-environment](https://hub.docker.com/r/banuba/djinni-build-environment)，我们可以通过docker继续使用该工具。
 
-### ~~使用~~
+### IDL
 
-~~Djinni 使用起来还是比较简单的~~
+Djinni 使用了一套自己定义的领域开发语言，语法还是比较简单的，对于 JNI 开发来说，核心的关键字就`enum`，`record`和`interface`三个。
 
-~~1. 克隆代码仓库~~
-~~2. 编写 IDL~~
-~~3. 调用项目代码中的`src/run`脚本自动生成对应的代码。该脚本实际最终调用的是一个 Scala 程序，如果是第一次运行，该脚本会自动安装依赖并编译，时间会比较久。~~
-~~4. 实现相应的接口~~
+| 关键字    | 作用                                                |
+| ---       | ---                                                 |
+| enum      | 定义枚举类型                                        |
+| record    | 定义数据类                                          |
+| interface | 定义接口类，通过后面的+c/+j确定实现类和适配类的位置 |
 
-~~Djinni 的 Demo 可以参考仓库中的 example 目录。~~
+### 使用
+
+Djinni 使用起来还是比较简单的
+
+1. 克隆代码仓库
+2. 编写 IDL
+3. 调用项目代码中的`src/run`脚本自动生成对应的代码。该脚本实际最终调用的是一个 Scala 程序，如果是第一次运行，该脚本会自动安装依赖并编译，时间会比较久。
+4. 实现相应的接口
+
+Djinni 的 Demo 可以参考仓库中的 example 目录。
