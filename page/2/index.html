@@ -268,6 +268,72 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Qt-Mechanisms-Event" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/11422.html" class="article-date">
+      <time datetime="2018-08-28T09:31:45.000Z" itemprop="datePublished">2018-08-28</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/articles/11422.html">Qt从0到1之机制篇 - 事件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p><a href="https://github.com/xyz1001/QtExamples/tree/master/QtEvent" target="_blank" rel="noopener">本节示例代码</a></p>
+<p>相信大家在初学C/C++等编程语言时，编写的都是在命令行下运行的程序，也就是运行时只用一个黑框的应用程序。和我们日常使用的GUI程序相比，这些程序除了没有一个GUI界面外，还有一个很大的区别在于这些程序是一种过程式的执行方式，执行完一行代码后再去执行下一句，执行完一个函数再去执行下一个，执行完之后程序就退出了，类似于一个批处理或脚本程序，而GUI程序是可以根据内部或外部的输入来确定执行哪些代码，以什么样的顺序去执行。这些输入可能是系统的分辨率进行了修改，或者是用户点击了一个按钮，按下了键盘上的某个键，触发了一个定时器等等。程序具体如何运行，是受到这些输入控制的，如果没有任何输入，程序将不执行任何代码。这就是批处理程序设计(<code>batch programming</code>)和事件驱动程序设计(<code>Event-driven programming</code>)的一个显著差异。</p>
+<p>在事件驱动程序设计中，事件是核心要素，一个事件就是一个来自外界的信息输入。接触过Windows编程的人应该会了解过Windows的消息循环机制，这里的消息就类似于事件。Windows程序在收到系统派发的消息后，可以根据消息类型及消息参数的不同，进行不同的处理。例如当我们按下键盘上的<code>Alt + F4</code>快捷键后，Windows就会向当前的活动窗口发送一个类型为<code>WM_CLOSE</code>的消息，这个消息一般用于通过窗口进行关闭。窗口在收到这个消息后，原则上需要将自己关闭，但也可以选择忽略这个消息，这样我们的快捷键就“失效”了。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt从0到1/">Qt从0到1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt机制/">Qt机制</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/articles/11422.html#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-Qt-Mechanisms-Object-Trees" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -854,70 +920,6 @@
       
         <p class="article-more-link">
           <a href="/articles/36111.html#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-custom-QMenu" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/6460.html" class="article-date">
-      <time datetime="2018-05-27T13:47:49.000Z" itemprop="datePublished">2018-05-27</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/6460.html">自定义QMenu样式</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>最近工作中需要实现一个自定义外观的菜单，但在网上搜索后发现很少有QMenu的样式自定义相关的深入解析。请教了公司的一位前辈，他提到QMenu自定义样式不方便，于是他一般是自己实现一个菜单控件。但这样未免太过于麻烦，因此经过一番摸索后基本实现了自己所需的样式。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QSS/">QSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/6460.html#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>

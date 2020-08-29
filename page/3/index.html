@@ -268,6 +268,70 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-custom-QMenu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/6460.html" class="article-date">
+      <time datetime="2018-05-27T13:47:49.000Z" itemprop="datePublished">2018-05-27</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/articles/6460.html">自定义QMenu样式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>最近工作中需要实现一个自定义外观的菜单，但在网上搜索后发现很少有QMenu的样式自定义相关的深入解析。请教了公司的一位前辈，他提到QMenu自定义样式不方便，于是他一般是自己实现一个菜单控件。但这样未免太过于麻烦，因此经过一番摸索后基本实现了自己所需的样式。</p>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QMenu/">QMenu</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/QSS/">QSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt/">Qt</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/articles/6460.html#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-better-seek-bar-with-QSlider" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -883,81 +947,6 @@
       
         <p class="article-more-link">
           <a href="/articles/9919.html#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-software-usage-of-shadowsocks" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/16675.html" class="article-date">
-      <time datetime="2017-08-20T15:44:14.000Z" itemprop="datePublished">2017-08-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/16675.html">软件折腾笔记之Shadowsocks</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3-pip</span><br><span class="line">sudo -H pip3 install setuptools shadowsocks</span><br></pre></td></tr></table></figure>
-<h3 id="优化系统配置"><a href="#优化系统配置" class="headerlink" title="优化系统配置"></a>优化系统配置</h3><h4 id="开启TCP-BBR拥塞控制算法"><a href="#开启TCP-BBR拥塞控制算法" class="headerlink" title="开启TCP BBR拥塞控制算法"></a>开启TCP BBR拥塞控制算法</h4><ol>
-<li><p>且服务器虚拟化方式为xen或kvm，TCP BBR不支持OpenVZ，检测方式：</p>
-<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install virt-what &amp;&amp; sudo virt-what</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检查内核是否为4.9以上，否则自行升级内核至4.9以上或更换较新的系统</p>
-</li>
-<li><p>开启BBR</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;net.core.default_qdisc=fq&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">echo &quot;net.ipv4.tcp_congestion_control=bbr&quot; &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<p>输入<code>sysctl net.ipv4.tcp_available_congestion_control</code>检查是否开启成功<br>输入<code>lsmod | grep bbr</code>检查是否加载成功</p>
-</li>
-</ol>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件折腾笔记/">软件折腾笔记</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/16675.html#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>

@@ -15,20 +15,18 @@
 
 
 
-<meta name="description" content="每个接触过Windows系统的开发人员都会接触到环境变量，相当一部分软件安装完成后必做的一步操作就是设置环境变量。Windows下的环境变量分为用户环境变量和系统环境变量。本文主要分享如何正确设置系统环境变量。 GUI界面这是我们最常用的方式，即右键此电脑-&amp;gt;属性-&amp;gt;高级系统设置-&amp;gt;环境变量，然后在系统变量栏中修改系统环境变量。该方法十分简单，但我们有时候可能需要通过程序来修改，">
-<meta name="keywords" content="Windows">
+<meta name="description" content="问题现象windows 下编译 Share 项目时，编译器报各种莫名错误123456789101112131415161718192021222324252627282930313233[0/1 ?/sec] Re-running CMake...-- Configuring done-- Generating done-- Build files have been written to: D:">
+<meta name="keywords" content="踩坑记,MSVC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="修改Windows系统环境变量">
-<meta property="og:url" content="http://www.xyz1001.xyz/articles/22206.html">
+<meta property="og:title" content="踩坑记之特殊的头文件名">
+<meta property="og:url" content="http://www.xyz1001.xyz/articles/30205.html">
 <meta property="og:site_name" content="Just for Fun">
-<meta property="og:description" content="每个接触过Windows系统的开发人员都会接触到环境变量，相当一部分软件安装完成后必做的一步操作就是设置环境变量。Windows下的环境变量分为用户环境变量和系统环境变量。本文主要分享如何正确设置系统环境变量。 GUI界面这是我们最常用的方式，即右键此电脑-&amp;gt;属性-&amp;gt;高级系统设置-&amp;gt;环境变量，然后在系统变量栏中修改系统环境变量。该方法十分简单，但我们有时候可能需要通过程序来修改，">
+<meta property="og:description" content="问题现象windows 下编译 Share 项目时，编译器报各种莫名错误123456789101112131415161718192021222324252627282930313233[0/1 ?/sec] Re-running CMake...-- Configuring done-- Generating done-- Build files have been written to: D:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/2019-04-27/modify_system_environment_variable.jpg">
-<meta property="og:updated_time" content="2020-08-25T08:18:28.119Z">
+<meta property="og:updated_time" content="2020-08-29T07:32:24.863Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修改Windows系统环境变量">
-<meta name="twitter:description" content="每个接触过Windows系统的开发人员都会接触到环境变量，相当一部分软件安装完成后必做的一步操作就是设置环境变量。Windows下的环境变量分为用户环境变量和系统环境变量。本文主要分享如何正确设置系统环境变量。 GUI界面这是我们最常用的方式，即右键此电脑-&amp;gt;属性-&amp;gt;高级系统设置-&amp;gt;环境变量，然后在系统变量栏中修改系统环境变量。该方法十分简单，但我们有时候可能需要通过程序来修改，">
-<meta name="twitter:image" content="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/2019-04-27/modify_system_environment_variable.jpg">
+<meta name="twitter:title" content="踩坑记之特殊的头文件名">
+<meta name="twitter:description" content="问题现象windows 下编译 Share 项目时，编译器报各种莫名错误123456789101112131415161718192021222324252627282930313233[0/1 ?/sec] Re-running CMake...-- Configuring done-- Generating done-- Build files have been written to: D:">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -60,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>修改Windows系统环境变量 | Just for Fun</title>
+<title>踩坑记之特殊的头文件名 | Just for Fun</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -261,11 +259,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-How-to-Modify-Windows-System-Environment" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-special-header-filename" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/articles/22206.html" class="article-date">
-      <time datetime="2019-04-27T01:58:16.000Z" itemprop="datePublished">2019-04-27</time>
+      <a href="/articles/30205.html" class="article-date">
+      <time datetime="2020-08-29T07:25:09.000Z" itemprop="datePublished">2020-08-29</time>
 </a>
 
 
@@ -280,7 +278,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      修改Windows系统环境变量
+      踩坑记之特殊的头文件名
     </h1>
   
 
@@ -291,7 +289,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/">Windows</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MSVC/">MSVC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/踩坑记/">踩坑记</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -301,77 +299,11 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>每个接触过Windows系统的开发人员都会接触到环境变量，相当一部分软件安装完成后必做的一步操作就是设置环境变量。Windows下的环境变量分为用户环境变量和系统环境变量。本文主要分享如何正确设置系统环境变量。</p>
-<h2 id="GUI界面"><a href="#GUI界面" class="headerlink" title="GUI界面"></a>GUI界面</h2><p>这是我们最常用的方式，即右键此电脑-&gt;属性-&gt;高级系统设置-&gt;环境变量，然后在系统变量栏中修改系统环境变量。该方法十分简单，但我们有时候可能需要通过程序来修改，又该怎么做呢？</p>
-<p><img src="https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/2019-04-27/modify_system_environment_variable.jpg" alt="环境变量"></p>
-<h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><p>在<code>CMD</code>中，我们可以通过<code>set</code>命令来设置环境变量，<code>powershell</code>中也可以通过<code>$ENV:key=value</code>的形式设置环境变量，但这只能影响当前命令行环境，命令行程序退出后就失效了。我们可以通过<code>SetX</code>来修改系统环境变量。官方描述如下：</p>
-<blockquote>
-<p>在用户或系统环境创建或修改环境变量。能基于参数、注册表项或文件输入设置变量。</p>
-</blockquote>
-<p>默认情况下，该命令是修改当前用户的的环境变量，如果我们需要修改系统环境变量，可以使用<code>/M</code>参数。但正如官方描述所说，该命令只能 <em>创建或修改</em> 环境变量，也就是说该命令无法用于删除一个环境变量。</p>
-<h2 id="注册表"><a href="#注册表" class="headerlink" title="注册表"></a>注册表</h2><p>根据微软的<a href="https://docs.microsoft.com/zh-cn/windows/desktop/ProcThread/environment-variables" target="_blank" rel="noopener">官方文档</a>， Windows系统环境变量其实是保存在注册表中的，路径为<code>HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment</code>，我们可以手动或通过代码修改注册表的方式来修改系统环境变量。</p>
-<blockquote>
-<p>To programmatically add or modify system environment variables, add them to the HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment registry key, then broadcast a WM_SETTINGCHANGE message with lParam set to the string “Environment”. This allows applications, such as the shell, to pick up your updates.</p>
-</blockquote>
-<p>修改完成后我们需要广播一个消息类型为<code>WM_SETTINGCHANGE</code>，<code>lParam</code>参数为<code>&quot;Environment&quot;</code>的窗口消息，该消息将会通知应用程序获取我们的更新。经过测试我发现，目前Windows下的<code>explorer.exe</code>是会处理这个消息然后更新其环境变量。这也就解释了之前一直以来的一个困惑，就是在修改完系统环境变量后，新启动的程序有的可以获取到更新后的环境变量信息，而有的必须则不行。这其实是因为新进程是会继承父进程的环境变量，如果父进程处理了上述的窗口消息且主动更新了，那么子进程就会使用更新后的环境变量信息，例如通过<code>explorer.exe</code>(这是Windows的窗口管理器，包括开始菜单，桌面等都是由该程序管理)启动的程序。而如果某些程序没有处理这个窗口消息，那么其不会更新自己的环境变量，进而导致通过其启动的新进程也就是旧的环境变量信息。例如我使用的一款启动器软件就没有处理这个消息，导致如果我通过其启动的软件都是旧环境变量信息，只能重新启动该启动器或重启系统。</p>
-<p>在发送这条窗口消息时，还有两个需要注意的问题。</p>
-<ol>
-<li><p>如何将一个字符串设置给<code>lParam</code>参数？</p>
-<p>Windows下发送窗口消息的几种方法中，参数lParam都是是<code>LPARAM</code>类型，在Win10 x64系统下，其定义如下</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> LONG_PTR            LPARAM;</span><br><span class="line"><span class="keyword">typedef</span> _W64 <span class="keyword">long</span> LONG_PTR, *PLONG_PTR;</span><br></pre></td></tr></table></figure>
-<p>也就是说lParam是一个整型，那如何将一个字符串赋值给整型呢？其实通过中间的<code>LONG_PTR</code>我们可以看出，这里Windows是用一个整型来存储字符串的地址。我们可以直接将字符串强转成一个整型。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SendMessage(HWND_BROADCAST, WM_SETTINGCHANGE, <span class="literal">NULL</span>, LPARAM(<span class="string">"Environment"</span>));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>调用无效？</p>
-<p>上面的代码调用看上去已经满足文档上的要求了，但在实际测试时，在<code>Win10 中文版</code>系统上，发送该消息后，再通过<code>explorer.exe</code>启动新程序，新的程序还是旧的环境变量信息。难道文档错了么？这个问题困扰了我非常久，后来才发现这是由于Windows为了兼容不同的字符编码环境，绝大部分API都提供了三套方法，除了普通的形式外，还有一个以<code>A</code>结尾，一个以<code>W</code>的方法，其中<code>A</code>代表<code>ASCII</code>码，即窄字符串版本，<code>W</code>代表宽字符版本。普通形式的方法实际上会根据是否有定义<code>__UNICODE__</code>这个宏来<code>define</code>为以<code>A</code>结尾或以<code>W</code>结尾的方法。如<code>SendMessage</code>的定义如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ifdef UNICODE</span><br><span class="line">#define SendMessage  SendMessageW</span><br><span class="line">#else</span><br><span class="line">#define SendMessage  SendMessageA</span><br><span class="line">#endif // !UNICODE</span><br></pre></td></tr></table></figure>
-<p>在我的电脑环境下是有定义<code>UNICODE</code>宏的，因此<code>SendMessage</code>方法实际上是调用了<code>SendMessageW</code>方法，然而第四个参数<code>&quot;Environment&quot;</code>是一个<code>ASCII</code>字符串，这就导致参数和方法不匹配，进而导致该消息没有被正确处理。下面是几种可行的修改方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SendMessageA(HWND_BROADCAST, WM_SETTINGCHANGE, NULL, LPARAM(&quot;Environment&quot;)); // 明确指定使用</span><br><span class="line">SendMessageW(HWND_BROADCAST, WM_SETTINGCHANGE, NULL, LPARAM(L&quot;Environment&quot;)); // 明确指定使用宽字符版本</span><br><span class="line">SendMessage(HWND_BROADCAST, WM_SETTINGCHANGE, NULL, LPARAM(_T&quot;Environment&quot;)); // _T是一个根据UNICODE宏调整的宏，分别会被定义为空或L</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>下面是修改系统环境变量的几种方法的对比</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>支持程序调用</th>
-<th>支持手动修改</th>
-<th>添加</th>
-<th>修改</th>
-<th>删除</th>
-<th>即时生效</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GUI界面</td>
-<td></td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>命令行</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-<td>√</td>
-</tr>
-<tr>
-<td>修改注册表并发送窗体消息</td>
-<td>√</td>
-<td></td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-</tbody>
-</table>
+        <h2 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h2><p>windows 下编译<a href> Share 项目</a>时，编译器报各种莫名错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[0/1 ?/sec] Re-running CMake...</span><br><span class="line">-- Configuring done</span><br><span class="line">-- Generating done</span><br><span class="line">-- Build files have been written to: D:/Code/build-Share-Desktop_Qt_5_12_5_MSVC2017_32bit-Debug</span><br><span class="line">[1/6 8.9/sec] Automatic MOC and UIC for target Share</span><br><span class="line">[2/6 1.5/sec] Building CXX object CMakeFiles\Share.dir\Share_autogen\mocs_compilation.cpp.obj</span><br><span class="line">FAILED: CMakeFiles/Share.dir/Share_autogen/mocs_compilation.cpp.obj </span><br><span class="line">C:\PROGRA~2\MICROS~1\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\HostX86\x86\cl.exe  /nologo /TP -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I. -ID:\Code\Share -IShare_autogen\include -IC:\Qt\5.12.5\msvc2017\include -IC:\Qt\5.12.5\msvc2017\include\QtWidgets -IC:\Qt\5.12.5\msvc2017\include\QtGui -IC:\Qt\5.12.5\msvc2017\include\QtANGLE -IC:\Qt\5.12.5\msvc2017\include\QtCore -IC:\Qt\5.12.5\msvc2017\.\mkspecs\win32-msvc /DWIN32 /D_WINDOWS /W3 /GR /EHsc /showIncludes /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\Share.dir\Share_autogen\mocs_compilation.cpp.obj /FdCMakeFiles\Share.dir\ /FS -c Share_autogen\mocs_compilation.cpp</span><br><span class="line">D:\Code\Share\share.h(6): error C2504: “QObject”: 未定义基类</span><br><span class="line">D:\Code\Share\share.h(7): error C2027: 使用了未定义类型“QString”</span><br><span class="line">C:\Qt\5.12.5\msvc2017\include\QtCore/qchar.h(48): note: 参见“QString”的声明</span><br><span class="line">d:\code\build-share-desktop_qt_5_12_5_msvc2017_32bit-debug\share_autogen\EWIEGA46WW/moc_share.cpp(85): error C2352: “QObject::qt_metacast”: 非静态成员函数的非法调用</span><br><span class="line">c:\qt\5.12.5\msvc2017\include\qtcore\qobject.h(119): note: 参见“QObject::qt_metacast”的声明</span><br><span class="line">d:\code\build-share-desktop_qt_5_12_5_msvc2017_32bit-debug\share_autogen\EWIEGA46WW/moc_share.cpp(90): error C2352: “QObject::qt_metacall”: 非静态成员函数的非法调用</span><br><span class="line">c:\qt\5.12.5\msvc2017\include\qtcore\qobject.h(119): note: 参见“QObject::qt_metacall”的声明</span><br><span class="line">[3/6 2.2/sec] Building CXX object CMakeFiles\Share.dir\mainwindow.cpp.obj</span><br><span class="line">FAILED: CMakeFiles/Share.dir/mainwindow.cpp.obj </span><br><span class="line">C:\PROGRA~2\MICROS~1\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\HostX86\x86\cl.exe  /nologo /TP -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I. -ID:\Code\Share -IShare_autogen\include -IC:\Qt\5.12.5\msvc2017\include -IC:\Qt\5.12.5\msvc2017\include\QtWidgets -IC:\Qt\5.12.5\msvc2017\include\QtGui -IC:\Qt\5.12.5\msvc2017\include\QtANGLE -IC:\Qt\5.12.5\msvc2017\include\QtCore -IC:\Qt\5.12.5\msvc2017\.\mkspecs\win32-msvc /DWIN32 /D_WINDOWS /W3 /GR /EHsc /showIncludes /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\Share.dir\mainwindow.cpp.obj /FdCMakeFiles\Share.dir\ /FS -c D:\Code\Share\mainwindow.cpp</span><br><span class="line">D:\Code\Share\share.h(6): error C2504: “QObject”: 未定义基类</span><br><span class="line">D:\Code\Share\share.h(7): error C2027: 使用了未定义类型“QString”</span><br><span class="line">C:\Qt\5.12.5\msvc2017\include\QtCore/qchar.h(48): note: 参见“QString”的声明</span><br><span class="line">[4/6 3.0/sec] Building CXX object CMakeFiles\Share.dir\main.cpp.obj</span><br><span class="line">FAILED: CMakeFiles/Share.dir/main.cpp.obj </span><br><span class="line">C:\PROGRA~2\MICROS~1\2017\COMMUN~1\VC\Tools\MSVC\1416~1.270\bin\HostX86\x86\cl.exe  /nologo /TP -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I. -ID:\Code\Share -IShare_autogen\include -IC:\Qt\5.12.5\msvc2017\include -IC:\Qt\5.12.5\msvc2017\include\QtWidgets -IC:\Qt\5.12.5\msvc2017\include\QtGui -IC:\Qt\5.12.5\msvc2017\include\QtANGLE -IC:\Qt\5.12.5\msvc2017\include\QtCore -IC:\Qt\5.12.5\msvc2017\.\mkspecs\win32-msvc /DWIN32 /D_WINDOWS /W3 /GR /EHsc /showIncludes /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\Share.dir\main.cpp.obj /FdCMakeFiles\Share.dir\ /FS -c D:\Code\Share\main.cpp</span><br><span class="line">D:\Code\Share\share.h(6): error C2504: “QObject”: 未定义基类</span><br><span class="line">D:\Code\Share\share.h(7): error C2027: 使用了未定义类型“QString”</span><br><span class="line">C:\Qt\5.12.5\msvc2017\include\QtCore/qchar.h(48): note: 参见“QString”的声明</span><br><span class="line">[5/6 3.5/sec] Building CXX object CMakeFiles\Share.dir\share.cpp.obj</span><br><span class="line">ninja: build stopped: subcommand failed.</span><br><span class="line">15:08:49: 进程&quot;C:\Users\87591\scoop\shims\cmake.exe&quot;退出，退出代码 1 。</span><br><span class="line">Error while building/deploying project Share (kit: Desktop Qt 5.12.5 MSVC2017 32bit)</span><br><span class="line">When executing step &quot;CMake Build&quot;</span><br><span class="line">15:08:49: Elapsed time: 00:02.</span><br></pre></td></tr></table></figure></p>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p>首先新建一个Qt初始项目编译正常，排除开发环境问题。<br>接下来没有任何思路，只好逐步精简项目，发现移除<code>share.h</code>和<code>share.cpp</code>并移除其他文件中对<code>share.h</code>的包含后依然会报<code>share.h</code>中的错误，尝试修改<code>share.h</code>的名称找出哪个文件还依赖了该文件，发现改名后编译居然通过了。遂猜测该文件名可能有冲突。使用 everything 搜索<code>share.h</code>，发现同名文件<code>&quot;C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\ucrt\share.h&quot;</code>，位于标准库搜索路径中，表明该文件属于标准库头文件。<br>至此，问题原因找到，我们的<code>share.h</code>文件覆盖了标准库中的<code>share.h</code>，导致原本应该包含标准库中<code>share.h</code>变成包含我们提供的<code>share.h</code>。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>修改share.h的文件名为其他名称后解决。</p>
+<p>但事情到这里还没彻底弄清楚，按照C++头文件包含规则，如果是双引号则优先在当前项目路径下查找头文件，如果是尖括号则优先从系统目录查找。这里已经可以确认示例项目中没有包含<code>share.h</code>文件，也就是说是程序依赖的库间接依赖了该头文件。而对于库来说，其本来目的肯定是要包含系统目录中的<code>share.h</code>，那么理论上编程习惯没有问题的话，应使用<code>#inlcude &lt;share.h&gt;</code>，这样会优先查找到系统库中的<code>share.h</code>，不会出问题。而根据目前现象来看，有两种猜测，要么是某个库中对<code>share.h</code>的依赖写成了<code>#include &quot;share.h&quot;</code>，要么是 MSVC 编译器对<code>&quot;&quot;</code>和<code>&lt;&gt;</code>的处理存在问题。所以我们要找到到底是哪个文件包含了<code>share.h</code>。<br>MSVC 提供了<code>/showIncludes</code>编译选项，用于打印头文件包含关系，我们用 Visual Studio 打开（用 Qt Creator 测试并没有打印），发现大致包含关系如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MainWindow.h &gt; QMainWindow &gt; ... &gt; qbytearray.h &gt; string &gt; ... &gt; xiosbase &gt; share.h</span><br></pre></td></tr></table></figure></p>
+<p> 所以直接包含<code>share.h</code>的是<code>xiosbase</code>这个文件，打开后发现其是通过<code>#include &lt;share.h&gt;</code>来包含的，所以猜测一不对，因此只可能是 MSVC 编译器对<code>&quot;&quot;</code>和<code>&lt;&gt;</code>的处理是存在问题的，但通过附件中的<a href> TestInclude </a>项目又正常，猜测可能是在某些特定条件下才会触发该 bug，但到这里已经无法再继续追下去了，只能作罢。</p>
 
       
     </div>
@@ -380,13 +312,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/articles/22206.html">修改Windows系统环境变量</a></p>
+        <p><span>本文标题:</span><a href="/articles/30205.html">踩坑记之特殊的头文件名</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">张帆(Fun)</a></p>
-        <p><span>发布时间:</span>2019-04-27, 09:58:16</p>
-        <p><span>最后更新:</span>2020-08-25, 16:18:28</p>
+        <p><span>发布时间:</span>2020-08-29, 15:25:09</p>
+        <p><span>最后更新:</span>2020-08-29, 15:32:24</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/articles/22206.html" title="修改Windows系统环境变量">http://www.xyz1001.xyz/articles/22206.html</a>
-            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/22206.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/articles/30205.html" title="踩坑记之特殊的头文件名">http://www.xyz1001.xyz/articles/30205.html</a>
+            <span class="copy-path" data-clipboard-text="原文: http://www.xyz1001.xyz/articles/30205.html　　作者: 张帆(Fun)" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -398,16 +330,10 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/articles/64676.html">
-                    在库中开启Qt事件循环
-                </a>
-            </div>
-        
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/articles/35120.html">
-                    踩坑记之Jenkins无权限克隆的代码
+                <a href="/articles/5811.html">
+                    JNI开发心得
                 </a>
             </div>
         
@@ -419,7 +345,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI界面"><span class="toc-number">1.</span> <span class="toc-text">GUI界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行"><span class="toc-number">2.</span> <span class="toc-text">命令行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注册表"><span class="toc-number">3.</span> <span class="toc-text">注册表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题现象"><span class="toc-number">1.</span> <span class="toc-text">问题现象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原因分析"><span class="toc-number">2.</span> <span class="toc-text">原因分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方法"><span class="toc-number">3.</span> <span class="toc-text">解决方法</span></a></li></ol>
         
     </div>
     <style>
@@ -455,7 +381,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"修改Windows系统环境变量　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"踩坑记之特殊的头文件名　| Just for Fun　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -475,15 +401,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/articles/64676.html" title="上一篇: 在库中开启Qt事件循环">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/articles/35120.html" title="下一篇: 踩坑记之Jenkins无权限克隆的代码">
+            <a href="/articles/5811.html" title="下一篇: JNI开发心得">
                 <i class="fa fa-angle-right"></i>
             </a>
         
