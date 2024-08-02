@@ -31,7 +31,7 @@ jobs:
         run: |
           ls
           npm install -g hexo-cli
-          npm ci
+          npm install
       - name: Generate pages
         run: |
           hexo generate
