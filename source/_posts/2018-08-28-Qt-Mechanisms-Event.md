@@ -125,3 +125,11 @@ bool Widget::event(QEvent *event) {
 - [Qt 学习之路 2（22）：事件总结](https://www.devbean.net/2012/10/qt-study-road-2-event-summary/)
 - [The Event System](http://doc.qt.io/qt-5/eventsandfilters.html)
 - [Event Classes](http://doc.qt.io/qt-5/events.html)
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

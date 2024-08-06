@@ -66,3 +66,11 @@ MSVC 提供了`/showIncludes`编译选项，用于打印头文件包含关系，
 MainWindow.h > QMainWindow > ... > qbytearray.h > string > ... > xiosbase > share.h
  ```
  所以直接包含`share.h`的是`xiosbase`这个文件，打开后发现其是通过`#include <share.h>`来包含的，所以猜测一不对，因此只可能是 MSVC 编译器对`""`和`<>`的处理是存在问题的，但通过附件中的[ TestInclude ](https://github.com/xyz1001/BlogExamples/tree/master/TestInclude)项目又正常，猜测可能是在某些特定条件下才会触发该 bug，但到这里已经无法再继续追下去了，只能作罢。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

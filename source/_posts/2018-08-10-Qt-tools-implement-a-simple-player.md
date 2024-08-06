@@ -467,3 +467,11 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:../dev/lib64
 ### 打包发布
 
 linux下，我们可以使用第三方工具[linuxdeployqt](https://github.com/probonopd/linuxdeployqt)来进行打包，该工具可以帮助我们生成[Appimage](https://appimage.org/)文件格式。具体用法可参考项目的README。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

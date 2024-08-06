@@ -53,3 +53,11 @@ qmake支持生成VS工程，执行命令`qmake . -t vcapp`即可。
 对于一个Vimer，即使Qt Creator和VS提供了Vim模式，但还是习惯使用Vim来编写代码。使用Vim的最大问题便是补全，目前我使用`Valloric/YouCompleteMe`来进行补全，并使用`rdnetto/YCM-Generator`来生成配置文件，`YCM-Generator`提供了对qmake工程的支持。为了能方便的使用Vim进行Qt开发，我们还需要熟练掌握Qt 命令行工具，如`rcc`，`qmake`，`lupdate`等的使用。
 
 
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

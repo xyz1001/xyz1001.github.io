@@ -45,3 +45,11 @@ date: 2019-03-24 17:31:30
 ## 结论
 
 经过 Wireshark 抓包，终于对 Dukto 的一个大致实现原理有了了解，其局域网发现利用了 UDP 广播的特性，数据传输使用了基本的 TCP 协议，整体上并不复杂，非常适合初学者练手。在抓包，分析的过程中，不知不觉中便强化了知识的记忆。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

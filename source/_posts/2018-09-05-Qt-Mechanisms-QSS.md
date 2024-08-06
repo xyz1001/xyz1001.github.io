@@ -240,3 +240,11 @@ QPushButton:pressed:hover {
 - [Qt Style Sheets Reference](http://doc.qt.io/qt-5/stylesheet-reference.html)
 - [Qt 之 QSS（样式表语法）](https://blog.csdn.net/liang19890820/article/details/51691212)
 - [QSS总结以及最近做的Qt项目](https://www.cnblogs.com/wangqiguo/p/4960776.html#_label3)
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

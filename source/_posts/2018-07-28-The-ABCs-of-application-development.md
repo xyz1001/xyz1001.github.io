@@ -102,3 +102,11 @@ date: 2018-07-28 10:51:20
 ## 小结
 
 由于本人工作时间也不长，经验不足，很多过程仅能简述一下，无法深入讲解。但我们还是能发现，整个软件开发流程中，很多过程都需要软件开发人员的参与，也需要和很多人员进行沟通协作，我们需要理解并明确我们在每一个过程中的角色和职责，这样才能推动项目的有序进行。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

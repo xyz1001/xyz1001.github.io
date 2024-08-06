@@ -131,3 +131,11 @@ date: 2017-08-28 23:30:33
 3. 推荐使用`QFrame`作为主窗口的基类，而使用`QWidget`作为子部件的基类，如不确定，请尽量使用`QFrame`作为基类。
 
 最后，本文仅仅验证了边框（`border`）属性，理论上`padding`和`margin`将会和`border`会有一致的表现。具体各位读者可自行验证。另外，对于Qt提供的其他控件，如`QPushButton`，`QLabel`等控件可能存在其他情况，本文列举的情况并不一定适用，使用时需注意实际情况。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

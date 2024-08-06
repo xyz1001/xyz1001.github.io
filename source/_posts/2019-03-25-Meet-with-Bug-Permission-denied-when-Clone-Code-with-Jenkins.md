@@ -129,3 +129,11 @@ Please make sure you have the correct access rights
 1. 在整个过程中，对`Jenkins`克隆代码的流程有一个基本了解给解决这个问题提供了很大帮助。上述对`Jenkins`克隆代码步骤的探索就是当时在处理Windows服务器上无法克隆代码时通过[Procmon](https://docs.microsoft.com/en-us/sysinternals/downloads/procmon)工具观察得到。可惜当时降级`git`版本后问题没有复现就没有继续深究，导致又一次踩坑。
 2. 可以看到，`GIT_SSH`指定的其实就是一个“假”的`ssh`命令，和我们解决问题中使用的“假”的`git`命令的有异曲同工之妙。
 3. 在使用“假”的`git`命令时，我们还拿到了十分敏感的`SSH`密钥，这说明了`Jenkins`的这项保密策略其实是有很大的漏洞的。只要子节点服务器管理员拥有root权限，就可以十分轻松的获取到管理员保存在主节点上的密钥，进而窃取其他代码仓库中的代码。为了避免这个问题，管理员需要严格控制子节点的root权限和敏感操作，不同小组的代码最好能够添加不同的`credentials`进行拉取。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

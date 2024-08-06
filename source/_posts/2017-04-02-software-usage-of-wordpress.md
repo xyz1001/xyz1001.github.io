@@ -113,3 +113,11 @@ WordPress自身存在一定BUG，需要通过手动修改代码的方式修复�
 - 大部分默认主题提供的404页面十分简陋，我们可以根据自己的需要，修改themes目录下对应主题目录下的`404.php`文件，自由定制。
 - WordPress默认将图片保存至WordPress根目录`/wp-content/uploads`文件夹中，备份时注意备份。
 - 文章中插入的图片，WordPress会默认以缩略图显示，往往会导致部分大图显示十分模糊，因此需要在插入图片时选择合适的显示大小，对于部分特别大的图片，可设置图片超链接至原图。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

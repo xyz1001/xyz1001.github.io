@@ -292,3 +292,11 @@ bool disconnect(const QObject *sender, PointerToMemberFunction signal, const QOb
 
 - [Signals & Slots](http://doc.qt.io/qt-5/signalsandslots.html)
 - [Qt 学习之路 2（4）：信号槽](https://www.devbean.net/2012/08/qt-study-road-2-signal-slot/)
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

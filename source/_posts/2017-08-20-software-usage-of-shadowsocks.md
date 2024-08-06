@@ -129,3 +129,11 @@ net.ipv4.tcp_mtu_probing = 1
 | privoxy      | sock5转http  |
 
 - 首次使用后推荐到处配置信息为`URI`并保存，方便下次使用时无需输入配置信息
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

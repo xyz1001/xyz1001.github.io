@@ -81,3 +81,11 @@ QSS的每条属性并非是毫不相关的，很多时候某个属性的设置�
 ## 总结
 
 以上是个人遇到的几种QSS设置后无效的情况总结，实际使用中很可能还会遇到很多其他的情况导致QSS无效。QSS目前作为Qt对控件进行修饰的一种途径，具有十分灵活的特性。但QSS仍有较多的坑需要在使用中去慢慢摸索。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

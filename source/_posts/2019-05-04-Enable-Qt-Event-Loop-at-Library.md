@@ -232,3 +232,11 @@ Timer::~Timer() {
 ## 总结
 
 相对来说，在库中使用Qt事件循环相关的特性会麻烦一些，但和Qt提供的丰富的基础库和机制相比，这点牺牲还是值得的。如果对库的体积要求不大，是完全可以考虑在库的开发中引入Qt的。本文的只是简单介绍了如何在库中引入Qt事件循环，在代码的非侵入性，线程安全性等方面还有很大的改进空间，希望读者在使用时可以进一步完善。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

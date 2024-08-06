@@ -228,3 +228,11 @@ date: 2018-01-01 16:17:57
 
 - [zeal](https://zealdocs.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
  PC全平台的离线开发文档查看程序，类似于macOS下的`Dash`，文档资源来源于`Dash`。Linux下使用体验很棒，但Windows下很卡，易崩溃。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

@@ -52,3 +52,11 @@ date: 2018-03-02 21:09:08
 1. 根据自身的使用环境调整历史记录文件
 2. 仅支持Arch系列的发行版
 3. 通过`AUR`安装的软件可通过`pacman -Qemq`来备份
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

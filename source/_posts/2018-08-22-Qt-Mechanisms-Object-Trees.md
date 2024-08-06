@@ -75,3 +75,11 @@ int main(int argc, char *argv[]) {
 
 - [Object Trees & Ownership](http://doc.qt.io/qt-5/objecttrees.html)
 - [Qt 学习之路 2（10）：对象模型](https://www.devbean.net/2012/09/qt-study-road-2-objects-model/)
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

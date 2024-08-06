@@ -147,3 +147,11 @@ Windows 1809更新后，每次必须将当前所有触摸点进行报告，每�
 - `ShiftKeyFlags`：修饰键按位与结果，各修饰键分别对应`KBD_LCONTROL_BIT`/`KBD_LSHIFT_BIT`/`KBD_LALT_BIT`/`KBD_LGUI_BIT`/`KBD_RCONTROL_BIT`/`KBD_RSHIFT_BIT`/`KBD_RALT_BIT`/`KBD_RGUI_BIT`，GUI为Windows键/Command键/Meta键
 - `Reserved`：固定为0
 - `KeyCodes[6]`：当前按下的键，键值同HID keycode（https://gist.github.com/MightyPork/6da26e382a7ad91b5496ee55fdc73db2#file-usb_hid_keys-h）,该驱动仅支持最多6键无冲，即若同时按下了超过6个键（不包括修饰键），仅前六个生效。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>

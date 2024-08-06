@@ -73,3 +73,11 @@ int main()
 > You may not use a using-directive to make all names from a namespace available.
 
 由于命名空间往往是一个黑盒，我们无法直观得查看到命名空间里面定义了哪些名称，因此直接导入一个命名空间是相当危险的事，尤其是在一个多人协作的大型项目中，每个人都有可能往命名空间中添加命名。贸然使用using指示，很有可能导致各种bug，甚至是运行时bug，同时也为后期维护埋下了地雷。
+
+<script src="https://utteranc.es/client.js"
+        repo="xyz1001/xyz1001.github.io"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
