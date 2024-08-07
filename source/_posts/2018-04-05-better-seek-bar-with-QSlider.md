@@ -123,11 +123,3 @@ void SeekBar::mouseReleaseEvent(QMouseEvent *event) {
 ## 总结
 
 经过以上调整后，`SeekBar`已基本满足日常使用，用户可根据具体设计再做调整。[完整代码](https://github.com/xyz1001/qt-utils/tree/develop/src/widgets/seekbar)
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

@@ -66,11 +66,3 @@ qmake的语法相对来说比较简单，和cmake相比，关键词要少很多�
 
 在生成makefile之后，我们可以调用平台提供的make工具，如类UNIX系统上，我们可以直接执行`make`命令，而Windows上，我们可以执行`nmake`命令进行编译。
 编译完成后，若我们在`pro`文件中制定了需要安装的文件，我们可以执行`make install`或`nmake install`来进行文件归档。
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

@@ -61,11 +61,3 @@ QMenu默认弹出位置是和设置该菜单的控件位置相关的。但有时
 ## 小结
 
 相对来说，QMenu算是一个比较复杂的控件了。对于这类控件，我们必须先仔细阅读官方的API文档，Qt的文档是相当优秀的工具，利用好这个工具可以是我们少踩很多坑。但从目前来看，Qt还存在一定的实现BUG，在实际开发中我们需要及时看清问题原因，不要在工具的BUG上花费过多时间，要善于寻找绕过BUG的途径。
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

@@ -116,11 +116,3 @@ git push --set-upstream origin source   #推送新创建的分支source至Github
 ## SEO
 
 参考[让Google搜索到搭建在Github Pages上的博客](https://jactor-sue.github.io/how-githubio-blog-can-be-searched-by-google/)
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

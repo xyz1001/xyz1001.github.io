@@ -74,11 +74,3 @@ int main()
 - 为`MSVC`添加`/utf-8`的编译选项。在较新(据说是`Visual Studio 2015 Update 2`之后)的`VS`版本中，添加了[/utf-8](https://docs.microsoft.com/en-us/cpp/build/reference/utf-8-set-source-and-executable-character-sets-to-utf-8?view=vs-2017)编译选项，用于告诉编译器将源码文件视为使用`UTF-8`编码。
 
 我的这个项目使用的是`VS 2017`，因此选择了最后一种方式。
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

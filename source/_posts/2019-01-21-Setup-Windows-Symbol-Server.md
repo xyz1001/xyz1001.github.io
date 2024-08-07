@@ -66,11 +66,3 @@ date: 2019-01-21 17:03:04
  ```
 
 这样是非常繁琐的，需要手动操作，但目前并没有找到一个很好的方式去批量或自动处理这一问题。可能需要实现一个程序去分析`history.txt`并执行相关处理。
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

@@ -128,11 +128,3 @@ int main()
 ```
 
 当范围为100000000（1亿）时，程序运行时间为4.427 s
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

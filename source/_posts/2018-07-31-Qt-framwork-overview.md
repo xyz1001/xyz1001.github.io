@@ -39,11 +39,3 @@ Qt的授权有过一段比较混乱的历史，使用过包括GPL，QPL等。目
 ## 概览
 
 ![Qt概览](https://blog-1251989759.picgz.myqcloud.com/blog/qt_framework_overview/QtOverview.png/blog)
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

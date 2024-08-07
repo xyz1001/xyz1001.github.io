@@ -103,11 +103,3 @@ set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/out CACHE PATH "default install p
 
 1. 官方文档往往是解决问题的关键，一定要仔细阅读文档上的内容，包括示例，不放过任何一点细节。
 2. 知其然更要知其所以然。由于网上和CMake相关的资料绝大部分都是讲述如何使用CMake而不是CMake会做些什么，尤其是中文网站。这导致我一直都不知道CMake会在执行时先去读取缓存文件这一机制。一知半解，最为致命。
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

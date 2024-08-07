@@ -78,11 +78,3 @@ date: 2019-04-27 09:58:16
 | GUI界面                  |              | √            | √    | √    | √    | √        |
 | 命令行                   | √            | √            | √    | √    |      | √        |
 | 修改注册表并发送窗体消息 | √            |              | √    | √    | √    | √        |
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

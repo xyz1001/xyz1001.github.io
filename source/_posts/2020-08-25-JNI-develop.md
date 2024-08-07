@@ -648,11 +648,3 @@ Djinni 使用起来还是比较简单的
 4. 实现相应的接口
 
 Djinni 的 Demo 可以参考仓库中的 example 目录。
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>

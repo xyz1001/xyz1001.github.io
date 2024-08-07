@@ -49,11 +49,3 @@ A团队的代码仓库存在一个问题是代码模块拆分的过细，本意�
 6. 在原仓库中，执行3/4两步，保留UI应用相关文件及提交
 7. 创建新分支，并推送至远端，确保CI通过。
 8. 将本地代码强制提交至远程仓库主分支，必须和项目成员沟通一致通过后进行（*危险！*)
-
-<script src="https://utteranc.es/client.js"
-        repo="xyz1001/xyz1001.github.io"
-        issue-term="title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
