@@ -14,7 +14,7 @@ cpr是一个基于libcurl的C++封装库，提供了非常便于使用的上层�
     Response Download(const WriteCallback& write);
     AsyncResponse DownloadAsync(const WriteCallback& write);
 ```
-其中，AsyncResponse是一个类似std::future的对象，应用需要在 **合适的时机** 调用get()方法获取Response对象。
+其中，`AsyncResponse`是一个类似`std::future`的对象，应用需要在 **合适的时机** 调用`get()`方法获取`Response`对象。
 
 在业务开发中，我们需要实现异步下载功能，函数签名如下：
 ``` cpp
@@ -70,7 +70,7 @@ auto write_data = [this, fout](std::string data, intptr_t /*userdata*/) {
 *async_response = session->DownloadAsync(cpr::WriteCallback{write_data});
 ```
 
-这里由于需要在设置进度回调后，再去将AsyncResponse对象写入lambda捕获列表中，同时AsyncResponse又不支持默认构造，因此只能使用std::shared_ptr<std::optional<cpr::AsyncResponse>>这种方式实现。但即使这样修改后，依然无法使用。get()方法会阻塞cpr的回调线程，导致下载进度回调无法返回，而cpr::AsyncResponse::get()必须又需要在进度回调返回后才会返回，这样就陷入了死锁。同时，我们无法获取出错时的信息，cpr并没有提供错误回调。因此，cpr提供的异步接口看上去很美好，但由于很难找到一个合适的时机调用get()方法，因此很难使用。
+这里由于需要在设置进度回调后，再去将`AsyncResponse`对象写入lambda捕获列表中，同时`AsyncResponse`又不支持默认构造，因此只能使用`std::shared_ptr<std::optional<cpr::AsyncResponse>>`这种方式实现。但即使这样修改后，依然无法使用。get()方法会阻塞cpr的回调线程，导致下载进度回调无法返回，而`cpr::AsyncResponse::get()`必须又需要在进度回调返回后才会返回，这样就陷入了死锁。同时，我们无法获取出错时的信息，cpr并没有提供错误回调。因此，cpr提供的异步接口看上去很美好，但由于很难找到一个合适的时机调用get()方法，因此很难使用。
 
 ## 基于同步接口实现
 
