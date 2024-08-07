@@ -16,65 +16,65 @@ date: 2018-01-01 16:17:57
 
 | 图标                                                                    | 含义        |
 | ---                                                                     | ---         |
-| ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png)     | Linux软件   |
-| ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) | Windows软件 |
-| ![android](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png) | Android软件 |
-| ![web](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/web.png)         | 网页软件    |
-| ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png)       | 免费软件    |
-| ![nonfree](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/nonfree.png) | 付费软件    |
-| ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)   | 开源软件    |
-| ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)   | 命令行软件    |
+| ![linux](linux.png)     | Linux软件   |
+| ![windows](windows.png) | Windows软件 |
+| ![android](android.png) | Android软件 |
+| ![web](web.png)         | 网页软件    |
+| ![free](free.png)       | 免费软件    |
+| ![nonfree](nonfree.png) | 付费软件    |
+| ![opensoure](oss.png)   | 开源软件    |
+| ![cmd](cmd.png)   | 命令行软件    |
 
 ## 目录
 
-- [WordPress](http://xyz1001.xyz/articles/10685.html) - 博客系统 ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [WordPress](http://xyz1001.xyz/articles/10685.html) - 博客系统 ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  一款基于PHP开发的动态博客系统，具有丰富的主题、插件。
 
-- [hexo](http://xyz1001.xyz/articles/17074.html) - 静态博客系统 ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [hexo](http://xyz1001.xyz/articles/17074.html) - 静态博客系统 ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  一款基于nodejs开发的静态博客系统，具有丰富的主题和插件。
 
-- [shadowsocks](http://xyz1001.xyz/articles/16675.html) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![android](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [shadowsocks](http://xyz1001.xyz/articles/16675.html) ![linux](linux.png) ![windows](windows.png) ![android](android.png) ![free](free.png) ![opensoure](oss.png)
 
-- [aria2](https://github.com/aria2/aria2) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [aria2](https://github.com/aria2/aria2) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  一个强大的下载器后端，可以和众多前端工具配合使用，如uGet，浏览器插件甚至是网页等。[相关配置文件](https://github.com/xyz1001/dotfiles/tree/master/.aria2)
 
-- [axel](https://github.com/axel-download-accelerator/axel) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [axel](https://github.com/axel-download-accelerator/axel) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下载器，支持多线程下载，可通过命令`axel -n [线程数] -a [百度网盘下载连接]`提高百度网盘下载速度。
 
-- [BaiduPCS-go](https://github.com/iikira/BaiduPCS-Go) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [BaiduPCS-go](https://github.com/iikira/BaiduPCS-Go) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  使用Golang开发的第三方命令行百度网盘，最大的特点是使用了类似命令行下文件操作的方式对百度网盘进行管理。
 
-- [bat](https://github.com/sharkdp/bat) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [bat](https://github.com/sharkdp/bat) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  `cat`命令的升级版，支持输出语法高亮和Git集成。可使用`alias cat="bat"`替换`cat`命令，对于需要使用原始的`cat`命令时，使用`\cat`取消alias。类似的还有[ccat](https://github.com/jingweno/ccat)，`ccat`更加轻量级，[详细对比](https://github.com/sharkdp/bat/blob/master/doc/alternatives.md)
 
-- [besttrace](https://www.ipip.net/product/client.html) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [besttrace](https://www.ipip.net/product/client.html) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![cmd](cmd.png)
  `traceroute`命令的升级版，支持显示ip所在地。
 
-- [bpython](https://github.com/bpython/bpython) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [bpython](https://github.com/bpython/bpython) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
     默认Python解释器的升级版，一个具有强大的代码提示和补全，语法高亮功能的python解释器。
 
-- chrome-remote-desktop ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- chrome-remote-desktop ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  Chrome的远程桌面，PC全平台可用，效果出色。
 
-- [cloc](https://github.com/AlDanial/cloc) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [cloc](https://github.com/AlDanial/cloc) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下的代码行数统计工具。
 
-- [copyq](https://hluk.github.io/CopyQ/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [copyq](https://hluk.github.io/CopyQ/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  PC全平台可用的剪切板管理工具，类似于Windows下的`Ditto`。特色是支持Vim按键操作。
 
-- [doxygen](http://www.doxygen.nl/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [doxygen](http://www.doxygen.nl/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  代码文档生成工具
 
-- [eslint](https://eslint.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [eslint](https://eslint.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  Javascript lint工具，可配合其他前端工具使用，如`Vim`的[ale](https://github.com/w0rp/ale)插件
  
-- [evtest](http://manpages.ubuntu.com/manpages/trusty/man1/evtest.1.html)  ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [evtest](http://manpages.ubuntu.com/manpages/trusty/man1/evtest.1.html)  ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  Linux下监听和查询事件输入（如按键，鼠标，触摸等）的工具
 
-- [gitg](https://wiki.gnome.org/Apps/Gitg/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [gitg](https://wiki.gnome.org/Apps/Gitg/) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png)
  Linux下的Git图形化操作软件，平时用来看看分支图还是很好用的。
 
-- [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  `git diff`命令的升级版，提供了更加易读的方式呈现文件对比信息，可通过[配置](https://github.com/xyz1001/dotfiles/blob/master/gitconfig)替换默认的`git diff`命令。
 
  ``` ini
@@ -96,7 +96,7 @@ date: 2018-01-01 16:17:57
      whitespace = red reverse
  ```
 
-- [graphicsmagick](http://www.graphicsmagick.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [graphicsmagick](http://www.graphicsmagick.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下强大的图片处理工具，是一系列工具软件的集合，以下是其中部分工具：
 
  - convert
@@ -108,25 +108,25 @@ date: 2018-01-01 16:17:57
  - composite
   图片合成工具
 
-- [highlight](http://www.andre-simon.de/doku/highlight/highlight.php) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [highlight](http://www.andre-simon.de/doku/highlight/highlight.php) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  将文件渲染成带语法高亮的HTML
 
-- [jq](https://stedolan.github.io/jq/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [jq](https://stedolan.github.io/jq/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下的`json`格式化工具，Vim中可使用命令`:%!jq '.'`格式化json文件
 
-- [kid3-qt](https://kid3.sourceforge.io/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![android](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/android.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [kid3-qt](https://kid3.sourceforge.io/) ![linux](linux.png) ![windows](windows.png) ![android](android.png) ![free](free.png) ![opensoure](oss.png)
  音乐文件id3标签编辑工具，可用于解决音乐文件在播放器中信息显示乱码
 
-- [meld](http://meldmerge.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [meld](http://meldmerge.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  PC全平台可用的文件对比工具，`diff`命令的GUI版本。
 
-- mlocate ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- mlocate ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  本地文件搜索工具，通过提前生成索引加快文件搜索速度。
 
-- [mosh](https://mosh.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [mosh](https://mosh.org/) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  具有更高的稳定性的ssh，适合在网络不稳定的情况下使用。
 
-- [moreutils](https://joeyh.name/code/moreutils/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [moreutils](https://joeyh.name/code/moreutils/) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  一系列有用的小工具的集合。下面是部分工具：
 
  - chronic
@@ -158,16 +158,16 @@ date: 2018-01-01 16:17:57
  - zrun
   自动解压压缩文件并将解压后的文件作为参数传递给后面的命令作为参数。参考[Can you provide an example use for `zrun`?](https://unix.stackexchange.com/questions/115894/can-you-provide-an-example-use-for-zrun)
 
-- [mypaint](http://mypaint.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [mypaint](http://mypaint.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  Linux下的`画图`
 
-- [ncdu](https://dev.yorhel.nl/ncdu) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [ncdu](https://dev.yorhel.nl/ncdu) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下的磁盘分析器，支持Vim操作，清理磁盘就用这个。
 
-- [notepadqq](https://notepadqq.com/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [notepadqq](https://notepadqq.com/) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png)
  Linux下的`Notepad++`
 
-- [privoxy](https://www.privoxy.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [privoxy](https://www.privoxy.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  用于将`socks`协议转化为`http`协议，搭配`ss`使用，用于支持一些仅支持`http`代理的软件，如`zeal`，相关配置命令：
 
  ``` bash
@@ -175,44 +175,44 @@ date: 2018-01-01 16:17:57
  sudo systemctl start privoxy.service
  ```
 
-- [proxychains-ng](https://github.com/rofl0r/proxychains-ng) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [proxychains-ng](https://github.com/rofl0r/proxychains-ng) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  用于强制让一些不支持设置代理的终端程序使用网络代理。可搭配`ss`使用，配置命令：
 
  ```
  sudo sed -i 's/socks4\s*127.0.0.1\s*9050/socks5 \t127.0.0.1 1080/g' /etc/proxychains.conf
  ```
 
-- [ranger](https://github.com/ranger/ranger) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [ranger](https://github.com/ranger/ranger) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  终端下的文件管理器，支持Vim操作。
 
-- [redshift](http://jonls.dk/redshift/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [redshift](http://jonls.dk/redshift/) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png)
  中文名叫红移，屏幕色温调整工具，可自动获取地理位置。Windows下可使用[f.lux](https://justgetflux.com/)
 
-- [ripgrep](https://github.com/BurntSushi/ripgrep) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [ripgrep](https://github.com/BurntSushi/ripgrep) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  `grep`命令的升级版，速度最快的`grep`（来源于官方测试数据）。类似的还有[Ag](https://github.com/ggreer/the_silver_searcher)
 
-- [shellcheck](https://www.shellcheck.net/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [shellcheck](https://www.shellcheck.net/) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  `shell`脚本的lint工具
 
-- [simplescreenrecorder](https://github.com/MaartenBaert/ssr) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [simplescreenrecorder](https://github.com/MaartenBaert/ssr) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png)
  Linux下的屏幕录制工具
 
-- [tidy](http://www.html-tidy.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [tidy](http://www.html-tidy.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  `HTML`和`XML`代码格式化和错误处理工具
 
-- [tig](https://github.com/jonas/tig) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [tig](https://github.com/jonas/tig) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下的git历史查看工具
 
-- [trash-cli](https://github.com/andreafrancia/trash-cli) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [trash-cli](https://github.com/andreafrancia/trash-cli) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  命令行下的`回收站`，可避免文件被误删
 
-- tree ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- tree ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  树状的列出当前目录和文件结构
 
-- [universal-ctags](https://github.com/universal-ctags/ctags) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [universal-ctags](https://github.com/universal-ctags/ctags) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  替换早已停止维护的[exuberant ctags](http://ctags.sourceforge.net/)
 
-- [xcape](https://github.com/alols/xcape) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [xcape](https://github.com/alols/xcape) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  Linux下的按键映射工具，可将修饰键映射为其他按键。搭配`setxkbmap`命令使用更为强大。如可通过下面的命令将`Caps`键敲击时映射为`Esc`键，作为修饰键时映射为`Ctrl`键，Vim党的福音。
 
  ``` bash
@@ -220,11 +220,11 @@ date: 2018-01-01 16:17:57
  xcape -e 'Control_L=Escape'
  ```
 
-- [xclip](https://github.com/astrand/xclip) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [xclip](https://github.com/astrand/xclip) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  Linux下在命令行对X11桌面环境的剪贴板进行操作的工具，一些其他工具的功能依赖该工具。
 
-- [xdotool](https://github.com/jordansissel/xdotool) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png) ![cmd](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/cmd.png)
+- [xdotool](https://github.com/jordansissel/xdotool) ![linux](linux.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  Linux下模拟鼠标和键盘输入的工具，可利用该工具实现一些自动化操作
 
-- [zeal](https://zealdocs.org/) ![linux](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/linux.png) ![windows](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/windows.png) ![free](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/free.png) ![opensoure](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/blog/software-note/oss.png)
+- [zeal](https://zealdocs.org/) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  PC全平台的离线开发文档查看程序，类似于macOS下的`Dash`，文档资源来源于`Dash`。Linux下使用体验很棒，但Windows下很卡，易崩溃。

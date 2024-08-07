@@ -13,7 +13,7 @@ date: 2019-04-27 09:58:16
 
 这是我们最常用的方式，即右键此电脑->属性->高级系统设置->环境变量，然后在系统变量栏中修改系统环境变量。该方法十分简单，但我们有时候可能需要通过程序来修改，又该怎么做呢？
 
-![环境变量](https://blog-1251989759.cos.ap-guangzhou.myqcloud.com/2019-04-27/modify_system_environment_variable.jpg)
+![环境变量](modify_system_environment_variable.jpg)
 
 
 ## 命令行

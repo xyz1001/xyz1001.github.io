@@ -62,7 +62,7 @@ WordPress是一个优秀的个人博客框架，用起来相当简单，功能�
 - `No Category Base`(WPML)：去除文章网址中的Category
 - `WP-Mail-SMTP`：由于大部分服务器（阿里云等）均不提供`mail()`函数给WordPress使用，导致WordPress无法向外发送邮件，使得用户注册、评论通知以及部分插件的正常功能无法使用，因此需要改用SMTP服务器进行邮件发送。设置如下：
 
- ![WordPress 启用SMTP](/img/software-grope-of-wordpress/wordpress-smtp.png)
+ ![WordPress 启用SMTP](wordpress-smtp.png)
 
 - `WP-PostViews`：可以记录每篇文章展示次数、根据展示次数显示历史最热或最冷的文章排行等
 - `crayon-syntax highlight`：程序猿必备插件，提供代码高亮显示，极大地方便的代码的阅读。使用方式为在编辑文章的“文本”状态下，点击crayon标签，将代码复制进去，选择代码语言即可。在设置中勾选“在代码中进行 HTML 转义”

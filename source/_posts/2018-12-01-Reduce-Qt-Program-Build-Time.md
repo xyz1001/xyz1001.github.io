@@ -143,7 +143,7 @@ qmake支持在以下平台和构建环境中预编译头
 - 使用`Qt Creator`
 
  左侧`项目` - `Build` - `构建步骤` -> `Make` -> `Make参数` -> `添加-j?(?表示你想使用的线程数)`，此处的线程数推荐和CPU的线程数相匹配。
- ![开启并行编译](https://blog-1251989759.picgz.myqcloud.com/blog/reduce_qt_build_time/enable_mp.png/blog)
+ ![开启并行编译](enable_mp.png)
 
 - 使用命令行
 

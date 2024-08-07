@@ -51,7 +51,7 @@ public class Calculator {
 
 由于只有 C 语言提供了稳定的 ABI，因此`native`函数对应的 JNI 函数是 C 函数，函数原型十分复杂。我们可以利用 jdk 中的 javah 工具或 Android Studio 帮助我们自动创建对应的 JNI 方法。在 Android Studio 中添加 javah 外部工具的配置如下：
 
-![Android Studio 添加 javah 外部工具](http://blog-1251989759.picgz.myqcloud.com/2020-08-28/android_studio_javah.png)
+![Android Studio 添加 javah 外部工具](android_studio_javah.png)
 
 对上面的适配类生成的 JNI 接口如下
 

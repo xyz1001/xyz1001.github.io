@@ -41,7 +41,7 @@ Please make sure you have the correct access rights
 
 `Jenkins`的在克隆代码过程中工作流程大致如下：
 
-![Jenkins克隆代码](https://blog-1251989759.picgz.myqcloud.com/2019-03-25/jenkins_clode_code.png)
+![Jenkins克隆代码](jenkins_clode_code.png)
 
 1. 当我们触发`Jenkins`构建时，`Jenkins`主节点收到构建请求。在我们的项目的构建配置信息中会指定构建的子节点名和构建步骤，主节点会根据配置信息将具体的任务分派给指定的子节点。一个项目可以指定多个子节点进行不同的构建任务。
 2. 子节点在收到构建任务后，如果存在`Git`克隆代码的任务，子节点会向主节点请求克隆代码所需的账号密码或`SSH`密钥，`jenkins`称之为`credentials`（凭证）。这样做的好处在于子节点无需部署证书信息，管理员只需要将敏感的证书信息保存在主节点并管理好主节点的权限，就可以保证证书的保密性。
