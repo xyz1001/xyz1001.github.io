@@ -4,7 +4,6 @@ author: 张帆
 tags:
   - 软件折腾笔记
   - shadowsocks
-abbrlink: 16675
 date: 2017-08-20 23:44:14
 ---
 

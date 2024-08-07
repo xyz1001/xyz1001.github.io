@@ -4,7 +4,6 @@ author: 张帆
 tags:
   - vim
   - 配置
-abbrlink: 35516
 date: 2018-08-05 13:28:23
 ---
 

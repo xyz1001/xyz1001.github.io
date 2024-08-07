@@ -4,7 +4,6 @@ author: 张帆
 tags:
   - manjaro
   - 配置
-abbrlink: 1418
 date: 2018-02-27 21:32:16
 ---
 

@@ -3,7 +3,6 @@ title: Manjaro下备份已安装软件包
 author: 张帆
 tags:
   - Manjaro
-abbrlink: 12471
 date: 2018-03-02 21:09:08
 ---
 

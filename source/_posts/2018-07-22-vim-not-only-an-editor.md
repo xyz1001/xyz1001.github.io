@@ -3,7 +3,6 @@ title: 'Vim, 不仅仅是一个编辑器'
 author: 张帆
 tags:
   - vim
-abbrlink: 36111
 date: 2018-07-22 17:50:08
 ---
 

@@ -5,7 +5,6 @@ tags:
   - 踩坑记
   - Jenkins
   - 运维
-abbrlink: 35120
 date: 2019-03-25 18:06:57
 ---
 

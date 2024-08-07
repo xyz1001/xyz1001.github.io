@@ -3,7 +3,6 @@ title: 算法---质数筛选法
 author: 张帆
 tags:
   - 算法
-abbrlink: 10856
 date: 2016-04-08 18:20:00
 ---
 

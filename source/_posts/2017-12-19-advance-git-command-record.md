@@ -3,7 +3,6 @@ title: Git命令整理
 author: 张帆
 tags:
   - git
-abbrlink: 30986
 date: 2017-12-19 21:52:46
 ---
 

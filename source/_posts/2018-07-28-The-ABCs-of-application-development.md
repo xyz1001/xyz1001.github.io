@@ -3,7 +3,6 @@ title: 初识应用软件开发
 author: 张帆
 tags:
   - 软件工程
-abbrlink: 36680
 date: 2018-07-28 10:51:20
 ---
 

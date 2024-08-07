@@ -3,7 +3,6 @@ title: 在库中开启Qt事件循环
 author: 张帆
 tags:
   - Qt
-abbrlink: 64676
 date: 2019-05-04 11:04:16
 ---
 
