@@ -19,7 +19,7 @@
     "hexo-generator-sitemap": "^1.2.0",
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.3.1",
-    "hexo-renderer-marked": "^0.3.2",
+    "hexo-renderer-marked": "^6.3.0",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.2.2",
     "hexo-tag-plantuml": "^1.0.0",
