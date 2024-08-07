@@ -22,6 +22,7 @@
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.2.2",
-    "hexo-tag-plantuml": "^1.0.0"
+    "hexo-tag-plantuml": "^1.0.0",
+    "hexo-theme-next": "^8.20.0"
   }
 }

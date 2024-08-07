@@ -6,8 +6,8 @@
 title: Just for Fun
 subtitle: 给未来留点痕迹
 description: 记录是提升的最佳方式
-author: 张帆(Fun)
-language: zh-Hans
+author: xyz1001
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -64,7 +64,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yelee
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
