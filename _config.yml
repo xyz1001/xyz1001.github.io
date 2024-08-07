@@ -15,7 +15,7 @@ timezone: Asia/Shanghai
 url: http://xyz1001.github.io
 root: /
 # permalink: :year/:month/:day/:title/
-permalink: articles/:abbrlink.html
+permalink: articles/:hash.html
 permalink_defaults:
 
 # Directory
