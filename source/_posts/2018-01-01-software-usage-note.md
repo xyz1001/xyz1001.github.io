@@ -26,13 +26,13 @@ date: 2018-01-01 16:17:57
 
 ## 目录
 
-- [WordPress](http://xyz1001.xyz/articles/10685.html) - 博客系统 ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
+- [WordPress](https://xyz1001.github.io/articles/4452bbc46063.html) - 博客系统 ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png)
  一款基于PHP开发的动态博客系统，具有丰富的主题、插件。
 
-- [hexo](http://xyz1001.xyz/articles/17074.html) - 静态博客系统 ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
+- [hexo](https://xyz1001.github.io/articles/0b0bbf28996e.html) - 静态博客系统 ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  一款基于nodejs开发的静态博客系统，具有丰富的主题和插件。
 
-- [shadowsocks](http://xyz1001.xyz/articles/16675.html) ![linux](linux.png) ![windows](windows.png) ![android](android.png) ![free](free.png) ![opensoure](oss.png)
+- [shadowsocks](https://xyz1001.github.io/articles/1eaf04abe090.html) ![linux](linux.png) ![windows](windows.png) ![android](android.png) ![free](free.png) ![opensoure](oss.png)
 
 - [aria2](https://github.com/aria2/aria2) ![linux](linux.png) ![windows](windows.png) ![free](free.png) ![opensoure](oss.png) ![cmd](cmd.png)
  一个强大的下载器后端，可以和众多前端工具配合使用，如uGet，浏览器插件甚至是网页等。[相关配置文件](https://github.com/xyz1001/dotfiles/tree/master/.aria2)
