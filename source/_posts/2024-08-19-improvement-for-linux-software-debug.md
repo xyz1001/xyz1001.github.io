@@ -195,3 +195,57 @@ find . -exec file {} \; | grep -i elf | cut -d":" -f1 | xargs strip
 在线收集目指的是在崩溃后应用自动将崩溃文件上传到指定服务器，目前业内主流的方案是接入[sentry](https://sentry.io/welcome/)。其提供了对dump自动生成、上传、分析和管理的能力，是一套完善的解决方案，十分强大，但该服务是收费的。官方提供了各个语言和框架的接入SDK和文档。对于C++项目，使用以下conan包[sentry-native/0.7.6](https://conan.io/center/recipes/sentry-native?version=0.7.6)，按照官方文档接入即可。
 
 当然，我们也可以自建服务器，然后基于google提供的crashpad等库实现崩溃手机和上传功能，相关的文档网上非常多，这里就不多赘述了。
+
+### 崩溃分析
+
+#### 获取调试符号
+
+目前所有对外发布的动态库和可执行程序（以下统称elf文件）均已移除了全部符号信息，因此仅依靠coredump文件，无法查看到有意义的堆栈信息。因此我们需要找到与之对应的包含符号的原始文件。调试器会依赖文件中的一个唯一的BuildID来定位原始文件，这个ID在每次构建时都会重新生成，因此即使源码完全一样，只要ID发生了变化，调试器是无法加载对应的符号的。我们可以通过file命令来查看一个elf文件的ID。
+
+``` bash
+$ file libfoo.so
+libfoo.so: ELF 64-bit LSB shared object, x86-64, version 1 (GNU/Linux), dynamically linked, BuildID[sha1]=99bd21768dd4c9ab2ad035b61f9b8e9b17016192, with debug_info, not stripped
+```
+
+对于一个coredump文件， 我们可以通过命令`eu-unstrip`（Debian系包含在包`elfutils`中提供）获取其依赖的elf文件的BuildID
+
+``` bash
+$ eu-unstrip -n --core core.Demo.1000.03a9a0a208ff4ab984f928d32a0a353a.337020.1725966616000000
+0x63a5cd8b5000+0x7c000 3b78e12a59aeff8cffbd2ed1729f6d858aff4c65@0x63a5cd8b52d4 - - /opt/Demo/usr/bin/Demo
+...
+0x7be7fa800000+0x272a18 500426881fa7a45abed6dc52d3208547d6d39cf1@0x7be7fa800280 /opt/Demo/usr/bin/../lib/libbar.so - libbar.so
+0x7be7fac00000+0x264a88 99bd21768dd4c9ab2ad035b61f9b8e9b17016192@0x7be7fac00280 /opt/Demo/usr/bin/../lib/libfoo.so - libfoo.so
+...
+```
+那么如何获取原始elf文件呢？最简单的情况是如果已经搭建了符号服务器，则该步骤可跳过，直接配置环境变量DEBUGINFOD_URLS即可, debuginfod会自动去符号服务器上找到对应的包含调试符号的文件。如果没有搭建，在使用conan进行了依赖管理的前提下，我们可以根据用户反馈的版本号，找到对应的应用仓库提交，然后使用以下命令拉取对应的conan依赖
+
+``` bash
+conan install . --lockfile-partial -s:h build_type=RelWithDebInfo --deployer=direct_deploy
+```
+
+注意这里不能添加`–build missing`避免发生重新编译，若拉取失败，检查conan的profile是否和服务器构建该版本时使用的一致。命令执行完成后，在`build/RelWithDebInfo`目录下就有所有依赖的elf文件的原始文件。此时可以通过上述命令检查一下是否匹配。接下来就可以类似搭建符号服务器步骤，启动本地的符号服务器：
+
+``` bash
+debuginfod -F .
+```
+
+若发现debuginfod工作不正常时，可尝试删除缓存数据库文件，路径位于`~/debuginfod.sqlite`.
+
+#### 开始调试
+
+完成以上步骤后，进入到最后的调试步骤。首先需要设置环境变量以告知调试器符号服务器位置。
+
+``` bash
+export DEBUGINFOD_URLS=http://<符号服务器IP>:8002
+```
+
+对于系统自带的库，如libstdc++等，大部分发行版也提供了对应的符号服务器，可执行搜索。如Debian的符号服务器：https://debuginfod.debian.net。接下来使用gdb启动调试。
+
+``` bash
+gdb <可执行程序路径> -c core.Demo.1000.03a9a0a208ff4ab984f928d32a0a353a.337020.1725966616000000
+```
+
+其中可执行程序路径必须和转储文件BuildID对应。这样我们就可以看到完整的堆栈信息，包含符号名，代码文件路径/行号，变量名等。
+
+
+
