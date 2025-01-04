@@ -3,8 +3,6 @@ title: 自定义QMenu样式
 author: 张帆
 tags:
   - Qt
-  - QMenu
-  - QSS
 date: 2018-05-27 21:47:49
 ---
 

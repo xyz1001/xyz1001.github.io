@@ -3,7 +3,7 @@ title: Linux软件调试体验优化
 author: 张帆
 tags:
   - Linux
-  - 调试
+  - 软件调试
 date: 2024-08-19 21:29:33
 ---
 

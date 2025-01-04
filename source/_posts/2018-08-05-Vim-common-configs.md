@@ -2,8 +2,7 @@
 title: Vim配置之通用配置
 author: 张帆
 tags:
-  - vim
-  - 配置
+  - Vim
 date: 2018-08-05 13:28:23
 ---
 

@@ -2,9 +2,9 @@
 title: 踩坑记之Jenkins无权限克隆的代码
 author: 张帆
 tags:
-  - 踩坑记
-  - Jenkins
   - 运维
+  - Jenkins
+  - Git
 date: 2019-03-25 18:06:57
 ---
 

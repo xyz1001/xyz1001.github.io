@@ -2,8 +2,7 @@
 title: 软件折腾笔记之hexo
 author: 张帆
 tags:
-  - 软件折腾笔记
-  - hexo
+  - Hexo
 date: 2017-04-02 17:05:47
 ---
 

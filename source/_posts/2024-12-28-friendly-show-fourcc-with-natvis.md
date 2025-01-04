@@ -2,9 +2,8 @@
 title: 基于VS Natvis实现FourCC值可视化
 author: 张帆
 tags:
-  - Windows
-  - video
-  - IDE
+  - MSVC
+  - 音视频
 date: 2024-12-28 16:21:31
 ---
 

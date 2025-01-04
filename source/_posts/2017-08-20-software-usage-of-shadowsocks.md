@@ -2,8 +2,7 @@
 title: 软件折腾笔记之Shadowsocks
 author: 张帆
 tags:
-  - 软件折腾笔记
-  - shadowsocks
+  - Shadowsocks
 date: 2017-08-20 23:44:14
 ---
 

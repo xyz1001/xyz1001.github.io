@@ -2,7 +2,6 @@
 title: 软件折腾笔记之WordPress
 author: 张帆
 tags:
-  - 软件折腾笔记
   - WordPress
 date: 2016-04-11 18:57:00
 ---

@@ -3,7 +3,6 @@ title: Qt自定义控件之SeekBar
 author: 张帆
 tags:
   - Qt
-  - QSlider
 date: 2018-04-05 14:27:08
 ---
 

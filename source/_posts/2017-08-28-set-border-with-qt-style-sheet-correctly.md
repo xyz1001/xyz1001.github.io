@@ -3,7 +3,6 @@ title: 正确使用Qt Style Sheet设置边框
 author: 张帆
 tags:
   - Qt
-  - QSS
 date: 2017-08-28 23:30:33
 ---
 

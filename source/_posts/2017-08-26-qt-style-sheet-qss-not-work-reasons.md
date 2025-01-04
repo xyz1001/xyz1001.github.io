@@ -3,7 +3,6 @@ title: qt style sheet(QSS)无效原因整理
 author: 张帆
 tags:
   - Qt
-  - QSS
 date: 2017-08-26 17:52:27
 ---
 

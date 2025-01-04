@@ -2,9 +2,9 @@
 title: 基于图算法重构libyuv图像转换器
 author: 张帆
 tags:
-  - video
-  - algorithm
-  - refactor
+  - 音视频
+  - 算法
+  - C++
 date: 2024-12-28 15:12:15
 ---
 

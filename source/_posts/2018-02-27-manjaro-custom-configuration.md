@@ -2,8 +2,7 @@
 title: Manjaro个性化配置
 author: 张帆
 tags:
-  - manjaro
-  - 配置
+  - Manjaro
 date: 2018-02-27 21:32:16
 ---
 

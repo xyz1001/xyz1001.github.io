@@ -3,8 +3,6 @@ title: Qt从0到1之工具篇：qmake
 author: 张帆
 tags:
   - Qt
-  - qmake
-  - Qt工具
   - Qt从0到1
 date: 2018-08-08 10:59:16
 ---
